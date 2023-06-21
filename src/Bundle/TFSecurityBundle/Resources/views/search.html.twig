@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <form action="{{ path('TFSecurity_search_logfile') }}" method="GET">
+        <div class="row">
+            <div class="col-2">
+                <select name="file" id="file" class="form-control">
+                    {% for logFile in logFiles %}
+                        <option value="{{ logFile }}" {% if selectedFile == logFile %}selected{% endif %}>{{ logFile }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-9">
+                <input  class="form-control" type="text" name="search" placeholder="Search term" value="{{ searchTerm }}">
+            </div>
+            <div class="text-right mb-grid col-1">
+                <button type="submit" class="btn-primary btn">Search</button>
+            </div>
+        </div>
+    </form>
+
+    {% if logOutput %}
+        <h2>Search results for "{{ searchTerm }}" in "{{ selectedFile }}":</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Time</th>
+                <th>channel</th>
+                <th>logLevel</th>
+                <th>Message</th>
+                <th>Optional</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for log in logOutput %}
+                <tr>
+                    <td>{{ log.timestamp }}</td>
+                    <td>{{ log.channel }}</td>
+                    <td>{{ log.logLevel }}</td>
+                    <td>{{ log.message }}</td>
+                    <td>{{ log.optionalFields }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

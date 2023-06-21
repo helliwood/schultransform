@@ -1,0 +1,14 @@
+{% extends 'frontend/public.html.twig' %}
+
+{% block title %}Schultransform - {{ site.name }}{% endblock %}
+{% block dc_title %}{{ site.dcTitle }}{% endblock %}
+{% block dc_url %}{{ app.request.uri }}{% endblock %}
+{% block dc_description %}{{ site.dcDescription | replace({"\n": "", "\r": "", "\t": ""}) }}{% endblock %}
+{% block dc_keywords %}{{ site.dcKeywords }}{% endblock %}
+{% block dc_image %}{{ site.socialMediaImage ? url('media_base_public_show', {id: site.socialMediaImage.id}) : '/build_frontend/images_frontend/socialimage.jpg' }}{% endblock %}
+{% block dc_author %}{{ site.dcCreator }}{% endblock %}
+{% block dc_date %}{{ site.dcDate ? site.dcDate | date('Y-m-d') : '' }}{% endblock %}
+
+{% block body %}
+    {{ siteContent | raw }}
+{% endblock %}

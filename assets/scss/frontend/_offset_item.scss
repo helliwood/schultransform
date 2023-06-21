@@ -1,0 +1,68 @@
+.offset-item {
+  .offset-item-front{
+    @include dark-border;
+    @include media-breakpoint-up($breakpoint-mobil-style) {
+      border-right-width:0;
+    }
+    z-index: 2;
+    background-size:cover ;
+    .btn{
+      position: absolute;
+      bottom: $spacer;
+    }
+  }
+
+  .offset-item-back{
+    @include dark-border;
+
+      @include media-breakpoint-up($breakpoint-mobil-style) {
+        border-left-width:0;
+      }
+    }
+
+  .offset-item-back-border-helper{
+    @include dark-border;
+    border-right-width:0;
+    &.blue-bar::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 200px;
+      background:map-get($cms-colors, 'a');;
+      z-index: 100;
+      position: absolute;
+      height: $spacer;
+      left: -1px;
+    }
+  }
+
+  .offset-item-back2{
+      z-index: 1;
+      right:0;
+      padding-left: 20%;
+  }
+}
+
+
+.offset-item-revert{
+  .offset-item-back{
+    border-width: 1px;
+
+  }
+  .offset-item-back-border-helper{
+    border-width: 1px 1px 1px 0;
+  }
+}
+
+#carouselHero .offset-item-front{
+ min-height:400px;
+}
+
+.logo-container{
+  background:white;
+  width:100%;
+  max-height:80%;
+  img{
+    max-height:100px;
+  }
+}

@@ -1,0 +1,4 @@
+glossary:
+  regex_template: 'frontend/glossary/glossary-link.html.twig'
+  index_template:  'frontend/glossary/index.html.twig'
+  items_per_page_front: 3

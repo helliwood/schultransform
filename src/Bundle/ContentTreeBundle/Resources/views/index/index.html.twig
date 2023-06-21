@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <a class="btn btn-outline-primary float-right"
+       href="{{ path('content_tree_snippets') }}">Snippets anzeigen</a>
+    <h1>CONTENT-TREE</h1>
+    <div class="row">
+        <div class="col">
+            <div class="panel">
+                <content-tree tree-path="{{ path('content_tree_tree') }}"></content-tree>
+            </div>
+        </div>
+    </div>
+{% endblock %}

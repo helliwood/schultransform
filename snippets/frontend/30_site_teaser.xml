@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:template id="30"
+             name="Content | Seitenteaserübersicht"
+             groups="content"
+             xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:rs="http://helliwood.de"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://helliwood.de ./../rs_schema.xsd">
+
+    <rs:link id="link" label="link" display="false" />
+    <rs:select id="amountmainnews" label="Anzahl Hauptnews" display="false" placeholder="Bitte wählen">
+        <rs:option value="0">Keine</rs:option>
+        <rs:option value="2">Zwei</rs:option>
+        <rs:option value="4">Vier</rs:option>
+    </rs:select>
+    <rs:text id="amountnews" label="Anzahl News (leer für unendlich)" display="false"/>
+    <rs:text id="amountimages" label="Anzahl News mit Bild (leer = keine)" display="false"/>
+    <rs:select id="sort" label="Sortierung" display="false"  >
+        <rs:option value="0">Wie Contentree</rs:option>
+        <rs:option value="2">Neuste zuerst</rs:option>
+        <rs:option value="4">Älteste zuerst</rs:option>
+    </rs:select>
+    <rs:select id="filter" label="Anzeigen" display="false">
+        <rs:option value="0">Alle</rs:option>
+        <rs:option value="1">Nur published</rs:option>
+        <rs:option value="2">Nur wenn Menueintrag</rs:option>
+        <rs:option value="3">Nur wenn Published &amp; Menueintrag</rs:option>
+    </rs:select>
+    <rs:sitepreview id="sitepreview" sort="$sort" filter="$filter" amountimages="$amountimages" parent="$link" amountmainnews="$amountmainnews"  amountnews="$amountnews"></rs:sitepreview>
+
+</rs:template>

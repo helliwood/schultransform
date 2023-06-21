@@ -1,0 +1,55 @@
+<style>
+    .opinion_scale {
+        width: 100%;
+        display: inline-flex;
+        clear-after: both;
+    }
+
+    .opinion_scale div {
+        float: left;
+        width: 12.5%;
+        text-align: center;
+        padding-top: 5px;
+        margin-bottom: 5px;
+        height: 20px;
+        border: 1px solid #000;
+
+    }
+
+    .opinion_scale_values {
+        padding-bottom: 5px;
+    }
+
+    .opinion_scale .selected {
+        background-color: #006292;
+        color: #fff;
+        opacity: 1;
+    }
+
+    .opinion_scale_left {
+        clear: both;
+        display: inline;
+    }
+
+    .opinion_scale_center {
+        position: absolute;
+        left: 44%
+    }
+
+    .opinion_scale_right {
+        position: absolute;
+        right: -13px;
+    }
+</style>
+<div class="opinion_scale">
+    {% for i in 0..7 %}
+        <div class="opinion_scale_values {% if answer.value == i %}selected{% endif %}">
+            <b>{{ i }}</b>
+        </div>
+    {% endfor %}
+</div>
+
+{% set questionLabels = question.properties.labels %}
+<div class="opinion_scale_left">{{ questionLabels.left }}</div>
+<div class="opinion_scale_center">{{ questionLabels.center }}</div>
+<div class="opinion_scale_right">{{ questionLabels.right }}</div>

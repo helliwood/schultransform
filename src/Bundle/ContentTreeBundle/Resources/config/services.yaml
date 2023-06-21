@@ -1,0 +1,107 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+
+services:
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+  Trollfjord\Bundle\ContentTreeBundle\Routing\RoutingLoader:
+    tags: [ routing.loader ]
+
+  # controllers are imported separately to make sure services can be injected
+  # as action arguments even if you don't extend any base controller class
+  Trollfjord\Bundle\ContentTreeBundle\Controller\:
+    resource: '../../Controller/'
+    tags: [ 'controller.service_arguments' ]
+
+  Trollfjord\Bundle\ContentTreeBundle\ControllerPublic\:
+    resource: '../../ControllerPublic/'
+    tags: [ 'controller.service_arguments' ]
+
+  Trollfjord\Bundle\ContentTreeBundle\Repository\:
+    resource: '../../Repository/'
+    tags: [ 'doctrine.repository_service' ]
+
+
+  Trollfjord\Bundle\ContentTreeBundle\Form\:
+    resource: '../../Form/'
+    tags: [ 'form.type' ]
+
+  Trollfjord\Bundle\ContentTreeBundle\Command\RefreshSnippetsCommand:
+    tags: [ 'console.command' ]
+
+  Trollfjord\Bundle\ContentTreeBundle\Service\SiteService:
+    arguments: [ "%kernel.cache_dir%" ]
+
+  Trollfjord\Bundle\ContentTreeBundle\Service\SnippetService: ~
+
+  Trollfjord\Bundle\ContentTreeBundle\TemplateEngine\TemplateEngine:
+    arguments:
+      - '%content_tree.template_path%'
+      - '@service_container'
+      - !tagged_iterator content_tree.template_engine.pre_renderer
+
+  Trollfjord\Bundle\ContentTreeBundle\TemplateEngine\Element\Template:
+    shared: false
+    public: true
+    tags: [ 'content_tree.template_engine.element' ]
+
+  Trollfjord\Bundle\ContentTreeBundle\TemplateEngine\Element\ContentArea:
+    shared: false
+    public: true
+    tags: [ 'content_tree.template_engine.element' ]
+
+  Trollfjord\Bundle\ContentTreeBundle\TemplateEngine\Element\IncludeSnippet:
+    shared: false
+    public: true
+    tags: [ 'content_tree.template_engine.element' ]
+
+  Trollfjord\Bundle\ContentTreeBundle\TemplateEngine\Element\IfCondition:
+    shared: false
+    public: true
+    tags: [ 'content_tree.template_engine.element' ]
+
+  Trollfjord\Bundle\ContentTreeBundle\TemplateEngine\Element\ForLoop:
+    shared: false
+    public: true
+    tags: [ 'content_tree.template_engine.element' ]
+
+  Trollfjord\Bundle\ContentTreeBundle\TemplateEngine\Element\CloneSnippet:
+    shared: false
+    public: true
+    tags: [ 'content_tree.template_engine.element' ]
+
+  Trollfjord\Bundle\ContentTreeBundle\TemplateEngine\Element\Text:
+    shared: false
+    public: true
+    tags: [ 'content_tree.template_engine.element' ]
+
+  Trollfjord\Bundle\ContentTreeBundle\TemplateEngine\Element\TextArea:
+    shared: false
+    public: true
+    tags: [ 'content_tree.template_engine.element' ]
+
+  Trollfjord\Bundle\ContentTreeBundle\TemplateEngine\Element\Attribute:
+    shared: false
+    public: true
+    tags: [ 'content_tree.template_engine.element' ]
+
+  Trollfjord\Bundle\ContentTreeBundle\TemplateEngine\Element\Variable:
+    shared: false
+    public: true
+    tags: [ 'content_tree.template_engine.element' ]
+
+  Trollfjord\Bundle\ContentTreeBundle\TemplateEngine\Element\Link:
+    shared: false
+    public: true
+    tags: [ 'content_tree.template_engine.element' ]
+
+  Trollfjord\Bundle\ContentTreeBundle\TemplateEngine\Element\Select:
+    shared: false
+    public: true
+    tags: [ 'content_tree.template_engine.element' ]

@@ -1,0 +1,142 @@
+.teaser {
+  @include dark-border;
+  display: block;
+  position: relative;
+  height: $grid-gutter-width*4;
+
+
+  .teaser-title {
+    position: absolute;
+    bottom: $positioning-space;
+    left: $positioning-space;
+    line-height: 1.1em;
+    font-size: 1rem;
+  }
+
+
+  &:hover {
+    .teaser-title {
+      text-decoration: underline;
+    }
+
+  }
+
+  .teaser-icon {
+    position: absolute;
+    top: $positioning-space;
+    left: $positioning-space;
+    width: $grid-gutter-doublewidth;
+    height: $grid-gutter-doublewidth;
+    font-size: $font-big-gutter;
+  }
+
+  .icon-box {
+    background: transparent;
+    color: white;
+  }
+
+  @include media-breakpoint-down($breakpoint-mobil-style) {
+    margin-bottom: $grid-gutter-halfwidth;
+  }
+}
+
+.start_teaser {
+  position: relative;
+  margin-bottom: $grid-gutter-width;
+  width: 100%;
+  position: relative;
+
+  .extras {
+    .chart {
+      width: 280px;
+      height: 160px;
+      overflow: hidden;
+      position: relative;
+      @include media-breakpoint-down("sm") {
+        margin-left: -30px;
+      }
+      &.link {
+        cursor: pointer;
+      }
+
+      &::before {
+        content: " ";
+        width: 200px;
+        height: 110px;
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 100px 100px 0 0;
+        position: absolute;
+        top: 50px;
+        left: 40px;
+      }
+    }
+
+    position: absolute;
+    bottom: -22px;
+    left: $grid-gutter-width;
+
+    h1 {
+      background-color: rgba(255, 255, 255, 0.8);
+      color: map-get($cms-colors, 'a');
+      padding: 4px 10px;
+      font-size: 1.8rem;
+      font-weight: normal;
+      float: left;
+      clear: left;
+      @include media-breakpoint-down("sm") {
+        font-size: 1.3rem;
+      }
+    }
+
+    h2 {
+      background-color: map-get($cms-colors, 'a');
+      color: $white;
+      padding: 4px 10px;
+      font-size: 1.8rem;
+      font-weight: normal;
+      float: left;
+      clear: left;
+
+      @include media-breakpoint-down("sm") {
+        font-size: 1.3rem;
+      }
+    }
+  }
+}
+
+.teaser-list {
+
+  .teaser-item {
+    width: 100%;
+    padding-top: 56.25%;
+    position: relative;
+    margin-bottom: $grid-gutter-width * 2;
+    background-size: cover;
+
+    &.link {
+      cursor: pointer;
+    }
+
+    .teaser-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      .teaser-icon {
+        font-size: 8rem;
+        color: #fff;
+      }
+
+      .teaser-text {
+        background-color: $main-bg-color;
+        padding: 6px 10px;
+        position: absolute;
+        left: $grid-gutter-width;
+        bottom: -$grid-gutter-width;
+        max-width: calc(100% - #{$grid-gutter-width * 2});
+      }
+    }
+  }
+}

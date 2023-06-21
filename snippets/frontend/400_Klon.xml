@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:template id="400"
+             name="Content | Klon"
+             groups="[root], marginal, content, basics, newsteaser, teaser"
+             form="true"
+             xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:rs="http://helliwood.de"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://helliwood.de ./../rs_schema.xsd">
+    <rs:clone id="cloneId"/>
+</rs:template>

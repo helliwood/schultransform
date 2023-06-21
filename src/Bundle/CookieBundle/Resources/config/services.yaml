@@ -1,0 +1,44 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+
+services:
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+  # controllers are imported separately to make sure services can be injected
+  # as action arguments even if you don't extend any base controller class
+  Trollfjord\Bundle\CookieBundle\Controller\:
+    resource: '../../Controller/'
+    tags: [ 'controller.service_arguments' ]
+
+  Trollfjord\Bundle\CookieBundle\ControllerPublic\:
+    resource: '../../ControllerPublic/'
+    tags: [ 'controller.service_arguments' ]
+
+  Trollfjord\Bundle\CookieBundle\Repository\:
+    resource: '../../Repository/'
+    tags: [ 'doctrine.repository_service' ]
+
+  Trollfjord\Bundle\CookieBundle\TemplateEngine\Element\Cookie:
+    shared: false
+    public: true
+    tags: [ 'content_tree.template_engine.element' ]
+
+  cookie_bundle_service_dbtransactions:
+    class: Trollfjord\Bundle\CookieBundle\Service\DbTransactions
+
+  cookie_bundle_service:
+    class: Trollfjord\Bundle\CookieBundle\Service\CookieBannerService
+
+  Trollfjord\Bundle\CookieBundle\Form\CookieItemForm:
+    arguments:
+      - '@cookie_bundle_service_dbtransactions'
+
+  Trollfjord\Bundle\CookieBundle\Service\DbTransactions: '@cookie_bundle_service_dbtransactions'
+
+  Trollfjord\Bundle\CookieBundle\Service\CookieBannerService: '@cookie_bundle_service'

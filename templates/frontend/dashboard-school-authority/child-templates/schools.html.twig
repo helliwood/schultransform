@@ -1,0 +1,99 @@
+{% if user.schoolAuthority %}
+    {% if user.schoolAuthority.schools | length > 0 %}
+        <div class="mb-1 t-category-row row row-cols-1 row-cols-md-2 row-cols-xl-3">
+            {% for school in user.schoolAuthority.schools %}
+                <div class="t-category-col mb-2">
+                    <div class="border bg-white c-3 tr-border-radius-bottom">
+                        <div class="d-flex position-relative justify-content-start align-items-center">
+                            <div class="p-2 bgcolor-c d-inline-block c-3 text-white mr-1"
+                            >
+                                <i class="fad fa-school c-3"></i>
+                            </div>
+                            <div>
+                                <div class="d-flex justify-content-center align-self-center pr-grid overflow-hidden">
+                                    <p class="m-0 tr-ellipsis" title="{{ school.name }}">
+                                        
+
+                                        {%  set schoolname = school.name %}
+
+                                        {% if schoolname |length > 25 %}
+                                            <span class="small-text">
+                                        {% endif %}
+                                        {% if schoolname |length > 35 %}
+                                            {{ schoolname|slice(0, 35) ~ '...' }}
+                                        {% else %}
+                                            {{ schoolname}}
+                                        {% endif %}
+                                        {% if schoolname |length > 25 %}
+                                            </span>
+                                        {% endif %}
+
+
+
+                                    </p>
+
+                                    {% if not school.confirmed %}
+                                        <i title="Schule nicht bestätigt"
+                                           style="right: 2px;top:0"
+                                           class="position-absolute fad color-c fa-exclamation-square"></i>
+                                    {% endif %}
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="px-grid pt-3 pb-2 border-top small-text">
+                            Adresse: <br>{{ school.getAddress.street }}<br>
+                            {{ school.getAddress.postalcode }} {{ school.getAddress.city }}<br><br>
+                            Mail:{% if not school.getEmailAddress %} - {% else %} <a
+                                href="mailto:{{ school.getEmailAddress }}">{{ school.getEmailAddress }}</a>{% endif %}
+                            <br>
+                            Tel.:{% if not school.getPhoneNumber %} - {% else %} <a
+                                href="tel:{{ school.getPhoneNumber }}">{{ school.getPhoneNumber }}</a>{% endif %}
+                            <br>
+                            Fax: {% if not school.getFaxNumber %} - {% else %}<a
+                                href="fax:{{ school.getFaxNumber }}">{{ school.getFaxNumber }}</a>{% endif %} <br>
+                        </div>
+                        {% if allowOpenPotential[school.id] | default(null) %}
+                            <div class="tr-bg-alpha1-primary tr-border-radius-bottom px-2 pb-3 mt-2">
+                                <div class="d-flex t-header-link-action small-text mb-2">
+                                    <div class="bg-primary text-white px-2 py-1 tr-m-min-1">
+                                        <p>Potenzial&shy;analyse</p>
+                                    </div>
+                                    <div class="tr-bg-yellow-1 px-2 py-1 tr-border-radius-right mr-4 tr-m-min-1">
+                                        {% if app.user.schoolAuthority.isConfirmed() %}
+                                            <b-link class="tr-color-black-100 tr-text-decoration"
+
+                                                    href="{{ path('dashboard_school_authority_school_potential',{school:school.id}) }}">
+                                                Öffnen
+                                            </b-link>
+                                        {% else %}
+                                            <i class="fad fa-do-not-enter"></i>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="tr-bg-color-gray-500 tr-border-radius-bottom px-2 pb-3 mt-2">
+                                <div class="d-flex t-header-link-action small-text mb-2">
+                                    <div class="tr-bg-color-gray-600 text-white px-2 py-1 tr-m-min-1 overflow-hidden">
+                                        <p class="tr-ellipsis">Potenzialanalyse</p>
+                                    </div>
+                                    <div class="tr-bg-color-gray-400 px-2 py-1 tr-border-radius-right mr-4 tr-m-min-1 overflow-hidden">
+                                        <b-link class="tr-color-black-100 tr-ellipsis"
+                                                href="#">
+                                            keine Ergebnisse
+                                        </b-link>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h5 class="alert-danger p-1 d-flex justify-content-center">
+            <i class="fad fa-warning mr-1"></i> {% trans  from 'dashboard' %}schoolAuthorityNoSchools{% endtrans %}
+        </h5>
+    {% endif %}
+{% endif %}

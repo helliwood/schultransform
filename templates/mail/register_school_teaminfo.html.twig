@@ -1,0 +1,64 @@
+{% block body %}
+<p>Es wurde eine neue Schule angelegt</p>
+    <table>
+        <tr>
+            <td colspan="2"><b>Erstellter Benutzer</b></td>
+        </tr>
+        <tr>
+            <td><b>User</b></td>
+            <td>{{ data.user.firstName }} {{ data.user.lastName }}</td>
+        </tr>
+        <tr>
+            <td><b>Mail</b></td>
+            <td>{{ data.user.email }}</td>
+        </tr>
+        <tr>
+            <td colspan="2"><b>Erstellte Schule</b></td>
+        </tr>
+        <tr>
+            <td><b>Schulname</b></td>
+            <td>{{ data.user.school.name }}</td>
+        </tr>
+        <tr>
+            <td><b>Typ</b></td>
+            <td>{{ data.user.school.getSchoolType() }}</td>
+        </tr>
+        <tr>
+            <td><b>E-Mail der Schule</b></td>
+            <td>{{ data.user.school.getEmailAddress() }}</td>
+        </tr>
+        <tr>
+            <td><b>Schulcode</b></td>
+            <td>{{ data.user.school.code }}</td>
+        </tr>
+        <tr>
+            <td><b>Adresse</b></td>
+            <td>{{ data.user.school.getAddress() }}</td>
+        </tr>
+
+
+    </table>
+
+
+    <br/>
+    <br/>
+    Mit den besten Grüßen<br/>
+    <br/><br/>
+    <strong>Projektbüro Schultransform</strong><br/>
+    <br/>
+    <strong>c/o Helliwood media & education im fjs e.V.</strong><br/>
+    Marchlewskistraße 27, 10243 Berlin<br/>
+    Telefon: +49 30 2938 1680<br/>
+    Telefax: +49 30 2938 1689<br/>
+    E-Mail: <a href="mailto:support@schultransform.org">support@schultransform.org</a><br/>
+    Internet: <a href="https://www.schultransform.org">https://www.schultransform.org</a><br/>
+    <br/>
+    <strong>Förderverein für Jugend und Sozialarbeit e.V. (fjs)</strong><br/>
+    Geschäftsführender Vorstand: Thomas Schmidt<br/>
+    Vereinsregisternummer: VR 11338 B, Amtsgericht Berlin-Charlottenburg<br/>
+    <a href="https://fb.tipp.fm/3938_fjs_transparenzdatenbank.htm">Transparenzdatenbank</a><br/><br/>
+
+    <strong>Förderung</strong><br/>
+    Das Forschungs- und Entwicklungsprojekt zur Entwicklung einer Plattform zur digitalen Schultransformation [SchulTransform] wird gefördert durch das Bundesministerium für Bildung und Forschung (BMBF) und wird von Helliwood media & education und dem Bündnis für Bildung gemeinsam umgesetzt.
+    <br/>
+{% endblock %}

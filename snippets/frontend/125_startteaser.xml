@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:template id="125"
+             name="Content | Teaser Startseite Neu"
+             groups="content"
+             xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:rs="http://helliwood.de"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://helliwood.de ./../rs_schema.xsd">
+
+    <rs:media id="teaser" label="Bild" filetype="image" display="false"/>
+    <rs:select id="gauge" label="Index anzeigen" display="false">
+        <rs:option value="yes">Ja</rs:option>
+        <rs:option value="no">Nein</rs:option>
+    </rs:select>
+    <rs:link id="link_gauge" label="Link auf dem Index" display="false"/>
+    <div class="pb-grid">
+
+        <div class="start_teaser">
+            <img class="img-fluid d-none d-md-block">
+                <rs:attribute name="src" action="append" value="$teaser_url"/>
+            </img>
+            <img class="img-fluid d-block d-md-none">
+                <rs:attribute name="src" action="append" value="$teaser_alturl"/>
+            </img>
+            <div class="extras">
+                <rs:if condition="$gauge=='yes'">
+                    <div class="chart">
+                        <rs:if condition="$link_gauge!=''">
+                            <rs:attribute name="class" action="append" value=" link"/>
+                            <rs:if condition="$link_gauge_type=='extern'">
+                                <rs:attribute name="onclick" action="append" value="window.open('$link_gauge')"/>
+                            </rs:if>
+                            <rs:if condition="$link_gauge_type=='intern'">
+                                <rs:attribute name="onclick" action="append"
+                                              value="window.location.href='$link_gauge'"/>
+                            </rs:if>
+                        </rs:if>
+                        <![CDATA[<result-chart-gauge :show-detail="false" :chart-height="300" chart-value="]]><rs:questionnaire-stats></rs:questionnaire-stats><![CDATA["
+                                chart-color="#006292" tick-color="#666"></result-chart-gauge>]]>
+                    </div>
+                </rs:if>
+                <rs:if condition="$title1!=''">
+                    <h1>
+                        <rs:text id="title1" label="Titel 1"/>
+                    </h1>
+                </rs:if>
+                <rs:if condition="$title2!=''">
+                    <h2>
+                        <rs:text id="title2" label="Titel 2"/>
+                    </h2>
+                </rs:if>
+            </div>
+        </div>
+        <div class="px-grid pt-grid">
+            <rs:textarea id="text" label="Text"/>
+        </div>
+    </div>
+</rs:template>

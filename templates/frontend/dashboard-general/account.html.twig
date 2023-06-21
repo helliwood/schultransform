@@ -1,0 +1,58 @@
+{% block account_wrapper %}
+    <div class="mt-lg-grid">
+
+        <div class="position-relative overflow-hidden d-block t-account-wrapper">
+            {% block account_top %}
+
+            {% endblock %}
+
+            {% block account_2 %}
+                <div class="t-cat-details-icon-header">
+                    <i class="fad fa-school t-cat-details-icon-header-icon text-white tr-large-3 float-right  pb-4 pt-3 mt-2 mr-4 mt-md-4 mr-md-5"></i>
+                </div>
+            {% endblock %}
+            {% block account_3 %}
+                {# header chart #}
+                {% if headerChartValue | number_format(1) %}
+                    {# color of the category or fall back 'primary' in HEX #}
+                    {% set color = category.color ??  '#006292' %}
+                    <div class="col-md-8 col-12 t-header-chart">
+                        <div class="extras">
+                            <div class="chart">
+                                <result-chart-gauge :chart-height="280"
+                                                    class="t-result-chart-gauge-header"
+                                                    chart-value="{{ headerChartValue }}"
+                                                    tick-color="#666"
+                                                    the-url=""
+                                                    chart-color="{{ color }}">
+                                </result-chart-gauge>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}
+
+<div class="{% block bg_color %}tr-bg-school-color-2 {% endblock %}
+d-flex flex-column pt-sm-3 px-3
+pb-2 text-white position-relative align-content-end tr-border-radius-bottom">
+    {% block account_action %}
+        <div class="d-flex t-header-link-action position-absolute">
+            <div class="tr-bg-school-color-1 w-100 px-2 py-1 text-white">
+                <p>{{ user.school.name }}</p>
+            </div>
+            <div class="tr-bg-yellow-1 px-2 py-1 tr-border-radius-right">
+                <a href="#" class="tr-color-black-100">Starten</a>
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block account_bottom %}
+
+
+    {% endblock %}
+
+</div>
+

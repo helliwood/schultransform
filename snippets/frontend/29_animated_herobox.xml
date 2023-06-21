@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:template id="29"
+             name="Content | Animierter Teaser Startseite"
+             groups="content"
+             xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:rs="http://helliwood.de"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://helliwood.de ./../rs_schema.xsd">
+
+
+    <div id="carouselHero" class="carousel slide" data-ride="carousel" data-pause="hover">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.4/lottie.min.js"  type="application/javascript"/>
+
+        <div class="carousel-inner">
+
+            <rs:for id="loop1" label="Loop">
+                <div class="carousel-item active">
+                <rs:media id="teaser" label="Bild" filetype="file" display="false"/>
+
+                <div class="offset-item d-lg-flex position-relative  mb-grid">
+                    <div class="offset-item-front col-lg-8 mb-lg-grid color-style-a p-grid">
+                        <div id="container" style="width: 100%;position: absolute;top: 0;left: 0;width: 100%;height: 100%;z-index: -1;">
+                            <rs:attribute name="data-image" action="append" value="$teaser_url" />
+
+                        </div>
+                        <script  type="application/javascript">
+                            document.addEventListener("DOMContentLoaded", function() {
+                                var cont = document.getElementById('container');
+
+                                if(!cont.dataset.init){
+                                    cont.setAttribute('data-init', '1');
+                                    var animation = bodymovin.loadAnimation({
+                                        // animationData: { /* ... */ },
+                                        container: cont, // required
+                                        path: cont.dataset.image, // required
+                                        renderer: 'svg', // required
+                                        loop: false, // optional
+                                        autoplay: true, // optional
+                                        name: "Demo Animation", // optional
+                                    });
+                                }
+
+                            });
+
+                    </script>
+                        <rs:attribute name="style" action="append" value="background-image:url($teaser_url)" />
+                        <div class="alt-bg-image  d-block d-md-none">
+                            <rs:attribute name="style" action="append" value="background-image:url($teaser_alturl)" />
+                        </div>
+                        <h2><rs:text id="h2" label="Teaser-Titel"/></h2>
+                        <p></p>
+                        <a class="btn btn-primary align-self-end"><rs:text id="btn-text" label="Button-Text"/>
+                            <rs:attribute name="href" action="append" value="$link" />
+                        </a>
+                    </div>
+                    <div class="offset-item-back col-lg-4 dark-bg-color p-grid ml-grid ml-lg-0 mt-lg-grid d-flex align-items-end">
+                        <div>
+                            <h2 class="color-switch-revert">
+                                <rs:text id="title_rechts" label="Titel"/>
+                                <span class="subtitle"><rs:text id="subtitle_rechts" label="Subtitel"/></span>
+                            </h2>
+                            <p><rs:textarea id="text_rechts" label="Text"/></p>
+                        </div>
+                    </div>
+                    <div class="offset-item-back-border-helper d-none d-lg-block position-absolute offset-lg-6 col-lg-2 dark-bg-color h-100 pl-grid"></div>
+                </div>
+                </div>
+                <rs:link id="link" label="Button-Link" display="false"></rs:link>
+
+            </rs:for>
+        </div>
+        <ol class="carousel-indicators" style="display:none">
+
+            <li data-target="#carouselHero" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselHero" data-slide-to="1"></li>
+            <li data-target="#carouselHero" data-slide-to="2" style="display:none"></li>
+            <li data-target="#carouselHero" data-slide-to="3" style="display:none"></li>
+            <li data-target="#carouselHero" data-slide-to="4" style="display:none"></li>
+        </ol>
+    </div>
+<!--
+<script>
+    document.getElementsByClassName('carousel-item')[0].classList.add('active');
+</script>
+-->
+
+</rs:template>

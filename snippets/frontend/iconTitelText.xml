@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:template id="9"
+             name="Content | Box Icon-Titel-Text-Link"
+             groups="content"
+             xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:rs="http://helliwood.de"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://helliwood.de ./../rs_schema.xsd">
+
+
+    <rs:color-select id="color" label="Farbe" display="false" />
+    <rs:text id="icon" label="Icon" display="false" />
+    <rs:link id="link" label="link" display="false" />
+
+    <div class="color-offset-item d-lg-flex mb-grid ">
+        <a class="col-lg-7  animate mb-lg-grid d-flex front-item align-items-center mobile-indent-flex">
+            <rs:attribute name="href" action="append" value="$link"/>
+            <rs:attribute name="class" action="append" value=" color-style-$color"/>
+
+            <div class="col-3"><i class="offset-item-icon m-auto ">
+                <rs:attribute name="class" action="append" value=" $icon"/>
+
+            </i></div>
+            <div class="col"><h3 class="offset-item-title"><rs:text id="title" label="Titel" /></h3></div>
+
+            <div class="col-1">
+            </div>
+            <span class="icon-box d-flex"> <i data-fa-transform="rotate-90" class="fad  fa-arrow-up"></i></span>
+        </a>
+        <div class="col-lg-5 h-100 p-grid mt-lg-grid  back-item mobile-indent-flex">
+            <p>
+                <rs:textarea id="text" label="Text" nl2br="true"/>
+            </p>
+
+            <rs:text id="buttonText" label="Button-Text" display="false"/>
+
+            <rs:if condition="$buttonText!=''">
+            <a href="" target="" class="btn btn-primary color-style-force-a">
+                <rs:attribute name="href" action="append" value="$link"/>
+                <rs:variable name="buttonText" display="true"/>
+            </a>
+            </rs:if>
+        </div>
+
+    </div>
+
+</rs:template>

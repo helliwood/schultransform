@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if category %}<h1>{{ category.name }}</h1>
+        <div class="row mb-3">
+            <div class="col">
+                <div class="panel">
+                    <h2>Fragebögen</h2>
+                    <data-table
+                            sort-by="position"
+                            :sort-desc="false"
+                            api-url="{{ path('questionnaire_questionnaires', {id: category.id}) }}"
+                            :fields="[
+                    {key: 'name', label: 'Name', sortable: true},
+                    {key: 'type', label: 'Typ', sortable: true},
+                    {key: 'questionGroupsCount', label: 'Fragegruppen', sortable: false},
+                    {key: 'resultCount', label: 'Ergebnisse', sortable: false},
+                    {key: 'actions', label: 'Optionen', sortable: false, class:'options'}
+                ]">
+                        <template v-slot:cell(name)="{row, callAndRefresh}">
+                            <span if="row.item.icon" :style="{'color':row.item.color}"><i
+                                        :class="row.item.icon"></i></span> {{ '{{' }} row.item.name {{ '}}' }}
+                        </template>
+                        <template v-slot:cell(actions)="{row, callAndRefresh}">
+                            <b-button size="sm" :href="'/Backend/Questionnaire/show-questionnaire/'+row.item.id"
+                                      class="mr-2">
+                                Ergebnisse
+                            </b-button>
+                            <b-button size="sm"
+                                      :href="'/Backend/Questionnaire/QuestionGroup/'+row.item.id"
+                                      class="mr-2">
+                                Fragegruppen
+                            </b-button>
+                            <b-button size="sm" variant="primary" :href="'/Backend/Questionnaire/edit-questionnaire/'+row.item.id"
+                                      class="mr-2">
+                                Bearbeiten
+                            </b-button>
+                        </template>
+                    </data-table>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <div class="row">
+        <div class="col">
+            <div class="panel">
+                <a class="btn btn-primary float-right"
+                   href="{{ path('questionnaire_add_category', {parent: category ? category.id : null}) }}">Kategorie
+                    hinzufügen</a>
+                <h2>Kategorien</h2>
+                <data-table
+                        sort-by="position"
+                        :sort-desc="false"
+                        :fields="[
+                    {key: 'name', label: 'Name', sortable: false},
+                    {key: 'categoryCount', label: 'Unterkategorien', sortable: false},
+                    {key: 'questionnaireCount', label: 'Fragebögen', sortable: false},
+                    {key: 'resultCount', label: 'Ergebnisse', sortable: false},
+                    {key: 'actions', label: 'Optionen', sortable: false, class:'options'}
+                ]">
+                    <template v-slot:cell(name)="{row, callAndRefresh}">
+                        <span if="row.item.icon" :style="{'color':row.item.color}"><i
+                                    :class="row.item.icon"></i></span> {{ '{{' }} row.item.name {{ '}}' }}
+                    </template>
+                    <template v-slot:cell(actions)="{row, callAndRefresh}">
+                        <b-button size="sm" :href="'{{ path('questionnaire_home') }}/'+row.item.id" class="mr-2">
+                            Fragebögen
+                        </b-button>
+                        <b-button size="sm" :href="'{{ path('questionnaire_home') }}/edit-category/'+row.item.id"
+                                  class="mr-2" variant="primary">
+                            Bearbeiten
+                        </b-button>
+                    </template>
+                </data-table>
+            </div>
+        </div>
+    </div>
+    <a href="{{ path('questionnaire_recommendation_home') }}" class="btn btn-primary mt-3">Handlungsempfehlungen</a>
+{% endblock %}

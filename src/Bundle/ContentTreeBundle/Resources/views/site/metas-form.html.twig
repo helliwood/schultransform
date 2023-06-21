@@ -1,0 +1,62 @@
+{% extends 'iframe.html.twig' %}
+
+{% form_theme form _self %}
+
+{% block _site_parent_widget %}
+    <content-tree-site-form-parent id="{{ id }}" :site-id="{{ form.parent.vars.data.id }}"
+                                   :position="{{ form.parent.vars.data.position|default('null') }}"
+                                   name="{{ full_name }}" :value="{{ value|default('null') }}"
+                                   tree-path="{{ path('content_tree_tree') }}">
+        {# {{ block('hidden_widget') }} #}
+    </content-tree-site-form-parent>
+{% endblock %}
+
+{% block _site_position_row %}
+
+{% endblock %}
+
+{% block _site_socialMediaImage_row %}
+    <media-form-element
+            id="{{ id }}"
+            name="{{ name }}"
+            label="{{ label }}"
+            col-class="col-sm-10"
+            value="{{ value }}"
+            filetype="{{ attr.filetype }}"
+            api-url="{{ path('media_base_home') }}"
+            :entity="{{ entity|json_encode() }}"
+            :parent="{{ parent|json_encode() }}"
+            :icon="{{ icon|json_encode() }}"
+    >
+        {{ block('hidden_widget') }}
+    </media-form-element>
+{% endblock %}
+
+{% block body %}
+    {% if not finish %}
+        <div class="container-fluid pb-4">
+            <content-tree-site-form slugify-path="{{ path('content_tree_site_slugify') }}">
+                {{ form_start(form, {'action': path("content_tree_site_metas_form", {id:site.id}), 'attr': {'novalidate': 'novalidate', 'class': 'pb-5'}}) }}
+                {{ form_widget(form) }}
+                <div class="row fixed-bottom bg-body pt-2 border-top">
+                    <div class="offset-sm-2 col-sm-10">
+                        <button type="submit" value="save" class="btn btn-secondary mb-2 ml-2"><i
+                                    class="far fa-save"></i>
+                            Speichern
+                        </button>
+                    </div>
+                </div>
+                {{ form_end(form) }}
+            </content-tree-site-form>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% if finish %}
+        <script>
+            top.postMessage({op: 'metas-saved', siteId:{{ site.id }}}, "*");
+        </script>
+    {% endif %}
+{% endblock %}

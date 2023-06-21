@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:template id="12"
+             name="Content | Box Titel-Text-Link"
+             groups="content"
+             xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:rs="http://helliwood.de"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://helliwood.de ./../rs_schema.xsd">
+
+
+    <rs:link id="link" label="Link" display="false"></rs:link>
+
+
+    <a class="color-switch col-12 col-md-8 main-bg-color mb-grid animate main-title d-flex align-items-center  pl-grid ">
+        <rs:attribute name="href" action="append" value="$link"/>
+        <h2>
+            <rs:text id="Title" label="Titel"/>
+            <span class="icon-box d-flex"> <i data-fa-transform="rotate-90" class="fad  fa-arrow-up"></i>
+            </span>
+        </h2>
+    </a>
+    <rs:if condition="$url!=''">
+        <div class="col-md-9 col-12 p-grid p-md-0 mt-0">
+            <p class="title-copy  mb-grid"><rs:textarea id="url" label="Subtext"></rs:textarea></p>
+        </div>
+    </rs:if>
+</rs:template>

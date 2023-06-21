@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:template id="123"
+             name="Eingabe | Fragebogen Vue"
+             groups="content"
+             xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:rs="http://helliwood.de"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://helliwood.de ./../rs_schema.xsd">
+    <div>
+        <rs:select id="formtype" label="Fragebogen-Typ" display="false" placeholder="Bitte wählen">
+            <rs:option value="SCHOOL">Schulen</rs:option>
+            <rs:option value="SCHOOL_AUTHORITY">Schulträger</rs:option>
+        </rs:select>
+        <rs:questionnaire-id id="questionnaireId" display="false"></rs:questionnaire-id>
+
+        <rs:user check="hasUser" redirect="user_login">
+            <rs:if condition="$formtype=='SCHOOL_AUTHORITY'">
+                <rs:user check="hasUser" role="ROLE_SCHOOL_AUTHORITY_LITE" redirect="user_login"
+                         notice="Sie sind kein Schulträger oder haben sich noch nicht per Fax verifiziert und haben deswegen keine Berechtigung für diesen Fragebogen.">
+                    <questionnaire>
+                        <rs:attribute name="questionnaire-id" action="append" value="$questionnaireId"></rs:attribute>
+                    </questionnaire>
+                </rs:user>
+            </rs:if>
+            <rs:if condition="$formtype=='SCHOOL'">
+                <rs:user check="hasUser" role="ROLE_TEACHER" redirect="user_login"
+                         notice="Sie haben keinen Fragebogen-Code und haben deswegen keine Berechtigung für diesen Fragebogen.">
+                    <questionnaire>
+                        <rs:attribute name="questionnaire-id" action="append" value="$questionnaireId"></rs:attribute>
+                    </questionnaire>
+                </rs:user>
+            </rs:if>
+        </rs:user>
+    </div>
+</rs:template>

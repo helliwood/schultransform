@@ -1,0 +1,34 @@
+{% block body %}
+
+    Sehr geehrte/r {{ data.name }},<br/>
+    <br/>
+    vielen Dank für Ihre Nachricht! Folgende Daten haben Sie uns übermittelt:<br/>
+    <br/><br/>
+    Name: {{ data.name }}<br/>
+    Organisation: {{ data.organisation }}<br/>
+    E-Mail: {{ data.email }}<br/>
+    Betreff: {{ data.subject }}<br/>
+    Nachricht: {{ data.message | nl2br }}<br/><br/>
+
+    Sie haben uns Ihre Zustimmung gegeben, dass oben stehende Daten von uns entsprechend der Datenschutzerklärung in einem automatisierten Verfahren erhoben, gespeichert und verarbeitet werden, um Ihre Anfrage zu bearbeiten. Die Daten werden ausschließlich für die Verarbeitung der Konversation verwendet.
+
+
+    <br/><br/><br/>
+    <strong>Projektbüro Schultransform</strong><br/>
+    <br/>
+    <strong>c/o Helliwood media & education im fjs e.V.</strong><br/>
+    Marchlewskistraße 27, 10243 Berlin<br/>
+    Telefon: +49 30 2938 1680<br/>
+    Telefax: +49 30 2938 1689<br/>
+    E-Mail: <a href="mailto:support@schultransform.org">support@schultransform.org</a><br/>
+    Internet: <a href="https://www.schultransform.org">https://www.schultransform.org</a><br/>
+    <br/>
+    <strong>Förderverein für Jugend und Sozialarbeit e.V. (fjs)</strong><br/>
+    Geschäftsführender Vorstand: Thomas Schmidt<br/>
+    Vereinsregisternummer: VR 11338 B, Amtsgericht Berlin-Charlottenburg<br/>
+    <a href="https://fb.tipp.fm/3938_fjs_transparenzdatenbank.htm">Transparenzdatenbank</a><br/><br/>
+
+    <strong>Förderung</strong><br/>
+    Das Forschungs- und Entwicklungsprojekt zur Entwicklung einer Plattform zur digitalen Schultransformation [SchulTransform] wird gefördert durch das Bundesministerium für Bildung und Forschung (BMBF) und wird von Helliwood media & education und dem Bündnis für Bildung gemeinsam umgesetzt.
+    <br/>
+{% endblock %}

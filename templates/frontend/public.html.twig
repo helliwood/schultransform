@@ -1,0 +1,156 @@
+{% if form is defined %}
+    {% form_theme form 'frontend/forms.html.twig' %}
+{% endif %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}Schultransform{% endblock %}</title>
+    <meta name="description" content="{% block dc_description %}{% endblock %}">
+    <meta name="keywords" content="{% block dc_keywords %}{% endblock %}"/>
+    <meta name="author" content="{% block dc_author %}{% endblock %}"/>
+    <meta name="date" content="{% block dc_date %}{% endblock %}"/>
+    <meta name="copyright" content="Schultransform.org"/>
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% block dc_title %}{{ block('title') }}{% endblock %}">
+    <meta name="twitter:description" content="{{ block('dc_description') }}">
+    <meta name="twitter:image" content="{% block dc_image %}{% endblock %}">
+
+
+    <meta property="og:url" content="{% block dc_url %}{% endblock %}"/>
+    <meta property="og:title" content="{{ block('dc_title') }}"/>
+    <meta property="og:description" content="{{ block('dc_description') }}"/>
+    <meta property="og:site_name" content="Schultransform"/>
+    <meta property="og:image" content="{{ block('dc_image') }}"/>
+
+
+    <meta itemprop="url" content="{{ block('dc_url') }}"/>
+    <meta itemprop="name" content="{{ block('dc_title') }}">
+    <meta itemprop="description" content="{{ block('dc_description') }}"/>
+    <meta itemprop="image" content="{{ block('dc_image') }}"/>
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('frontend', null, 'build_frontend') }}
+    {% endblock %}
+
+    <style>
+        /* Hier Styles zu haben ist nicht schön */
+        section.part:last-child,
+        section.part .note:last-child,
+        .offset-item:last-child,
+        #main-content {
+            padding-bottom: 0 !important;
+            margin-bottom: 0 !important;
+        }
+
+
+        .collapse:not(.show) .percbar {
+            height: 100% !important;
+        }
+
+
+    </style>
+</head>
+<body class="st">
+<div id="app">
+    <header class="container">
+        {% include 'frontend/index/fe_header.html.twig' %}
+    </header>
+    <main class="container {% if dashboardUser | default(null)%}{{ dashboardUser }}{% endif %}">
+        <div class="row">
+            <div id="side-row" class="d-none d-lg-block main-bg-color main-border">
+            </div>
+            <div class="col p-grid" id="main-content">
+                {% if  knp_menu_get_breadcrumbs_array(knp_menu_get_current_item('frontend'))|length>1 %}
+                    <div id="content-title-bar" class="mb-grid row">
+                        <div class="col-lg-10 col text-left">
+                            <ol class="breadcrumb">
+                                {% for breadcrumb in knp_menu_get_breadcrumbs_array(knp_menu_get_current_item('frontend')) %}
+                                    <li class="breadcrumb-item ">
+                                        {% if loop.last and loop.first %}
+                                        {% elseif loop.last %}
+                                            {{ breadcrumb.label|raw }}
+                                        {% else %}
+                                            <a href="{{ breadcrumb.uri }}">{{ breadcrumb.label|raw }}</a>
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ol>
+                        </div>
+                        <div id="readingTime" class="color-a col text-right pr-0">
+                            <span id="words"></span> min <i class="c-a fad fa-clock"></i>
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% block body %}
+                {% endblock %}
+            </div>
+        </div>
+        <div class="row mt-grid main-row d-flex">
+            <div class="sb-width icon-hover-bounce color-a main-bg-color d-flex animate big-icon main-border hide-on-mobile ">
+                <i class="fad hf fa-heart m-auto"></i>
+            </div>
+            <div class="col main-bg-color color-switch mh text-left ml-lg-grid main-border">
+                <h2 class="d-none d-lg-inline pl-lg-grid">Schul<span>transformation</span> gestalten</h2>
+                <h2 class="d-inline d-lg-none pl-lg-grid">
+                    <i class="fad fa-heart m-auto"></i>&nbsp;Schul<span>transformation</span>
+                </h2>
+
+
+                <a href="#" class="position-absolute d-flex big-icon" id="move-to-top">
+                    <span class="float-right pr-grid  hide-on-mobile">nach oben</span>
+                    <div class="color-a  d-flex animate  sb-width  white-bg-color main-border "><i
+                                class="fad  fa-arrow-up m-auto"></i></div>
+                </a>
+            </div>
+        </div>
+        <slot></slot>
+    </main>
+    <cookie-banner ref="cookiebanner" :banner-id="1"></cookie-banner>
+
+    {% include 'frontend/index/fe_footer.html.twig' %}
+</div>
+{% block javascripts %}
+    {{ encore_entry_script_tags('frontend', null, 'build_frontend') }}
+{% endblock %}
+
+<script>
+    /** readingTime **/
+    let url = window.location.href;
+    if (typeof url === 'string') {
+        if (!url.match('Dashboard')) {
+            readingTime();
+        }
+    }
+
+
+    function readingTime() {
+        var txt = document.getElementById('main-content').innerText || document.getElementById('main-content').textContent;
+        var count = txt.split(/\s/).filter(function (txt) {
+            return /\S/.test(txt)
+        });
+        var wordsPerMin = 200;
+        var duration = Math.round((count.length / wordsPerMin / 60) * 100);
+        if (duration > 0) {
+
+            element = document.getElementById('words');
+            if (typeof (element) != 'undefined' && element != null) {
+                element.innerHTML = duration;
+            }
+
+            element = document.getElementById('readingTime');
+            if (typeof (element) != 'undefined' && element != null) {
+                element.style.display = "inline";
+            }
+        }
+
+    }
+</script>
+{{ track.getTrackingCode|raw }}
+</body>
+</html>

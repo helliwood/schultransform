@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:template id="24"
+             name="Content | Akkordeon"
+             groups="content"
+             xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:rs="http://helliwood.de"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://helliwood.de ./../rs_schema.xsd">
+
+
+        <rs:for id="faqs" label="Akkordeons">
+            <h4 class="collapselement collapsed  px-grid p-lg-2" data-toggle="collapse"  href="#cola" role="button" aria-expanded="false" aria-controls="#cola">
+                <rs:textarea id="questText" label="sichtbarer Text"/>
+                <rs:attribute name="href" action="append" hash="true" value="$questText"/>
+                <rs:attribute name="aria-controls" action="append" hash="true" value="$questText"/>
+
+            </h4>
+        <div class="collapse w-100 px-grid" id="cola">
+            <rs:attribute name="id" action="append" hash="true" value="$questText"/>
+            <rs:textarea id="answText" label="Eingeklappter Text"/>
+        </div>
+        </rs:for>
+
+</rs:template>
+

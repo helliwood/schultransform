@@ -1,0 +1,32 @@
+{% if results | default(null) %}
+    <div class="tr-bg-color-gray-200 px-2 pt-2 pb-0">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 mx-2 mt-2 bg-white">
+            {% if questionnaire | default(null) %}
+                {% include "frontend/dashboard-school/actions/child-templates/potential/child-templates/charts-single.html.twig" %}
+            {% else %}
+                {% include "frontend/dashboard-school/actions/child-templates/potential/child-templates/charts-all.html.twig" %}
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="c-{{ category.id }}">
+        <div class="tr-category-bg tr-border-radius-bottom h-100 tr-small-1">
+            {#    Number of questionnaires not filled out        #}
+            <p class="p-2 text-white">
+                {% if open is not null %}
+                    {{ "teacherPotentialTextUnderCharts"|trans({ '%categoryName%': category.name,'%numberQuestionnairesDone%': numberQuestionnairesDone,'%numberQuestionnairesTotal%':  questionairsInCat,'%plural%': 'sind'}, "dashboard")| raw }}
+                    {#                    {% if open=="1" %} #}
+                    {#                        {{ "teacherPotentialQuestionnairesDone"|trans({ '%categoryName%': category.name,'%numberQuestionnairesDone%': (open),'%numberQuestionnairesTotal%':  results | length,'%plural%': 'ist'}, "dashboard")| raw }} #}
+                    {#                    {% else %} #}
+                    {#                        {{ "teacherPotentialTextUnderCharts"|trans({ '%categoryName%': category.name,'%numberQuestionnairesDone%': numberQuestionnairesDone,'%numberQuestionnairesTotal%':  questionairsInCat,'%plural%': 'sind'}, "dashboard")| raw }} #}
+                    {#                    {% endif %} #}
+                {% endif %}
+                <b-link v-b-modal.modal-profil>
+                    <span>{% trans  from 'dashboard' %}inviteMoreTeacherSchool{% endtrans %}</span>
+                </b-link>
+            </p>
+
+        </div>
+    </div>
+
+{% endif %}

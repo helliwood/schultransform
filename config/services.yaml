@@ -1,0 +1,70 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+  tracking.matomo.site: 60
+services:
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+  # makes classes in src/ available to be used as services
+  # this creates a service per class whose id is the fully-qualified class name
+  Trollfjord\:
+    resource: '../src/*'
+    exclude:
+      - '../src/DependencyInjection/'
+      - '../src/Entity/'
+      - '../src/Kernel.php'
+      - '../src/Tests/'
+      - '../src/Bundle/'
+      - '../src/Core/'
+
+  # controllers are imported separately to make sure services can be injected
+  # as action arguments even if you don't extend any base controller class
+  Trollfjord\Controller\:
+    resource: '../src/Controller/'
+    tags: [ 'controller.service_arguments' ]
+
+  Trollfjord\Bundle\TFSecurityBundle\Controller\:
+    resource: '../src/Bundle/TFSecurityBundle/Controller/'
+    tags: [ 'controller.service_arguments' ]
+
+  Trollfjord\Bundle\TFSecurityBundle\Repository\:
+    resource: '../src/Bundle/TFSecurityBundle/Repository/'
+    tags: [ 'doctrine.repository_service' ]
+
+
+  # add more service definitions when explicit configuration is needed
+  # please note that last definitions always *replace* previous ones
+
+  Trollfjord\Service\ChartService: ~
+  Trollfjord\Service\TrackingService: ~
+  Trollfjord\Service\UserService: ~
+  Trollfjord\Service\CacheQuestionnaireMediaService: ~
+
+  Trollfjord\Service\Dashboard\TeacherService: ~
+  Trollfjord\Service\Dashboard\SchoolService: ~
+  Trollfjord\Service\Dashboard\SchoolAuthorityService: ~
+
+
+  Trollfjord\TemplateEngine\Element\ColorSelect:
+    shared: false
+    public: true
+    tags: [ 'content_tree.template_engine.element' ]
+
+  Trollfjord\TemplateEngine\Element\SitePreview:
+    shared: false
+    public: true
+    tags: [ 'content_tree.template_engine.element' ]
+
+  trollfjord.frontend.menu_builder:
+    class: Trollfjord\Menu\Builder
+    arguments: [ "@knp_menu.factory" ]
+    tags:
+      - { name: knp_menu.menu_builder, method: createMainMenu, alias: frontend } # The alias is what is used to retrieve the menu
+      - { name: knp_menu.menu_builder, method: createUserMenu, alias: usermenu } # The alias is what is used to retrieve the menu
+      - { name: knp_menu.menu_builder, method: createDashboardMenu, alias: dashboardmenu } # The alias is what is used to retrieve the menu

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:template id="110"
+             name="Daten | Box Titel-Text-Chart-Rose"
+             groups="content"
+             xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:rs="http://helliwood.de"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://helliwood.de ./../rs_schema.xsd">
+
+    <div class="offset-item  picture-box offset-item-revert d-lg-flex position-relative mb-grid">
+        <div class="offset-item-back-border-helper mb-grid d-none d-lg-block position-absolute offset-lg-6 col-lg-2 main-bg-color h-100"></div>
+
+        <div class="offset-item-front col-lg-6 mb-lg-grid lg-0 main-bg-color p-grid mobile-indent-left">
+            <div>
+                <h3><rs:text id="t1" label="Titel" /></h3>
+                <p><rs:textarea id="text" label="Text" nl2br="true"/></p>
+                <rs:contentarea name="content1" allowedgroups="basics"></rs:contentarea>
+            </div>
+        </div>
+        <div class="offset-item-back  col-lg-6 dark-bg-color pl-grid mt-lg-grid mt-0 d-flex mobile-indent-right">
+            <gradient-navigation
+                params="chart=rose"
+            ></gradient-navigation>
+        </div>
+    </div>
+
+</rs:template>

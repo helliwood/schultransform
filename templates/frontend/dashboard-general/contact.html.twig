@@ -1,0 +1,9 @@
+<div class="mb-3 tr-small-1">
+    <p>
+        {{ "contactTeam"|trans({}, "dashboard")| raw  }}
+    </p>
+    <p>{% trans  from 'dashboard' %}responseTimeTeam{% endtrans %}</p>
+    <b-link href="/kontakt" target="_blank" class="tr-small-1 btn tr-border-rad-2 bg-white border tr-border-warning px-3">
+        {% trans  from 'dashboard' %}contactTeamButtonText{% endtrans %}
+    </b-link>
+</div>

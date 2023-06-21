@@ -1,0 +1,10 @@
+.logo-offset {
+  width: 250px;
+  margin-left: -22%;
+
+  @include media-breakpoint-down($breakpoint-mobil-style) {
+    width: 100%;
+    margin-left: 0;
+  }
+
+}

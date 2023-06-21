@@ -1,0 +1,68 @@
+{% extends 'frontend/dashboard-teacher/child-templates/account.html.twig' %}
+{% block teacher_account_wrapper %}
+    <div class="c-{{ category.id }} mt-lg-2">
+        <div class="position-relative overflow-hidden d-block tr-border-radius-bottom t-account-wrapper">
+
+            {% block teacher_account_2 %}
+                <div class="t-cat-details-icon-header">
+                    <i class="fad fa-arrow-up tr-display-2 tr-rotate-45 float-right text-white py-2 px-2"></i>
+                    <i class="fad fa-school t-cat-details-icon-header-icon text-white tr-large-4 float-right pt-4 mt-3"></i>
+                </div>
+            {% endblock %}
+
+            {% block teacher_account_3 %}
+                {# header chart #}
+                {% if headerChartValue | default(0) %}
+                    {# color of the category or fall back 'primary' in HEX #}
+                    {% set color = category.color ??  '#006292' %}
+                    <div class="col-md-8 col-12 t-header-chart">
+                        <div class="extras">
+                            <div class="chart">
+                                <result-chart-gauge :chart-height="280"
+                                                    class="t-result-chart-gauge-header"
+                                                    chart-value="{{ headerChartValue }}"
+                                                    tick-color="#666"
+                                                    the-url=""
+                                                    chart-color="{{ color }}">
+                                </result-chart-gauge>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endblock %}
+            <div class="tr-bg-school-color-2 d-flex flex-column
+            pt-sm-3 px-3 pb-2 position-relative
+            align-content-end tr-border-radius-bottom">
+                {# link to action in header #}
+                <div class="d-flex t-header-link-action tr-sm-position-absolute">
+                    <div class="tr-bg-school-color-1 px-2 py-1 text-white">
+                        <p>{{ user.school.name }}</p>
+                    </div>
+                    <div class="tr-bg-yellow-1 px-2 py-1 tr-border-radius-right">
+                        <b-link v-b-modal.modal-cat{{ category.id }}
+                                class="d-inline tr-color-black-100 tr-text-decoration">
+                            {% trans  from 'dashboard' %}proceed{% endtrans %}
+                        </b-link>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between flex-column flex-sm-row mt-2 tr-color tr-small-1">
+                    <p class="d-inline-block p-0 m-0 text-white">
+                        {{ "teachersActiveByCategory"|trans({'%teachersActiveByCategory%': teachersActiveByCategory}, "dashboard")| raw  }}
+                    </p>
+
+                        <b-link class="text-white" v-b-modal.modal-2>
+                            {% trans  from 'dashboard' %}inviteMoreTeacher{% endtrans %}
+                        </b-link>
+                </div>
+                <dashboard-modal :data="{{ user | json_encode }}"
+                                 modal-component-name="teacherCodeSend"
+                                 id="modal-2"
+                ></dashboard-modal>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block teacher_account_4 %}
+{% endblock %}
+

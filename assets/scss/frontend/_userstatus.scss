@@ -1,0 +1,133 @@
+.userstatus{
+  color: black;
+  font-size: 1rem;
+
+
+  @include media-breakpoint-up($breakpoint-mobil-style) {
+    min-width: 300px;
+  }
+
+
+  a{
+    font-size: inherit;
+    color: inherit;
+  }
+
+  #login-button{
+    position: relative;
+    padding: 20px;
+    border-radius: $normal-border-radius 0px 0px $normal-border-radius;
+    height: 50px;
+    min-height: 50px;
+    line-height: 10px;
+    display: block;
+    margin-top: 15px;
+    margin-right: $grid-gutter-doublewidth;
+    z-index: 2;
+    @include media-breakpoint-down('sm') {
+      line-height: 18px;
+      padding: 9px 20px;
+    }
+
+    .the-icon {
+      position: absolute;
+      height: 100%;
+      display: block;
+      right: -55px;
+      top: 0;
+      width: 50px;
+      border-radius: 0 $normal-border-radius $normal-border-radius 0;
+      border-left-width: 0;
+      color: white;
+      text-align: center;
+      font-size: 1.8em;
+      line-height: 3rem;
+    }
+  }
+  .navbar{
+    display: none;
+    position: absolute;
+    width:calc(100% - 30px);
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    top:100%;
+    right: $grid-gutter-halfwidth;
+    background-color: $main-bg-color;
+
+    @include media-breakpoint-down('sm') {
+      width: 100vw;
+      right: 0;
+    }
+
+    @include media-breakpoint-up($breakpoint-mobil-style) {
+      &::before {
+        content: "";
+        background: white;
+        width: 100%;
+        height: 40px;
+        display: block;
+        position: absolute;
+        top: -41px;
+        z-index: 1;
+      }
+    }
+
+
+
+    li{
+      padding: 5px;
+      position: relative;
+      border-top: 1px solid $fe-border-color;
+      &:first-child {
+        border: none;
+      }
+      a{
+        width: 100%;
+        display: block;
+        line-height: 1.2em;
+        margin: 5px;
+        span{
+          color: black;
+        }
+      }
+      i{
+        position: absolute;
+        right: $grid-gutter-halfwidth;
+        font-size: 1.5em;
+        line-height: 0.7em;
+      }
+    }
+  }
+
+  .hide-on-open{
+
+  }
+  .show-on-open{
+    display: none;
+  }
+
+
+
+  @include media-breakpoint-up($breakpoint-mobil-style) {
+   &:hover{
+     .navbar{
+       display: block;
+     }
+   }
+  }
+
+
+  &.open{
+    .navbar{
+      display: block;
+    }
+
+    .hide-on-open{
+      display: none;
+    }
+    .show-on-open{
+     display: block;
+    }
+  }
+}

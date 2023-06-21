@@ -1,0 +1,31 @@
+{% extends 'frontend/clear.html.twig' %}
+
+{% form_theme form _self %}
+
+{% block form_label_class -%}
+    col-sm-3
+{%- endblock form_label_class %}
+
+{% block form_group_class -%}
+    col-sm-9
+{%- endblock form_group_class %}
+
+{% block body %}
+
+    <div class="mx-grid mx-sm-0">
+        <div class="panel">
+            {% if submitted %}
+                <h3 class="pb-3">Vielen Dank für Ihre Anmeldung!</h3>
+                <strong class="text-center pb-3">Wir werden uns in Kürze bei Ihnen melden.</strong>
+            {% else %}
+                <div class="row">
+                    <div class="col">
+                        {{ form_start(form, {'attr': {'novalidate': 'novalidate' }}) }}
+                        {{ form_widget(form) }}
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

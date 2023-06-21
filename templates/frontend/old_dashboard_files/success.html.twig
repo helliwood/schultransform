@@ -1,0 +1,305 @@
+{% extends 'frontend/public.html.twig' %}
+
+
+
+{% macro results(results) %}
+    {% for result in results %}
+        <div class=" border-wrapper inherit-border-color my-grid2" style="background: {{ result.color }}">
+            <h3 class=" collapsed position-relative p-grid  main-bg-color " data-toggle="collapse"
+                href="#cola{{ loop.index }}" role="button"
+                aria-expanded="false" aria-controls="#cola{{ loop.index }}">
+                <i class="offset-item-icon m-auto pr-grid icon-style-b {{ result.icon }}"
+                   style="color:{{ result.color }}"></i> {{ result.title }}
+                <i class="fad fa-chevron-up colla-indicator"></i>
+            </h3>
+            <div class=" collapse mt-0 main-bg-color px-grid" id="cola{{ loop.index }}">
+                <h4 class="w-100 mb-grid">Live Auswertung</h4>
+                <div class="px-grid pb-grid row m-0 white-bg-color">
+
+                    {% for questname,avrg in result.charts %}
+                        <div class="col-md-4 col-12">
+                            <div>
+                                <result-chart-gauge :chart-height="281" chart-value="{{ avrg.val }}"
+                                                    the-url="{{ avrg.url }}"
+                                                    chart-color="{{ result.color }}"></result-chart-gauge>
+                                <div class="text-center mt-ngrid3 position-relative"
+                                     style="z-index: 9">{{ questname }}<br>
+                                    <span class="small-text">{{ avrg.detail|raw }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+
+
+                <h4 class="my-grid">Handlungsempfehlungen</h4>
+                <div style="background: white" class="p-grid">
+                    {% if result.handlungsempf is empty %}
+
+
+                        Herzlichen Glückwunsch, Sie sind schon sehr weit fortgeschritten in diesem Handlungsfeld. Nutzen Sie gerne unsere
+                        <a href="/materialien">übergreifende  Handlungsempfehlungen</a> für weitere Inspirationen.
+
+
+
+                    {% endif %}
+                    {% for recommendation,recoval in result.handlungsempf %}
+                        <h4 class="mb-grid">{{ recommendation }}</h4>
+                        {% for reco in recoval %}
+                            <h5 class="collapsed position-relative  p-grid mb-0 mb-grid" data-toggle="collapse"
+                                style="background: {{ result.color }};color:white"
+                                href="#cola_sub{{ loop.parent.loop.parent.loop.index }}_{{ loop.parent.loop.index }}_{{ loop.index }}"
+                                role="button"
+                                aria-expanded="false" aria-controls="#cola{{ loop.index }}"> {{ reco.title }}
+                                <i class="fad fa-chevron-up colla-indicator"></i>
+                            </h5>
+                            <div class=" collapse main-bg-color mt-ngrid mb-grid p-grid"
+                                 id="cola_sub{{ loop.parent.loop.parent.loop.index }}_{{ loop.parent.loop.index }}_{{ loop.index }}">
+
+                                {% if reco.description %}
+                                    <p><strong>Bedeutung für den Transformationsprozess</strong></p>
+                                    <p>{{ reco.description|markdown }}</p>
+                                {% endif %}
+
+                                {% if reco.implementation %}
+                                    <p><strong>Umsetzung</strong></p>
+                                    <p>{{ reco.implementation|markdown }}</p>
+                                {% endif %}
+
+
+                                {% if reco.tips %}
+                                    <p class="mb-1"><strong>Tipps für Schulentwicklungsteams</strong></p>
+                                    <p>{{ reco.tips|markdown }}</p>
+                                {% endif %}
+
+                                {% if reco.tipsSchoolManagement %}
+                                    <p><strong>Tipps für Schulleitungen</strong></p>
+                                    {{ reco.tipsSchoolManagement|markdown }}
+                                {% endif %}
+
+                                {% if reco.examples %}
+                                    <p><strong>Beispiele</strong></p>
+                                    <p>{{ reco.examples|markdown }}</p>
+                                {% endif %}
+
+                                {% if reco.additionalInformation %}
+                                    <p><strong>Weiterführende Informationen</strong></p>
+                                    {{ reco.additionalInformation|markdown }}
+                                {% endif %}
+
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+
+
+
+                {% if not result.undone is empty %}
+
+                    <div class=" mt-0 main-bg-color">
+                        <h4 class="w-100 my-grid">Offene Fragebögen</h4>
+                        <div class="px-grid pb-grid row m-0 white-bg-color">
+
+
+                            {% for quest in result.undone %}
+                                <a class="p-grid d-block w-100 my-2" style="background: {{ result.color }};color:white"
+                                   href="{{ quest.site }}">{% if quest.icon %} <i
+                                            class="pr-2 fad  {{ quest.icon }}"></i> {% endif %}{{ quest.name }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+
+
+                <div class="mt-grid">
+                    <h4>Momentaufnamen</h4>
+                    <div class="animate d-flex download-wrapper pr-md-grid">
+                        <div class="download-area  mb-grid col-12 color-style-default p-0">
+                            <div class="row flex-wrap  r-lg-grid">
+                                {% for download in result.downloads %}
+                                    <div class="col-12 col-md-6 pb-grid pb-md-0 d-flex mt-grid">
+                                        <div class="col-9 download-description p-grid white-bg-color"><strong>
+                                                {{ download.title }}
+                                            </strong>
+                                            <p>
+                                                {{ download.desc }}
+                                            </p>
+                                            <a href="{{ download.url }}" target="_blank "
+                                               class="mt-grid download-description-link">
+                                                {{ download.FileText }}
+                                            </a>
+                                        </div>
+                                        <div class="col-3 text-right d-flex p-0"><a href="{{ download.url }}"
+                                                                                    target="_blank "
+                                                                                    class="btn btn-primary m-auto h-100 w-100 d-flex download-icon   "
+                                                                                    style="background: {{ result.color }}"><i
+                                                        class="fad fa-{{ download.type }} m-auto"></i></a></div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endmacro %}
+
+{% block body %}
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            <i class="fad fa-exclamation-square"></i> {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('notice') %}
+        <div class="alert alert-info">
+            <i class="fad fa-exclamation-square"></i> {{ message }}
+        </div>
+    {% endfor %}
+    <div class="color-switch col-12 col-md-8 main-bg-color mb-grid animate main-title d-flex align-items-center  pl-grid ">
+        <h2>Meine Ergebnisse</h2> <a href="{{ path('user_logout') }}" class="position-absolute" style="right:25px"> <i
+                    class="fad fa-sign-out"></i> Abmelden</a></div>
+    <div class="row">
+
+        {% if not is_granted('ROLE_SCHOOL_AUTHORITY_LITE') %}
+            {% if not is_granted('ROLE_SCHOOL') and not is_granted('ROLE_SCHOOL_LITE')  %}
+                {{ include('frontend/user/success_user_box.twig') }}
+            {% endif %}
+
+            {{ include('frontend/user/success_school_box.twig') }}
+        {% endif %}
+        {% if is_granted('ROLE_SCHOOL_AUTHORITY_LITE') or  is_granted('ROLE_SCHOOL') or  is_granted('ROLE_SCHOOL_LITE') %}
+            {{ include('frontend/old_dashboard_files/success_authority_box.twig') }}
+        {% endif %}
+
+
+    </div>
+
+
+    {% if not schools is empty %}
+
+        <div>
+            <div class=" border-wrapper inherit-border-color my-grid2 c-3">
+                <h3 class=" collapsed position-relative p-grid  main-bg-color " data-toggle="collapse"
+                    href="#schools" role="button"
+                    aria-expanded="false" aria-controls="#schools">Verbundene Schulen
+                    <i class="fad fa-chevron-up colla-indicator"></i>
+                </h3>
+                <div class=" collapse main-bg-color m-0 row" id="schools">
+
+                    {% for school in schools %}
+                        <div class="col-12 col-md-4 mb-grid">
+                            <div class="main-border bg-white c-3 h-100">
+                                <div class="position-relative">
+                                    <div class="p-2 bgcolor-c d-inline-block c-3 text-white mr-2 position-absolute" style="left:0;top:0">
+                                        <i class="fad fa-school c-3"></i>
+                                    </div>
+                                    <div style="padding-left:60px;height:50px;overflow: hidden" class="d-flex horizontal">
+                                        <strong class="justify-content-center align-self-center pr-grid">  {{ school.name }}
+                                            {% if not school.confirmed %}<i title="Schule wurde noch nicht freigeschaltet" style="right: 2px;top:0" class="position-absolute fad color-c fa-exclamation-square"></i>{% endif %}
+                                            <br>
+                                        </strong>
+                                    </div>
+                                </div>
+                                <div class="p-grid border-top small-text">
+                                    {{ school.getAddress.street }}<br>
+                                    {{ school.getAddress.postalcode }} {{ school.getAddress.city }}<br><br>
+                                    Mail:{% if not school.getEmailAddress %} - {% else %} <a
+                                        href="mailto:{{ school.getEmailAddress }}">{{ school.getEmailAddress }}</a>{% endif %}
+                                    <br>
+                                    Tel.:{% if not school.getPhoneNumber %} - {% else %} <a
+                                        href="tel:{{ school.getPhoneNumber }}">{{ school.getPhoneNumber }}</a>{% endif %}
+                                    <br>
+                                    Fax:{% if not school.getFaxNumber %} - {% else %}<a
+                                href="fax:{{ school.getFaxNumber }}">{{ school.getFaxNumber }}</a>{% endif %} <br>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+
+    <div class="color-switch col-12 col-md-8 main-bg-color mb-grid animate main-title d-flex align-items-center  pl-grid mt-grid">
+        <h2>Momentaufnahme und Empfehlungen</h2></div>
+    <div class="main-bg-color c-7 border-wrapper  mr-grid"
+         style="height:{% if chart2!="[]" %}650px{% else %}400px{% endif %}">
+        <h3 class="p-grid m-0">Aktivitäten</h3>
+        <div>
+            <v-chart :api-url="{{ chart1 }}" style="height:250px;padding:25px" height="250px"/>
+        </div>
+        {% if chart2 !="[]" %}
+            <div>
+                <v-chart :api-url="{{ chart2 }}" style="height:250px;padding:25px" height="250px"/>
+            </div>
+        {% endif %}
+    </div>
+    <!--
+
+    {% if is_granted('ROLE_SCHOOL_LITE') %}
+        <a href="/PublicUser/change"> <i class="fad fa-key"></i> Passwort ändern</a> &nbsp;|&nbsp;
+    {% endif %}
+    <a href="{{ path('user_logout') }}"> <i class="fad fa-sign-out"></i> Abmelden</a>
+
+    {% if is_granted('ROLE_SCHOOL') %}
+        <div class="mt-grid">
+            Ihr Schulcode lautet: {{ user.school.code }}
+        </div>
+    {% endif %}
+
+    {% if is_granted('ROLE_SCHOOL_AUTHORITY_LITE') %}
+        <div class="mt-grid">
+            Trägeraccount!
+        </div>
+    {% endif %}
+
+    {% if not is_granted('ROLE_SCHOOL') and is_granted('ROLE_SCHOOL_LITE') %}
+        <div class="mt-grid">
+            Ihre angegebene Schule wurde noch nicht bestätigt.<br/>
+            <a class="mt-1 btn btn-primary" href="{{ path('get_school_fax') }}" target="_blank" title="Schulfax"><i
+                        class="fad fa-download"></i> Schulfax herunterladen</a>
+        </div>
+    {% endif %}
+    {% if is_granted('ROLE_SCHOOL_LITE') %}
+        <div class="mt-grid">
+            <a class="mt-1 btn btn-primary" href="{{ path('user_edit_school') }}" title="Schulstammdaten"><i
+                        class="fad fa-file"></i> Schule bearbeiten</a>
+        </div>
+    {% endif %}
+
+    -->
+    <div class="example-wrapper mt-grid mb-grid2">
+        <div class="panel mb-grid">
+            <div>{{ _self.results(results) }}</div>
+
+
+
+            {% if not unfinished is empty %}
+                <div class="color-switch col-12 col-md-8 main-bg-color mt-grid2 mb-grid animate main-title d-flex align-items-center  pl-grid mt-grid mb-ngrid">
+                    <h2>Offene Handlungsfelder</h2></div>
+                <div>
+                    {% for result in unfinished %}
+                        <div class=" border-wrapper  p-grid my-grid2 c-9">
+                            <h4 onclick="window.location.href='{{ result.url }}'" style="cursor:pointer">
+                                <i class="offset-item-icon m-auto pr-grid icon-style-b {{ result.icon }}"></i> {{ result.title }}
+                                {% if not is_granted('ROLE_SCHOOL_AUTHORITY_LITE') %} (Fragebögen anzeigen)  {% endif %}
+                            </h4>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="mb-grid">&nbsp;</div>
+
+{% endblock %}

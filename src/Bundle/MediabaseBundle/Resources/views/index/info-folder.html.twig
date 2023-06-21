@@ -1,0 +1,23 @@
+{% extends 'iframe.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="py-4">
+           Hola Info
+        </div>
+        <div>
+            {% if folder %}
+            {%  endif %}
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        window.onload = function() {
+            parent.postMessage({op: 'contentLoaded'}, "*");
+        }
+    </script>
+{% endblock %}

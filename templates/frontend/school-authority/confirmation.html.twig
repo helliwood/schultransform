@@ -1,0 +1,18 @@
+{% block dc_image %}/build_frontend/images_frontend/socialimage.jpg{% endblock %}
+{% extends 'frontend/public.html.twig' %}
+
+{% block body %}
+    <a href="/home" class="color-switch col-12 col-md-8 main-bg-color mb-grid animate main-title d-flex align-items-center  pl-grid ">
+        <h2>Bestätigung<span class="icon-box d-flex"><i data-fa-transform="rotate-90" class="fad  fa-arrow-up"></i></span></h2>
+    </a>
+
+    {% if user %}
+        Hallo {{ user.getFirstName() }} {{ user.getLastName() }},<br/>
+        <br/>
+        vielen Dank für die Bestätigung Ihrer E-Mail-Adresse.<br/>
+        Ihr Account ist nun freigeschaltet. Sie können sich nun mit Ihrer E-Mail und dem gewählten Passwort anmelden.
+    {% else %}
+        Wir konnten Ihre Freischaltung nicht verarbeiten. Eventuell haben Sie Ihren Account bereits freigeschaltet.
+    {% endif %}
+    <a href="{{ path('user_login') }}" class="btn btn-primary btn-lg mt-3">Zur Anmeldung</a>
+{% endblock %}

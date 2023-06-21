@@ -1,0 +1,18 @@
+{% form_theme form _self %}
+
+{% block media_row %}
+    <media-form-element
+            id="{{ id }}"
+            name="{{ name }}"
+            label="{{ label }}"
+            colClass="col-sm-10"
+            value="{{ value }}"
+            filetype="{{ attr.filetype }}"
+            apiUrl="{{ path('media_base_home') }}"
+            :entity="{{ entity|json_encode() }}"
+            :parent="{{ parent|json_encode() }}"
+            :icon="{{ icon|json_encode() }}"
+    >
+        {{ block('hidden_widget') }}
+    </media-form-element>
+{% endblock %}

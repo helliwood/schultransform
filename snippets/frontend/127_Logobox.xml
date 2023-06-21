@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:template id="127"
+             name="Content | Logos"
+             groups="content"
+             xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:rs="http://helliwood.de"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://helliwood.de ./../rs_schema.xsd">
+
+    <div class="logos my-grid px-grid pt-grid main-bg-color main-border">
+        <rs:for id="sections" label="Sektionen">
+            <div class="headline mb-grid">
+                <rs:text id="title" label="Titel"/>
+            </div>
+            <div class="row">
+                <rs:for id="items" label="Logos">
+                    <rs:media id="logo" label="Logo" filetype="image" display="false"/>
+                    <rs:link id="link" label="Link" display="false"/>
+                    <div class="col-6 col-md-4 col-lg-3 mb-grid item_container">
+                        <div class="main-border bg-white item">
+                            <rs:if condition="$link!=''">
+                                <rs:attribute name="class" action="append" value=" link"/>
+                                <rs:if condition="$link_type=='extern'">
+                                    <rs:attribute name="onclick" action="append" value="window.open('$link')"/>
+                                </rs:if>
+                                <rs:if condition="$link_type=='intern'">
+                                    <rs:attribute name="onclick" action="append"
+                                                  value="window.location.href='$link'"/>
+                                </rs:if>
+                            </rs:if>
+                            <div class="img">
+                                <rs:attribute name="style" action="append" value="background-image: url('$logo_url')"/>
+                            </div>
+                        </div>
+                    </div>
+                </rs:for>
+            </div>
+        </rs:for>
+    </div>
+</rs:template>

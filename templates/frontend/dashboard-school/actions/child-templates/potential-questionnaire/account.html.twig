@@ -1,0 +1,50 @@
+{% extends 'frontend/dashboard-general/account.html.twig' %}
+
+{% block account_2 %}
+    <div class="t-cat-details-icon-header">
+        <i class="fad fa-arrow-up tr-display-2 tr-rotate-45 float-right text-white py-2 px-2"></i>
+        <i class="fad fa-school t-cat-details-icon-header-icon text-white tr-large-3 float-right  pb-4 pt-3 mt-2  mt-md-4"></i>
+    </div>
+{% endblock %}
+
+  {% block account_action %}
+      <div class="d-flex t-header-link-action tr-sm-position-absolute">
+          <div class="tr-bg-school-color-1 w-100 px-2 py-1 text-white">
+              <p>{{ user.school.name }}</p>
+          </div>
+      </div>
+  {% endblock %}
+{% block account_3 %}
+    {% if headerChartValue | number_format(1) %}
+        {# color of the category or fall back 'primary' in HEX #}
+        {% set color = category.color ??  '#006292' %}
+        <a href="{{ path('dashboard_school_potential',{category:category.id}) }}" class="tr-cursor-pointer">
+            <div class="col-md-8 col-12 t-header-chart">
+                <div class="extras">
+                    <div class="chart">
+                        <result-chart-gauge :chart-height="280"
+                                            class="t-result-chart-gauge-header"
+                                            chart-value="{{ headerChartValue }}"
+                                            tick-color="#666"
+                                            the-url=""
+                                            chart-color="{{ color }}">
+                        </result-chart-gauge>
+                    </div>
+                </div>
+            </div>
+        </a>
+    {% endif %}
+{% endblock %}
+
+
+
+{% block account_bottom %}
+    <div class="d-flex flex-column flex-sm-row justify-content-between mt-2 tr-color tr-small-1">
+        <p class="d-inline-block mb-1 p-0 m-sm-0">
+            {{ "schoolQuestionnairesDone"|trans({'%teachersActiveByQuestionnaire%': teachersActiveByQuestionnaire}, "dashboard")| raw }}
+        </p>
+        <b-link v-b-modal.modal-profil>
+            <p class="">{% trans  from 'dashboard' %}inviteMoreTeacherSchool{% endtrans %}</p>
+        </b-link>
+    </div>
+{% endblock %}

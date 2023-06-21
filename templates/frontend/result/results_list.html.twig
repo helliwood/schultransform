@@ -1,0 +1,53 @@
+{% extends 'frontend/iframe_postmsg.html.twig' %}
+
+{% macro results(results) %}
+    {% for result in results %}
+        <h4 class="collapselement collapsed" data-toggle="collapse" href="#cola{{ loop.index }}" role="button"
+            aria-expanded="false" aria-controls="#cola{{ loop.index }}">
+            {{ result.category.name }} ({{ result.results | length }})
+        </h4>
+
+        <table class="table table-striped collapse" id="cola{{ loop.index }}">
+            <thead>
+            <tr>
+                <th width="20%">Datum</th>
+                <th>Fragebogen</th>
+                <th width="15%">Auswertung</th>
+                <th width="15%">Empfehlung</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in result.results %}
+                <tr>
+                    <td>{{ item.creationDate | date("d.m.Y") }}</td>
+                    <td>{{ item.questionnaire.name }}</td>
+                    <td><a href="{{ path('print-result', {'resultId' : item.id}) }}"
+                           class="btn btn-primary"><i class="fad fa-download"></i> Download</a></td>
+                    <td>
+                        {% if item.questionnaire.site == null %}
+
+                        {% else %}
+                            <a href=" {{ item.questionnaire.site.getUrl()}}" target="_parent" class="btn btn-primary animate"><i data-fa-transform="rotate-90" class="fad  fa-arrow-up" style="transform: rotate(45deg)"></i> Anzeigen</a>
+                        {% endif %}
+
+
+                    </td>
+                </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+{% endmacro %}
+
+{% block body %}
+    {% if results %}
+        <div class="example-wrapper mt-grid">
+            <div class="panel">
+                <div class="color-switch col-12 col-md-8 main-bg-color mb-grid animate main-title d-flex align-items-center  pl-grid ">
+                    <h2>Ihre Fragebögen</h2></div>
+                <div>{{ _self.results(results) }}</div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

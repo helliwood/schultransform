@@ -1,0 +1,166 @@
+<div class="row c-{{ category.id }}">
+    <div class="w-100 tr-bg-color-gray-200 tr-border-radius-bottom mx-sm-2">
+        <div class="col-12 no-gutters p-0 mb-2">
+            {% if recommendationsAdvanced | default(null) %}
+                <h5 class="bg-primary text-white p-2 my-0 ml-2 ml-sm-0">Ihre Stärken</h5>
+            {% endif %}
+        </div>
+
+        {#  Questions loop more than 4  #}
+        {% if recommendationsAdvanced | default(null) %}
+            {#  Questions loop minus equal 4  #}
+            {% for key,recommendation in recommendationsAdvanced %}
+                <div class="col-12">
+
+                    {% for question in recommendation %}
+                        <div class="mb-2 mx-2 bg-white tr-border-radius-bottom tr-border-base tr-small-1">
+                            <h5 data-toggle="collapse"
+                                data-target="#question_{{ question.id }}_{{ key }}"
+                                aria-expanded="true"
+                                aria-controls="question_{{ question.id }}_{{ key }}"
+                                class="text-left btn tr-border-y p-2 m-0 d-flex justify-content-between flex-column flex-sm-row tr-cat-color t-potential-h5 collapsed">
+                                <span class="tr-text-grow-1 mb-1 mb-sm-0">{{ question.title }}</span>
+                                <span class="mr-4"><span class="tr-small-1 mr-2">Mehr erfahren</span><i
+                                            class="tr-display-4 fad fa-chevron-down colla-indicator mx-3"></i></span>
+                            </h5>
+                            {% if question.description %}
+                                <div class="tr-small-1 m-0 p-2">
+                                    <p><strong>Bedeutung für den Transformationsprozess</strong></p>
+                                    <p>{{ question.description|markdown }}</p>
+                                </div>
+                            {% endif %}
+                            <div class="m-0 p-2 collapse tr-small-1" id="question_{{ question.id }}_{{ key }}">
+
+                                {% if question.implementation %}
+                                    <p><strong>Umsetzung</strong></p>
+                                    <p>{{ question.implementation|markdown }}</p>
+                                {% endif %}
+
+
+                                {% if question.tips %}
+                                    <p class="mb-1"><strong>Tipps für Schulentwicklungsteams</strong></p>
+                                    <p>{{ question.tips|markdown }}</p>
+                                {% endif %}
+
+                                {% if question.tipsSchoolManagement %}
+                                    <p><strong>Tipps für Schulleitungen</strong></p>
+                                    {{ question.tipsSchoolManagement|markdown }}
+                                {% endif %}
+
+                                {% if question.examples %}
+                                    <p><strong>Beispiele</strong></p>
+                                    <p>{{ question.examples|markdown }}</p>
+                                {% endif %}
+
+                                {% if question.additionalInformation %}
+                                    <p><strong>Weiterführende Informationen</strong></p>
+                                    {{ question.additionalInformation|markdown }}
+                                {% endif %}
+                                <div>
+                                    {% if question.partnerMedias | default(null) %}
+                                        <p><strong>Partnermaterialien</strong></p>
+                                        <div class="d-flex flex-wrap w-100">
+                                            {% for media in question.partnerMedias %}
+                                                {% include "frontend/dashboard-school/actions/child-templates/potential/child-templates/partner-materials.html.twig" %}
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+        {% endif %}
+
+        <div class="col-12 mt-2 no-gutters p-0 mb-2">
+            {% if recommendations | default(null) %}
+                <h5 class="bg-primary text-white p-2 my-1 ml-2 ml-sm-0">Entwicklungspotenziale</h5>
+            {% endif %}
+        </div>
+        {% if recommendations | default(null) %}
+            {#  Questions loop minus equal 4  #}
+            {% for key,recommendation in recommendations %}
+                <div class="col-12">
+                    {% for question in recommendation %}
+                        <div class="mb-2 mx-2 bg-white tr-border-radius-bottom tr-border-base tr-small-1">
+                            <h5 data-toggle="collapse"
+                                data-target="#question_{{ question.id }}_{{ key }}"
+                                aria-expanded="true"
+                                aria-controls="question_{{ question.id }}_{{ key }}"
+                                class="text-left btn tr-border-y p-2 m-0 d-flex justify-content-between flex-column flex-sm-row tr-cat-color t-potential-h5 collapsed">
+                                <span class="tr-text-grow-1 mb-2 mb-sm-0">{{ question.title }}</span>
+                                <span class="mr-4"><span class="tr-small-1 mr-2">Mehr erfahren</span><i
+                                            class="tr-display-4 fad fa-chevron-down colla-indicator mx-3"></i></span>
+                            </h5>
+                            {% if question.description %}
+                                <div class="tr-small-1 m-0 p-2">
+                                    <p><strong>Bedeutung für den Transformationsprozess</strong></p>
+                                    <p>{{ question.description|markdown }}</p>
+                                </div>
+                            {% endif %}
+                            <div class="m-0 p-2 collapse tr-small-1" id="question_{{ question.id }}_{{ key }}">
+
+                                {% if question.implementation %}
+                                    <p><strong>Umsetzung</strong></p>
+                                    <p>{{ question.implementation|markdown }}</p>
+                                {% endif %}
+
+
+                                {% if question.tips %}
+                                    <p class="mb-1"><strong>Tipps für Schulentwicklungsteams</strong></p>
+                                    <p>{{ question.tips|markdown }}</p>
+                                {% endif %}
+
+                                {% if question.tipsSchoolManagement %}
+                                    <p><strong>Tipps für Schulleitungen</strong></p>
+                                    {{ question.tipsSchoolManagement|markdown }}
+                                {% endif %}
+
+                                {% if question.examples %}
+                                    <p><strong>Beispiele</strong></p>
+                                    <p>{{ question.examples|markdown }}</p>
+                                {% endif %}
+
+                                {% if question.additionalInformation %}
+                                    <p><strong>Weiterführende Informationen</strong></p>
+                                    {{ question.additionalInformation|markdown }}
+                                {% endif %}
+                                {% if question.partnerMedias | default(null) %}
+                                    <p><strong>Partnermaterialien</strong></p>
+                                    <div class="d-flex flex-wrap w-100">
+                                        {% for media in question.partnerMedias %}
+                                            {% include "frontend/dashboard-school/actions/child-templates/potential/child-templates/partner-materials.html.twig" %}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+        {% endif %}
+        <div class="col-12 mt-2 no-gutters p-0">
+
+            <div class="bg-primary tr-border-radius-bottom p-2 px-3 px-sm-2">
+                <p class="tr-small-1 text-white">
+                    {% if open is not null %}
+                        {{ "teacherPotentialTextUnderCharts"|trans({ '%categoryName%': category.name,'%numberQuestionnairesDone%': numberQuestionnairesDone,'%numberQuestionnairesTotal%':  questionairsInCat,'%plural%': 'sind'}, "dashboard")| raw }}
+                        {#                        {% if open=="1" %} #}
+                        {#                            {{ "teacherPotentialQuestionnairesDone"|trans({ '%categoryName%': category.name,'%numberQuestionnairesDone%': (open),'%numberQuestionnairesTotal%':  results | length,'%plural%': 'ist'}, "dashboard")| raw }} #}
+                        {#                        {% else %} #}
+                        {#                            {{ "teacherPotentialTextUnderCharts"|trans({ '%categoryName%': category.name,'%numberQuestionnairesDone%': numberQuestionnairesDone,'%numberQuestionnairesTotal%':  questionairsInCat,'%plural%': 'sind'}, "dashboard")| raw }} #}
+                        {#                        {% endif %} #}
+                    {% endif %}
+                    <b-link v-b-modal.modal-profil>{% trans  from 'dashboard' %}inviteMoreTeacher{% endtrans %}</b-link>
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>

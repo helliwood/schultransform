@@ -1,0 +1,94 @@
+
+$coloroffsetwidth:$spacer*4;
+
+.color-offset-item {
+  min-height: $spacer*6;
+  position: relative;
+
+  .front-item {
+    z-index: 2;
+    order: 1;
+    @include dark-border;
+    padding: $grid-gutter-width;
+    text-decoration: none;
+
+    .offset-item-title {
+      text-decoration: none;
+      margin:0;
+    }
+
+    .offset-item-icon {
+      font-size: 5rem;
+
+      @include media-breakpoint-up("xl") {
+        font-size: 6rem;
+      }
+
+      @include media-breakpoint-down($breakpoint-mobil-style) {
+        font-size: 3rem;
+      }
+    }
+
+    @include media-breakpoint-down($breakpoint-mobil-style) {
+      .icon-box{
+        @include icon-box-small;
+      }
+    }
+
+
+  }
+
+  .back-item {
+    background: $main-bg-color;
+    z-index: 1;
+    order: 2;
+    @include dark-border;
+
+    &::before {
+      @include dark-border;
+      border-right-width:0;
+      display: block;
+      content: "";
+      position: absolute;
+      left: $coloroffsetwidth*-1;
+      background: $main-bg-color;
+      height: 100%;
+      top: 1px; //TODO SOME BORDER-BOX ISSUE HERE?
+      width: $coloroffsetwidth;
+      display: none;
+      @include media-breakpoint-up("lg") {
+        display:block;
+      }
+    }
+
+  }
+
+
+  &:nth-child(2n) {
+    .front-item {
+      order: 3;
+
+    }
+
+    .back-item {
+        &::before {
+          left: auto;
+          right: $coloroffsetwidth*-1;
+          border-left-width:0;
+          border-right-width:1px;
+      }
+
+    }
+  }
+}
+
+
+
+.partner-box,
+.picture-box{
+  .btn{
+    position: relative !important;
+    bottom: auto !important;
+    margin-top:0 !important;
+  }
+}

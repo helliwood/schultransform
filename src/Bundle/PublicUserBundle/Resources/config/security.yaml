@@ -1,0 +1,39 @@
+# config/packages/security.yaml
+# ...
+security:
+  providers:
+    public_users_provider:
+      entity:
+        # the class of the entity that represents users
+        class: 'Trollfjord\Bundle\PublicUserBundle\Entity\User'
+        # the property to query by - e.g. username, email, etc
+        property: 'code'
+        # optional: if you're using multiple Doctrine entity
+        # managers, this option defines which one to use
+        # manager_name: 'customer'
+
+  encoders:
+    # this internal class is used by Symfony to represent in-memory users
+    Trollfjord\Bundle\PublicUserBundle\Entity\User: 'auto'
+
+
+  firewalls:
+    public_user:
+      anonymous: true
+      guard:
+        authenticators:
+          - Trollfjord\Bundle\PublicUserBundle\Security\LoginFormAuthenticator
+
+
+  role_hierarchy:
+    ROLE_SCHOOL_LITE: [ ROLE_USER ]
+    ROLE_SCHOOL_AUTHORITY_LITE: [ ROLE_USER ]
+    ROLE_SCHOOL: [ ROLE_SCHOOL_LITE ]
+    ROLE_SCHOOL_AUTHORITY: [ ROLE_SCHOOL_AUTHORITY_LITE ]
+
+  # Easy way to control access for large sections of your site
+  # Note: Only the *first* access control that matches will be used
+  #access_control:
+  #  - { path: /PublicUser, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+# ...

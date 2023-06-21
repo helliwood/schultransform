@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:template id="13"
+             name="Content | Box Titel-Text-Logo"
+             groups="content"
+             xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:rs="http://helliwood.de"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://helliwood.de ./../rs_schema.xsd">
+
+
+    <div class="offset-item d-lg-flex position-relative  mb-grid partner-box ">
+        <div class="offset-item-front col-lg-8 main-bg-color mb-0 mb-lg-grid  p-grid mobile-indent-left" >
+            <h3>    <rs:text id="Title" label="Titel"/></h3>
+            <p><rs:textarea id="text" label="Text" nl2br="true"/></p>
+            <rs:contentarea name="content1" allowedgroups="content"></rs:contentarea>
+        </div>
+        <div class="offset-item-back  col-lg-4 dark-bg-color p-grid mt-0 mt-lg-grid d-flex align-items-center mobile-indent-right">
+            <div class="text-center w-100">
+                <div class="logo-container p-grid mb-2">
+                    <rs:media id="teaser" label="Bild" filetype="image" class="img-fluid" display="false"/>
+                    <img class="img-fluid">
+                        <rs:attribute name="src" action="append" value="$teaser_url" />
+                        <rs:attribute name="alt" action="append" value="$Title logo" />
+
+                    </img>
+
+                </div>
+                <a  target="_blank"><rs:text id="link" label="Partnerlinnk"/>
+                <rs:attribute name="href" action="append" value="$link"></rs:attribute>
+                </a>
+            </div>
+        </div>
+
+        <div class="offset-item-back-border-helper blue-bar d-none d-lg-block position-absolute offset-lg-6 col-lg-2 dark-bg-color h-100 pl-grid"></div>
+
+    </div>
+
+
+
+</rs:template>

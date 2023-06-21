@@ -1,0 +1,17 @@
+legend.col-form-label {
+  display: block;
+  font-size: 70% !important;
+  border-bottom: 1px solid $border-color;
+  margin-bottom: $grid-gutter-width;
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+form label.required:after {
+  content: "*";
+  display: inline;
+}
+
+label.form-check-label.required:after {
+  content: "";
+}

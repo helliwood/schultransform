@@ -1,0 +1,15 @@
+{% if newWordId|default(null) %}
+    <script>
+        let new_word_id = '{{ newWordId }}';
+        top.postMessage({op: 'closeFrame', newWordId: new_word_id}, "*");
+    </script>
+    {% elseif updateWordId|default(null) %}
+        <script>
+            let edited_word_id = '{{ updateWordId }}';
+            top.postMessage({op: 'closeFrame', updateWordId: edited_word_id}, "*");
+        </script>
+{% else %}
+    <script>
+        top.postMessage({op: 'closeFrame'}, "*");
+    </script>
+{% endif %}

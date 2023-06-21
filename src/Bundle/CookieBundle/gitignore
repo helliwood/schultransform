@@ -1,0 +1,19 @@
+/auth.json
+/.idea/
+/**/.idea/
+/mysql/
+/src/Bundle/*
+/src/Core/*
+/snippets/rs_schema.xsd
+/**/.DS_Store
+/node_modules
+public/build*
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###

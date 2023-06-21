@@ -1,0 +1,179 @@
+{% extends 'pdf/layout.html.twig' %}
+
+{% block body %}
+
+    <style>
+        .subtitle {
+            font-size: 18px;
+            font-family: "regular2";
+            font-weight: normal;
+            color: #006292;
+        }
+
+        h1 {
+            font-size: 1.6rem;
+        }
+
+        h3 {
+            text-decoration: underline;
+        }
+
+        .subtitle b {
+            color: #000;
+        }
+
+        .question {
+            page-break-inside: avoid;
+            padding-bottom: 30px;
+            clear: both;
+        }
+
+        .question .questionTitle {
+            font-family: "semibold";
+            font-weight: normal;
+            text-align: left;
+        }
+
+        .question .questionText {
+            margin-bottom: 5px;
+        }
+
+        .opinion_scale {
+            width: 100%;
+            display: inline-flex;
+            clear-after: both;
+        }
+
+        .opinion_scale div {
+            float: left;
+            width: 12.5%;
+            text-align: center;
+            padding-top: 5px;
+            margin-bottom: 5px;
+            height: 20px;
+            border: 1px solid #000;
+
+        }
+
+        .opinion_scale_values {
+            padding-bottom: 5px;
+        }
+
+        .opinion_scale .selected {
+            background-color: #006292;
+            color: #fff;
+            opacity: 1;
+        }
+
+        .opinion_scale_left {
+            clear: both;
+            display: inline;
+        }
+
+        .opinion_scale_center {
+            position: absolute;
+            left: 44%
+        }
+
+        .opinion_scale_right {
+            position: absolute;
+            right: -13px;
+        }
+
+        .fa-check-circle {
+            width: 12px;
+            height: 12px;
+        }
+
+        .multiple_choice div, .table div {
+            display: inline-block;
+        }
+
+        .multiple_choice img {
+
+        }
+
+        .text_answer {
+            font-family: "semibold";
+            font-weight: normal;
+        }
+
+        .box {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 10px;
+        }
+
+        .box:before {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            display: block;
+            border: 1px solid #000;
+            width: 20px;
+            height: 20px;
+        }
+
+        .signature {
+            display: block;
+            border: 1px solid #000;
+            border-radius: 5px;
+            width: 350px;
+            height: 130px;
+            margin-top: 30px;
+            position: relative;
+        }
+
+        .signature .label {
+            position: absolute;
+            bottom: 30px;
+            left: 10px;
+        }
+
+        .code {
+            display: block;
+            border: 1px solid #000;
+            border-radius: 5px;
+            width: 200px;
+            position: absolute;
+            top: 20px;
+            right: 0px;
+            font-size: 1.2rem;
+            padding: 10px;
+        }
+
+        .code .label {
+            font-size: 0.6rem;
+        }
+    </style>
+    <h1>Schultransformation gemeinsam gestalten.<br/>
+        Machen Sie jetzt den Anfang!</h1>
+
+    Die Plattform
+    <strong>schul</strong>transform bietet Schulen und ihren Schulträgern die passende Unterstützung in dem Prozess
+    einer ganzheitlichen
+    digitalen Transformation – unabhängig davon, ob Sie erst am Anfang der Schultransformation stehen oder schon
+    mittendrin sind.<br/><br/>
+    <strong>Ihr Schulträger ist bereits registriert und bittet um Ihre Teilnahme.</strong>
+
+    <h3>Allgemeine Daten des Schulträger</h3>
+    {{ schoolAuthority.name }}<br/>
+    {{ schoolAuthority.address.street }}<br/>
+    {{ schoolAuthority.address.postalCode }} {{ schoolAuthority.address.city }}
+    {% if schoolAuthority.address.country %}({{ schoolAuthority.address.country }}){% endif %}<br/>
+    <br/>
+    Registrieren Sie schnell und einfach Ihre Schule auf <strong>schul</strong>transform.<br/>
+    So erhalten Sie Ihren Schul-Account für Ihren individuellen und ganzheitlichen Schulentwicklungsprozess. Ihr Schulträger ist in dem Formular bereits automatisch hinterlegt.
+
+    <br/><br/>
+    Scannen Sie den QR-Code mit Ihrem Smartphone:
+    <br/><br/>
+    {% set url = absolute_url(path('user_register_school')) ~ '?schoolAuthority=' ~ schoolAuthority.id %}
+    <img style="width: 250px;" src="{{ qr_code_data_uri(url) }}"/><br/><br/>
+    Oder rufen Sie diese URL auf:<br/>
+    <a href="{{ url }}">{{ url }}</a>
+    <br /><br />
+    Bei Rückfragen wenden Sie sich gerne an das <strong>schul</strong>transform-Projektbüro:<br />
+
+    <a href="https://www.schultransform.org/kontakt">www.schultransform.org/kontakt</a>
+{% endblock %}

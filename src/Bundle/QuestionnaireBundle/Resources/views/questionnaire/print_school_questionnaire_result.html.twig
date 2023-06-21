@@ -1,0 +1,173 @@
+{% extends 'pdf/layout.html.twig' %}
+
+{% block body %}
+
+    <style>
+        li.answer {
+            position: relative;
+            width: 400px;
+            padding-bottom: 12px;
+        }
+
+        li.answer .answerValue {
+            display: block;
+            position: absolute;
+            width: 50px;
+            padding: 2px 5px;
+            top: 0;
+            left: 410px;
+            background-color: #FFF;
+            color: #000;
+            border: 1px solid black;
+        }
+
+        li.answer .answerValue.selected {
+            background-color: #006292;
+            color: #FFF;
+        }
+
+        .opinion_scale {
+            width: 100%;
+            display: inline-flex;
+            clear-after: both;
+        }
+
+        .opinion_scale div {
+            float: left;
+            width: 12.5%;
+            text-align: center;
+            padding-top: 5px;
+            margin-bottom: 5px;
+            height: 20px;
+            border: 1px solid #000;
+
+        }
+
+        .opinion_scale_values {
+            padding-bottom: 5px;
+        }
+
+        .opinion_scale .selected {
+            background-color: #006292;
+            color: #fff;
+            opacity: 1;
+        }
+
+        .opinion_scale_left {
+            clear: both;
+            display: inline;
+        }
+
+        .opinion_scale_center {
+            position: absolute;
+            left: 44%
+        }
+
+        .opinion_scale_right {
+            position: absolute;
+            right: -13px;
+        }
+    </style>
+
+    <h1>{{ questionnaire.name }}</h1>
+    <h2>Der Index beträgt: {{ index | number_format(2, ',', '') }}</h2>
+    Dieser Fragebogen wurde <strong>{{ result.results | length }}</strong> Mal ausgefüllt.<br />
+    Schule: <strong>{{ school.name }}</strong>
+
+    {% for group in questionnaire.questionGroups %}
+
+        <h2>{{ group.name }}</h2>
+        {% if  group.description!="" %}
+            <div class=""><strong>{{ group.description }}</strong></div>
+        {% endif %}
+
+
+        {% for question in group.questions %}
+
+            <div style="padding-top: 15px; page-break-inside: avoid;">
+
+                {% if question.title %}<h5>{{ question.title }}</h5>{% endif %}
+                <h3>{{ question.question }}
+                    {% if question.type == 'multiple_choice' and question.properties.allow_multiple_selection %}(Mehrfachauswahl!!!){% endif %}
+                </h3>
+
+                {% if question.type == 'multiple_choice' %}
+                    <ol type="A" class="mt-grid">
+                        {% for choice in question.choices %}
+                            {% if result.questions[question.id] is defined and result.questions[question.id].choices[choice.id]  is defined %}
+                                {% set perc = (result.questions[question.id].choices[choice.id] / result.results | length * 100 )|round(1, 'floor') %}
+                            {% else %}
+                                {% set perc = 0 %}
+                            {% endif %}
+                            <li class="answer">{{ choice.choice }}: <span
+                                        class="answerValue {% if perc > 0 %}selected{% endif %}">{{ perc|number_format(1, ',', '.') }}%</span></li>
+                        {% endfor %}
+                        {% if question.properties.allow_other_choice %}
+                            {% set sum = 0 %}
+                            {% for r in result.questions[question.id].values %}
+                                {% set sum = sum + r %}
+                            {% endfor %}
+                            {% set perc = (sum / result.results | length * 100 )|round(1, 'floor') %}
+                            <li class="answer">Andere*: <span
+                                        class="answerValue {% if perc > 0 %}selected{% endif %}">{{ perc|number_format(1, ',', '.') }}%</span></li>
+                        {% endif %}
+                    </ol>
+                    {% if result.questions[question.id].values | length > 0 %}
+                        * {{ result.questions[question.id].values |keys |join(", ") }}
+                    {% endif %}
+                {% elseif question.type == 'opinion_scale' and question.properties.steps is defined %}
+                    {# <p><i>Entscheiden Sie zwischen 0 und {{ question.properties.steps-1 }}.</i></p> #}
+
+
+                    <div class="opinion_scale">
+                        {% for i in 0..question.properties.steps-1 %}
+                            {% set perc = 0 %}
+                            {% if result.questions[question.id] is defined and result.questions[question.id].values[i]  is defined %}
+                                {% set perc = (result.questions[question.id].values[i] / result.results | length * 100 )|round(1, 'floor') %}
+                            {% endif %}
+                            <div class="opinion_scale_values {% if perc > 0 %}selected{% endif %}">
+                                <b>{{ perc }}%</b>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    {% set questionLabels = question.properties.labels %}
+                    <div class="opinion_scale_left">{{ questionLabels.left }} (0)</div>
+                    <div class="opinion_scale_center">{{ questionLabels.center }}</div>
+                    <div class="opinion_scale_right">{{ questionLabels.right }} (7)</div>
+                {% elseif question.type == 'yes_no' %}
+                    <ul>
+                        <li>Ja</li>
+                        <li>Nein</li>
+                    </ul>
+                {% elseif question.type == 'long_text' and result.questions[question.id] is defined %}
+                    {% if result.questions[question.id].values | length > 0 %}
+                        <ul class="mt-2">
+                            {% for answer in  result.questions[question.id].answers %}
+                                {% if (answer.share_notices| default(false)) or (answer.share | default(false))  %}
+                                    {% if answer.value is not empty %}
+                                        <li>{{ answer.value }}</li>
+                                    {% endif %}
+                                {% endif %}
+
+                            {% endfor %}
+                        </ul>
+{#                        <ul class="mt-2">#}
+{#                            {% for a,i in result.questions[question.id].values %}#}
+{#                                {% if a is not empty %}#}
+{#                                    <li>{{ a }}</li>#}
+{#                                {% endif %}#}
+{#                            {% endfor %}#}
+{#                        </ul>#}
+                    {% endif %}
+                {% endif %}
+
+                {% if result.questions[question.id] is defined and result.questions[question.id].skipped >0 %}
+                    <strong>Diese Frage wurde
+                        <i>{{ result.questions[question.id].skipped }}</i> Mal übersprungen.</strong>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+{% endblock %}

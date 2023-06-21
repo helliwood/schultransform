@@ -1,0 +1,95 @@
+<div class="d-flex justify-content-between">
+    {# categories with questionnaires filled out #}
+    {% if ques | default(null) %}
+        <div class="w-50 mr-1">
+            <div class="bg-primary">
+                <p class="p-2 text-white">Ihre Stärken</p>
+            </div>
+            {% for category in strongPoints %}
+                <div class="d-flex p-3 mt-1"
+                     style="background: {{ category.color }};">
+                    {# check if the user has at least one questionnaire filled out #}
+                    {# add the link to the category overview #}
+                    {# TODO find a better way to add this link #}
+                    {% if category.userHasQuestionnairesFilledOut | default(null) %}
+                    <a href="{{ path('dashboard_teacher_category_overview', {category:category.id}) }}">
+                        {% endif %}
+
+                        {# SEPARATE THE CATEGORIES WITH CUSTEONANAIRES FILLED OUT #}
+                        {% if category.schoolHasQuestionnaires %}
+                            <div class="text-white">
+                                <i class="{{ category.icon }} display-4"></i>
+                                <i class="fad  fa-arrow-up"></i>
+                                <p class="text-white">
+                                    {{ category.name }}
+                                </p>
+                            </div>
+                        {% else %}
+                            <div class="h-50 text-white">
+                                <i class="{{ category.icon }} display-4"></i>
+                                <i class="fad  fa-arrow-up"></i>
+                                <p class="text-white">
+                                    {{ category.name }}
+                                </p>
+                            </div>
+                        {% endif %}
+
+
+                        {# close tag 'a' #}
+                        {% if category.userHasQuestionnairesFilledOut | default(null) %}
+                    </a>
+                    {% endif %}
+                </div>
+
+            {% endfor %}
+        </div>
+
+    {% endif %}
+
+    {# categories without questionnaires filled out #}
+    {% if weakPoints | default(null) %}
+        <div class="w-50 ml-1">
+            <div class="bg-primary">
+                <p class="p-2 text-white">Ihr Entwicklungspotenzial</p>
+            </div>
+            {% for category in weakPoints %}
+                <div class="d-flex p-3 mt-1"
+                     style="background: {{ category.color }};">
+                    {# check if the user has at least one questionnaire filled out #}
+                    {# add the link to the category overview #}
+                    {# TODO find a better way to add this link #}
+                    {% if category.userHasQuestionnairesFilledOut | default(null) %}
+                    <a href="{{ path('dashboard_teacher_category_overview', {category:category.id}) }}">
+                        {% endif %}
+
+                        {# SEPARATE THE CATEGORIES WITH CUSTEONANAIRES FILLED OUT #}
+                        {% if category.schoolHasQuestionnaires %}
+                            <div class="text-white">
+                                <i class="{{ category.icon }} display-4"></i>
+                                <i class="fad  fa-arrow-up"></i>
+                                <p class="text-white">
+                                    {{ category.name }}
+                                </p>
+                            </div>
+                        {% else %}
+                            <div class="h-50 text-white">
+                                <i class="{{ category.icon }} display-4"></i>
+                                <i class="fad  fa-arrow-up"></i>
+                                <p class="text-white">
+                                    {{ category.name }}
+                                </p>
+                            </div>
+                        {% endif %}
+
+
+                        {# close tag 'a' #}
+                        {% if category.userHasQuestionnairesFilledOut | default(null) %}
+                    </a>
+                    {% endif %}
+                </div>
+
+            {% endfor %}
+        </div>
+
+    {% endif %}
+</div>

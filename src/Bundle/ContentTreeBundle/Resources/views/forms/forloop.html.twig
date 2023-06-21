@@ -1,0 +1,14 @@
+{% form_theme form _self %}
+
+
+{% block forloop_row %}
+    <for-loop id="{{ id }}" fullname="{{ full_name }}" :value="{{ value | json_encode }}" label="{{ label }}">
+        {{ block('form_widget') }}
+    </for-loop>
+{% endblock %}
+
+{% block forloopcontent_row %}
+    <for-loop-content id="{{ id }}" fullname="{{ full_name }}" :value="{{ value | json_encode }}" :loop="{{ name }}">
+        {{ block('form_widget') }}
+    </for-loop-content>
+{% endblock %}

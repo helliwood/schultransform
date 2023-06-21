@@ -1,0 +1,30 @@
+{% extends 'frontend/dashboard-teacher/base.html.twig' %}
+    {% block teacher_header %}
+        {# Account data #}
+        {% include "frontend/dashboard-teacher/child-templates/account.html.twig" %}
+    {% endblock %}
+
+    {% block teacher_content %}
+        <div class="p-0 mb-3">
+            {# hr & title #}
+            <div class="mt-3 mb-1 py-1 tr-line">
+                <p>{% trans  from 'dashboard' %}yourSnapshot{% endtrans %}</p>
+            </div>
+
+            {# categories #}
+            <div class="mb-1 justify-content-between t-category-row row row-cols-1 row-cols-md-2 row-cols-lg-3">
+                {% include "frontend/dashboard-teacher/child-templates/categories.html.twig" %}
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block teacher_footer %}
+        {# hr & title #}
+        <div class="mt-0 mb-1 py-1 tr-line">
+            <p>{% trans  from 'dashboard' %}furtherInformation{% endtrans %}</p>
+        </div>
+        {# School info & more #}
+        <div class="d-flex justify-content-around flex-column flex-md-row">
+            {% include "frontend/dashboard-general/additional-information.html.twig" %}
+        </div>
+    {% endblock %}

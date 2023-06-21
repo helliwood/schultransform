@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Schulübersicht</h1>
+    <div class="row">
+        <div class="col">
+            <div class="panel">
+                <school-table
+                        api-url="/Backend/School/schooloverview"></school-table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

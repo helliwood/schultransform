@@ -1,0 +1,57 @@
+{% extends 'iframe.html.twig' %}
+
+{% form_theme form _self %}
+
+{% block _glossary_word_image_widget %}
+    <media-form-element
+            id="{{ id }}"
+            name="{{ name }}"
+            label="{{ label }}"
+            col-class="col-sm-10"
+            value="{{ value }}"
+            filetype="{{ attr.filetype }}"
+            api-url="{{ path('media_base_home') }}"
+            :entity="{{ entity|json_encode() }}"
+            :parent="{{ parent|json_encode() }}"
+            :icon="{{ icon|json_encode() }}"
+    >
+        {{ block('hidden_widget') }}
+    </media-form-element>
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid overflow-hidden mt-4">
+        {{ form_start(form) }}
+        <div class="row">
+            <div class="col">
+                {{ form_row(form.word) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                {{ form_row(form.slug) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                {{ form_row(form.image) }}
+                {{ form_errors(form) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col mb-4">
+                {{ form_row(form.relatedWords) }}
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        window.onload = function() {
+            top.postMessage({op: 'contentLoaded', content:'form'}, "*");
+        }
+    </script>
+{% endblock %}

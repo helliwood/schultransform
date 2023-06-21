@@ -1,0 +1,23 @@
+<div class="multiple_choice">
+    {% if answer.skipped %}
+        <strong>Frage nicht beantwortet:</strong> <span class="textAnswer">{{ answer.skipReason }}</span>
+    {% else %}
+        {% if question.properties.allow_multiple_selection == true %}
+            {% if answer.type == 'choice_other' %}
+                <img class="iconAnswer" src="build_frontend/images_frontend/check-double.png">
+                <span class="textAnswer">Andere: {{ answer.value }}</span>
+            {% else %}
+                <img class="iconAnswer" src="build_frontend/images_frontend/check-double.png">
+                <span class="textAnswer">{{ answer.Choice.choice }}</span>
+            {% endif %}
+        {% else %}
+            {% if answer.value is null %}
+                <img class="iconAnswer" src="build_frontend/images_frontend/times-circle.png">
+                <span class="textAnswer">Trifft nicht zu</span>
+            {% else %}
+                <img class="iconAnswer" src="build_frontend/images_frontend/check-circle.png">
+                <span class="textAnswer">Trifft zu</span>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+</div>

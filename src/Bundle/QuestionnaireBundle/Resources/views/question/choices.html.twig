@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            <div class="panel">
+                <h2>{{ question.question }}</h2>
+                <a class="btn btn-primary my-2"
+                   href="{{ path('questionnaire_question_add_choice', {id:question.id}) }}">Antwort
+                    hinzufügen</a>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Antwort</th>
+                        <th>Überschreibungen</th>
+                        <th>Optionen</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for choice in question.choices %}
+                        <tr>
+                            <td>{{ choice.position }}. {{ choice.choice }}</td>
+                            <td>{% for override in choice.overrides %}<span class="badge badge-info">{{ override.schoolType.name }}</span> {% endfor %}</td>
+                            <td>
+                                <a href="{{ path('questionnaire_question_edit_choice', {id:choice.id}) }}"
+                                   class="btn btn-primary mr-1">Bearbeiten</a>
+                                <b-modal id="delchoice{{ choice.id }}"
+                                         title="Antwort löschen" ok-only
+                                         ok-title="Abbrechen" ok-variant="primary-light">
+                                    <p>Möchten Sie die Antwort '{{ choice.choice }}' wirklich löschen?</p>
+                                    <p><a href="{{ path('questionnaire_question_delete_choice', {id:choice.id}) }}"
+                                          class="btn btn-danger">Antwort löschen</a></p>
+                                </b-modal>
+                                <b-button variant="danger" v-b-modal.delchoice{{ choice.id }}
+                                          class="mr-2"><i class="fas fa-trash"></i></b-button>
+                                {% if choice.position > 1 %}
+                                <a href="{{ path('questionnaire_question_choice_up', {id:choice.id}) }}"
+                                   class="btn btn-secondary mr-1"><span
+                                            class="fa fa-arrow-up"></span></a>{% endif %}
+                                {% if choice.position < question.choices.count %}
+                                <a href="{{ path('questionnaire_question_choice_down', {id:choice.id}) }}"
+                                   class="btn btn-secondary mr-1"><span
+                                            class="fa fa-arrow-down"></span></a>{% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

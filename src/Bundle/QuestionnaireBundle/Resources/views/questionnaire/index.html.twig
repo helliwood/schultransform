@@ -1,0 +1,16 @@
+{% extends "frontend/pure.html.twig" %}
+{% block title %}Questionnaire{% endblock %}
+{% block body %}
+    <div id="sidebar">
+        {% block sidebar %}
+        {% endblock %}
+    </div>
+    <div id="content" class="questionnaire h-100">
+        {% block content %}
+                <questionnaire
+                    :questionnaire-id="{{ questionnaireId }}"
+                ></questionnaire>
+        {% endblock %}
+    </div>
+{% endblock %}
+

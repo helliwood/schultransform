@@ -1,0 +1,62 @@
+<div class="row mb-2 mt-2">
+    <div class="col text-left">
+        <a href="/">Home</a> |
+        <a href="/impressum">Impressum</a> |
+        <a href="/datenschutz">Datenschutz</a>
+    </div>
+    <div class="col text-right d-none d-md-block">Haben Sie noch Fragen? | <a href="/kontakt">Kontakt</a></div>
+</div>
+<div class="row  main-row main" id="title-row">
+    {# <div class="sb-width color-style-a d-flex animate big-icon position-relative main-nav-icon  ml-2 ml-md-0 ">
+        <i class="fad hf fa-bars m-auto"></i>
+        {% include 'frontend/index/fe_nav.html.twig'%}
+    </div> #}
+    {% set items = [] %}
+    {% for item in knp_menu_get('frontend').children %}
+        {% set children = [] %}
+        {% for subitem in item.children %}
+            {% set children = children|merge([{label: subitem.label, uri: subitem.uri}]) %}
+        {% endfor %}
+        {% set items = items|merge([{label: item.label, uri: item.uri, children: item.displayChildren ? children : []}]) %}
+    {% endfor %}
+    <main-menu class="sb-width color-style-a big-icon main-nav-icon position-relative d-flex ml-2 ml-md-0"
+               :entries="{{ items | json_encode }}"></main-menu>
+    <div class="col main-bg-color  mh text-center">
+        {# <a href="#" class="text-left pl-grid col-2 position-absolute nav-linker  nav-trigger d-none d-md-block">Navigation</a> #}
+        <a href="/" class="logo d-none d-md-block color-switch">schul<span>transform</span>.</a>
+        <a href="/" class="logo d-block d-md-none color-switch">s<span>t.</span></a>
+    </div>
+    {% if app.user.getUserType is defined %}
+        {% set dashitems = [] %}
+        {% for item in knp_menu_get('usermenu').children %}
+            {% set children = [] %}
+            {% for subitem in item.children %}
+                {% set children = children|merge([{label: subitem.label, uri: subitem.uri}]) %}
+            {% endfor %}
+            {% set dashitems = dashitems|merge([{attributes: item.attributes, label: item.label, uri: item.uri, children: children}]) %}
+        {% endfor %}
+
+        <user-status
+                apiurl="{{ path('link_school') }}"
+                role="{{ app.user.getUserType() | lower }}"
+                usericon="{{ app.user.getUserIcon() }}"
+                label="{{ "loggedInText" |trans({},'dashboard') }}"
+                url="{{ path('user_success') }}"
+                :entries="{{ dashitems | json_encode }}"
+        ></user-status>
+        {% if app.user.getUserType is same as 'SCHOOL_AUTHORITY' %}
+            {# do not render the modal(modal-profil) the school authority uses other #}
+        {% else %}
+            <dashboard-modal :data="{{ app.user | json_encode }}"
+                             modal-component-name="teacherCodeSend"
+                             id="modal-profil"
+            ></dashboard-modal>
+        {% endif %}
+    {% else %}
+        <user-status
+                label="{{ "loggedOutText" |trans({},'dashboard') }}"
+                url="{{ path('user_login') }}"
+        ></user-status>
+    {% endif %}
+
+</div>

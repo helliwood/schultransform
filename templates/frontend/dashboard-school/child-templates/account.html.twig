@@ -1,0 +1,28 @@
+{% extends 'frontend/dashboard-general/account.html.twig' %}
+
+
+{% block account_top %}
+
+{% endblock %}
+
+ {% block account_action %}
+     <div class="d-flex t-header-link-action tr-sm-position-absolute">
+         <div class="tr-bg-school-color-1 w-100 px-2 py-1 text-white">
+             <p>{{ user.school.name }}</p>
+         </div>
+     </div>
+ {% endblock %}
+
+ {% block account_bottom %}
+     <div class="justify-content-between mt-2 d-md-flex d-block">
+         <p class="d-inline-block p-0 m-0 pb-grid pb-md-0 ">
+             {% if activeTeacher | default(null) %}
+                 {{ "teacherActive"|trans({'%teacherNr%': activeTeacher}, "dashboard") }}
+             {% endif %}
+             <b-link v-b-modal.modal-profil>{% trans  from 'dashboard' %}inviteTeacher{% endtrans %}</b-link>
+         </p>
+         <p class="d-inline-block p-0 m-0 ">{% trans  from 'dashboard' %}yourSchoolcode{% endtrans %}
+             <b-link v-b-modal.modal-profil><b>{{ user.school.code }}</b></b-link>
+         </p>
+     </div>
+ {% endblock %}

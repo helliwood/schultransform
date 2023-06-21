@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:template id="27"
+             name="Content | Slido iframe"
+             groups="content"
+             xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:rs="http://helliwood.de"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://helliwood.de ./../rs_schema.xsd">
+    <rs:text id="slidoid" label="Slido Code" display="false"/>
+
+    <div class="slido-wrapper mr-md-grid">
+        <rs:cookie id="my_cookie" key="External" cookie-banner-id="1">
+            <div class="slido-controls">
+                <button class="btn slido-btn active" onclick="slido_click(1);">Zuschauen</button>
+                <button class="btn slido-btn" onclick="slido_click(2);">Mitmachen</button>
+            </div>
+            <div class="slido-content">
+                <iframe class="d-block slido-iframe" src="https://wall.sli.do/event/" height="100%" width="100%"
+                        frameBorder="0"
+                        style="min-height: 570px;" title="Slido">
+                    <rs:attribute name="href" action="append" hash="true" value="$slidoid/live/polls"/>
+                </iframe>
+                <iframe class="d-none slido-iframe" src="https://app.sli.do/event/" height="100%" width="100%"
+                        frameBorder="0"
+                        style="min-height: 570px;" title="Slido">
+                    <rs:attribute name="href" action="append" hash="true" value="$slidoid/live/polls"/>
+                </iframe>
+            </div>
+        </rs:cookie>
+        <rs:if condition="$my_cookie==false">
+            <div  class="border-image-wrapper mt-grid">
+                <div class="p-4" style="background: #e5e5e5;">
+                    <h3  class="mb-1">slido - Abstimmungsplattform</h3>
+                    Sie haben externe Inhalte in den Cookie-Einstellungen deaktiviert.
+                    <a class="text-center cookieAP" href="javascript:void(0)" data-key="External">Cookies anpassen</a>
+                </div>
+            </div>
+        </rs:if>
+
+    </div>
+    <script type="application/javascript">
+        var buttons = document.getElementsByClassName("slido-btn");
+        var iframes = document.getElementsByClassName("slido-iframe");
+
+        function slido_click(btn) {
+            if (btn == "1") {
+                buttons[0].classList.add('active');
+                buttons[1].classList.remove('active');
+                iframes[0].classList.remove('d-none');
+                iframes[0].classList.add('d-block');
+                iframes[1].classList.remove('d-block');
+                iframes[1].classList.add('d-none');
+            } else {
+                buttons[0].classList.remove('active');
+                buttons[1].classList.add('active');
+                iframes[0].classList.remove('d-block');
+                iframes[0].classList.add('d-none');
+                iframes[1].classList.remove('d-none');
+                iframes[1].classList.add('d-block');
+            }
+        }
+    </script>
+</rs:template>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}Schultransform{% endblock %}</title>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('frontend', null, 'build_frontend') }}
+    {% endblock %}
+    <script>
+        var lastHeight = 0;
+        function onElementHeightChange(elm, callback) {
+            lastHeight = elm.clientHeight
+            var newHeight;
+
+            (function run() {
+                newHeight = elm.clientHeight;
+                if (lastHeight != newHeight)
+                    callback(newHeight)
+                lastHeight = newHeight
+
+                if (elm.onElementHeightChangeTimer)
+                    clearTimeout(elm.onElementHeightChangeTimer)
+                elm.onElementHeightChangeTimer = setTimeout(run, 200)
+            })()
+        }
+
+        function heightListener(){
+            postToParent();
+            onElementHeightChange(document.body, function(h) {
+                postToParent();
+            })
+        }
+
+        function postToParent(){
+            parent.postMessage({resizeIframe: document.body.scrollHeight})
+        }
+
+
+    </script>
+    <style>
+        html,body{
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body onload="heightListener()">
+<main id="app" class="container-fluid p-0">
+    {% block body %}
+    {% endblock %}
+</main>
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('frontend', null, 'build_frontend') }}
+{% endblock %}
+</body>
+</html>

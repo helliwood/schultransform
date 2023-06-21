@@ -1,0 +1,30 @@
+{% extends 'frontend/public.html.twig' %}
+
+{% block title %}Questionnaire{% endblock %}
+
+{% block body %}
+
+    <div class="color-switch col-12 col-md-8 main-bg-color mb-grid animate main-title d-flex align-items-center  pl-grid ">
+        <h2>Meine Ergebnisse</h2></div>
+    Boxplots der Handlungsfelder {% if all %}über alle Fragebögen{% else %}über Fragebögen der Schulen{% endif %}.<br/>
+    <div class="mt-2">
+        Filter:
+        {% if all %}
+            <a class="btn btn-secondary" href="{{ path('questionnaire_result_boxplot', {all:false}) }}">Nur Schulen</a>
+        {% else %}
+            <a class="btn btn-secondary" href="{{ path('questionnaire_result_boxplot', {all:true}) }}">Alle</a>
+        {% endif %}
+    </div>
+    <div class="row questionaire-result-view">
+
+        <div class="col">
+            <div class="panel">
+                {% for data in values %}
+                    {# <result-chart-boxplot :category="{{ data | json_encode }}"></result-chart-boxplot> #}
+                    <boxplot :category="{{ data | json_encode }}"></boxplot>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

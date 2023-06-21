@@ -1,0 +1,93 @@
+{% if categories | default(null) %}
+    {% for category in categories %}
+        {# open a tag #}
+        {# add the link to the category overview #}
+        {% if category.userHasQuestionnairesFilledOut | default(null) %}
+            <a class="d-block tr-text-decoration-none col t-category-col mb-1" href="{{ path('dashboard_school_authority_category_overview', {category:category.id}) }}">
+        {% else %}
+            <div class="d-block col t-category-col mb-1">
+        {% endif %}
+        <div class="tr-height-260 d-flex flex-column p-2 mb-1 position-relative tr-border-radius-bottom"
+             style="background: {{ category.color }};">
+            {# color was set in before render when there are no questionnaires #}
+            {# check if the user has at least one questionnaire filled out #}
+            <div class="h-50 text-white d-flex justify-content-between">
+                <div class="d-flex flex-column justify-content-between">
+                    <i class="{{ category.icon }} display-4 p-1"></i>
+                    <p class="text-white mb-1 pl-1">
+                        {{ category.name }}
+                    </p>
+                </div>
+                <div>
+                    <i class="fad fa-arrow-up tr-display-3 tr-rotate-45"></i>
+                </div>
+
+            </div>
+            <div class="h-50 pl-2 py-1 tr-bg-white-50 tr-position-absolute-plus tr-border-radius-bottom">
+                {% if category.noQuestionnairesFilledOutByUser | default(null) %}
+                    <div class="h-100 tr-small-1 d-flex flex-column justify-content-end">
+                        <div>
+                            <div class="tr-color-black-100">
+                                <p class="pl-1 m-0 overflow-hidden"><span class="tr-ellipsis w-75 w-sm-100 d-inline">{% trans  from 'dashboard' %}teacherNrQuestionaires{% endtrans %}</span><span class="ml-1 d-inline">0/{% if category.teacherQuestionnaires | default(null) %}{{ category.schoolAuthorityQuestionnaires | length }}{% endif %}</span>
+                                </p>
+                            </div>
+
+                        </div>
+                        <div class="overflow-hidden">
+                            <p class="pl-1 pb-3 tr-ellipsis" title="{% trans  from 'dashboard' %}teacherResultsMissing{% endtrans %}">{% trans  from 'dashboard' %}teacherResults{% endtrans %} {% trans  from 'dashboard' %}teacherResultsMissing{% endtrans %}
+                            </p>
+                        </div>
+                        <div class="mb-1">
+                            <b-link href='{{ "#{category.standAloneQuestionnaire.site.getUrl()}"}}'
+                                    class="btn bg-white tr-border-rad-2 w-50 align-self-baseline tr-border-yellow">Starten
+                            </b-link>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="h-100 tr-small-1 d-flex flex-column justify-content-between">
+                        {% if category.questionnairesFilledOut | default(null) and category.teacherQuestionnaires | default(null) %}
+                            {% set questionnairesFilledOut = category.questionnairesFilledOut | length %}
+                            {% set allQuestionnaires = category.schoolAuthorityQuestionnaires | length %}
+                            {% set allQuestionnairesfilledOut = questionnairesFilledOut is same as allQuestionnaires ? true : false %}
+                            <div class="tr-color-black-100">
+                                <p class="pl-1 m-0">{% trans  from 'dashboard' %}schoolAuthorityNrQuestionaires{% endtrans %}
+                                    <span
+                                            class="ml-1">{{ questionnairesFilledOut }}/{{ allQuestionnaires }}</span>
+                                </p>
+                                {% if allQuestionnairesfilledOut | default(false) %}
+                                    <p class="pl-1">{% trans  from 'dashboard' %}schoolAuthorityResults{% endtrans %}
+                                        <b-link href="{{ path('dashboard_school_authority_category_overview', {category:category.id}) }}" class="tr-color-black-100 tr-text-decoration"><b>{% trans  from 'dashboard' %}schoolAuthorityResultsOpen{% endtrans %}</b></b-link>
+                                    </p>
+                                {% else %}
+                                    <p class="pl-1">{% trans  from 'dashboard' %}teacherFirstResults{% endtrans %}
+                                        <b-link href="{{ path('dashboard_school_authority_category_overview', {category:category.id}) }}" class="tr-color-black-100 tr-text-decoration"><b>{% trans  from 'dashboard' %}teacherFirstResultsOpen{% endtrans %}</b></b-link>
+                                    </p>
+                                {% endif %}
+                            </div>
+                            <div class="mb-1">
+                                <b-link href='{{ "#{category.standAloneQuestionnaire.site.getUrl()}"}}'
+                                        class="btn bg-white tr-border-rad-2 w-50 align-self-baseline tr-border-yellow">
+                                    {% if allQuestionnairesfilledOut | default(false) %}
+                                        Wiederholen
+                                    {% else %}
+                                        Fortsetzen
+                                    {% endif %}
+                                </b-link>
+
+                            </div>
+                        {% endif %}
+
+                    </div>
+                {% endif %}
+            </div>
+
+        </div>
+        {#  close tag 'a' #}
+        {% if category.userHasQuestionnairesFilledOut | default(null) %}
+            </a>
+        {% else %}
+            </div>
+        {% endif %}
+
+    {% endfor %}
+{% endif %}

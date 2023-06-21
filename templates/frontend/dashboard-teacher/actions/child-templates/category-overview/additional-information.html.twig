@@ -1,0 +1,80 @@
+<div class="row row-cols-1 row-cols-md-2">
+    <div class="tr-small-1">
+        <div class="tr-bg-black-15 py-2 mx-2 pl-3 pr-2">
+            {% if user.school | default(null) %}
+                <div class="mb-2">
+                    {% trans  from 'dashboard' %}teacherHintsAndContact{% endtrans %}
+                </div>
+
+                <div class="d-flex">
+                    <div class="mr-3">
+                        <div class="position-relative">
+                            <i class="fad fa-school text-primary tr-display-4"></i>
+                            <span class="tr-times-mark"></span>
+                        </div>
+                    </div>
+                    <div>
+                        <p>{{ user.school.name }}
+                            {% if user.registrationDate %}
+                                <span>Mitglied seit: {{ user.registrationDate |date("m/d/Y")}}</span>
+                            {% endif %}
+
+                            {% if user.school.confirmed %}
+                                / <span class="text-primary">verifiziert</span>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            {% else %}
+                <div class="d-flex">
+                    <div class="position-relative mr-3">
+                        <i class="fad fa-school text-danger tr-display-4"></i>
+                        <span class="tr-exclamation-mark"></span>
+                    </div>
+                    <div>
+                        <p>{% trans  from 'dashboard' %}teacherHintsAndContact{% endtrans %}</p>
+                    </div>
+                </div>
+                <div class="w-100 my-3 ml-3">
+                    <b-link v-b-modal.modal-profil class="btn tr-border-rad-2 bg-white border border-danger px-3 ml-4"
+                    >{% trans  from 'dashboard' %}connectSchool{% endtrans %}</b-link>
+                </div>
+            {% endif %}
+            <div class="my-2">
+                <p>Lorem ipsum dolor sit amet, consetetur sadipscing
+                    elitr, sed diam nonumy eirmod tempor invidunt ut labore et</p>
+            </div>
+            {% if user.school.schoolAuthority | default(null) %}
+                <p>
+                    Schulträger: {{ user.school.schoolAuthority.name }}
+                </p>
+            {% endif %}
+
+            {% if user.school.getSchoolType() | default(null) %}
+                <strong> {{ user.school.getSchoolType() }}</strong>
+                <p>
+                    elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+                </p>
+            {% endif %}
+
+
+        </div>
+    </div>
+    <div class="px-2">
+        <div class="mb-3">
+            <b-link class="tr-small-1 btn tr-border-rad-2 bg-white border tr-border-warning px-3">
+                {% trans  from 'dashboard' %}contactTeam{% endtrans %}
+            </b-link>
+        </div>
+        <div class="d-flex">
+            <div>
+                <i class="fad fa-shield-check tr-display-4 text-primary"></i>
+            </div>
+            <div class="ml-2 tr-small-1">
+                {% trans  from 'dashboard' %}dataSafety{% endtrans %}
+            </div>
+        </div>
+    </div>
+
+</div>
+

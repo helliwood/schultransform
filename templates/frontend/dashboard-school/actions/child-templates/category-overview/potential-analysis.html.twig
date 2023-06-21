@@ -1,0 +1,118 @@
+<div class="row row-cols-1 row-cols-md-2 px-2 tr-bg-color-gray-200 no-gutters p-0">
+    <div class="tr-small-1 pb-md-4 pt-3">
+        {% if user.school | default(null) %}
+            <div class="d-flex">
+                <div class="mr-2">
+                    <div class="position-relative">
+                        <i class="fad fa-school ml-2 text-primary tr-display-4"></i>
+                        <span class="tr-times-mark"></span>
+                    </div>
+                </div>
+                <div class="tr-small-1">
+                    <p class="tr-small-1 m-0">{{ user.school.name }}
+                    </p>
+                    <p class="tr-small-1">
+                        {% if user.school and(user.school.getMainUser.registrationDate) %}
+                            <span>Mitglied seit: {{ user.school.getMainUser.registrationDate |date("m.d.Y")}}</span>
+                        {% endif %}
+                        {% if user.school and(user.school.getMainUser.registrationDate) and user.school.confirmed %}
+                            /
+                        {% endif %}
+                        {% if user.school.confirmed %}
+                            <span class="text-primary">verifiziert</span>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        {% else %}
+            <div class="d-flex">
+                <div class="position-relative mr-3">
+                    <i class="fad fa-school ml-2 text-danger tr-display-4"></i>
+                    <span class="tr-exclamation-mark"></span>
+                </div>
+                <div>
+                    <p class="tr-small-1">Lorem ipsum dolor sit amet, consetetur sadipscing
+                        elitr, sed diam nonumy eirmod tempor invidunt ut labore et</p>
+                </div>
+            </div>
+            <div class="w-100 my-3 ml-3">
+                <b-link v-b-modal.modal-2
+                        class="tr-small-1 btn tr-border-rad-2 bg-white border border-danger px-3 ml-4">Schule
+                    verknüpfen
+                </b-link>
+            </div>
+        {% endif %}
+        <div class="py-2 ml-2">
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr,</p>
+        </div>
+    </div>
+
+    <div class="d-flex pb-4 pt-md-3 px-2 px-md-0 ">
+        <div class="tr-small-1">
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr,</p>
+        </div>
+    </div>
+
+
+</div>
+<div class="tr-bg-alpha1-primary d-flex flex-column
+    pt-3 px-3 pb-1 position-relative
+    t-text-wrapper
+    align-content-end tr-border-radius-bottom">
+    <div class="d-flex t-header-link-action position-absolute">
+        <div class="bg-primary px-2 py-1 text-white">
+            <p>Potenzialanalyse</p>
+        </div>
+        <div class="tr-bg-yellow-1 px-2 py-1 tr-border-radius-right mr-4">
+            {% if user.school | default(null) %}
+                {% if teachersActiveByCategory  < 2 %}
+                    <p class="d-inline-block p-0 m-0">
+                        <a class="tr-color-black-100" target="_blank" href="/print-colleague-invitation">
+                            <span>Lehrkräfte einladen</span>
+                        </a>
+                    </p>
+                    {#                    <p> #}
+                    {#                        <b-link class="tr-color-black-100" v-b-modal.modal-2>Lehrkräfte einladen</b-link> #}
+                    {#                    </p> #}
+                {% else %}
+                    <a href="{{ path('dashboard_teacher_potential', {'category':category.id}) }}"><p
+                                class="tr-color-black-100">Öffnen</p></a>
+                {% endif %}
+            {% else %}
+                <b-link v-b-modal.modal-2 class="tr-color-black-100">Schule verknüpfen</b-link>
+            {% endif %}
+        </div>
+    </div>
+    <div class="d-flex justify-content-between
+        mt-3 flex-column flex-sm-row tr-small-1 tr-color-black-100">
+        {% if user.school | default(null) %}
+            {#     Number of teachers that have filled out a questionnaire in this category       #}
+            {% if teachersActiveByCategory  < 2 %}
+                <p class="mb-1 m-md-0">
+                    Es sind zu wenig Lehrkräfte in diesem Handlungsfeld aktiv (mind. 2).
+                </p>
+            {% else %}
+               <p> {{ "teachersActiveByCategory"|trans({'%teachersActiveByCategory%': teachersActiveByCategory}, "dashboard")| raw  }}</p>
+
+            {% endif %}
+            <p class="d-inline-block p-0 m-0">
+                <a class="tr-color-black-100" target="_blank" href="/print-colleague-invitation">
+                    <span>{% trans  from 'dashboard' %}inviteMorePeople{% endtrans %}</span>
+                </a>
+                {#                <b-link class="tr-color-black-100" v-b-modal.modal-2>Weitere Personen einladen</b-link> #}
+                {#                <dashboard-modal :data="{{ user | json_encode }}" #}
+                {#                                 modal-component-name="teacherCodeSend" #}
+                {#                                 id="modal-2" #}
+                {#                ></dashboard-modal> #}
+            </p>
+        {% else %}
+            <p class="m-0">
+                <span>{% trans  from 'dashboard' %}noSchoolConnected{% endtrans %}</span>
+
+            </p>
+            <b-link v-b-modal.modal-2 class="d-inline-block p-0 m-0">{% trans  from 'dashboard' %}connectSchool{% endtrans %}Schule verknüpfen</b-link>
+        {% endif %}
+    </div>
+</div>

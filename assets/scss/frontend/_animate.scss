@@ -1,0 +1,45 @@
+@keyframes fly-in {
+  0%   {font-size: 1rem;opacity: 0}
+  90% {}
+  100% {}
+}
+
+@keyframes opaci {
+  0%   {opacity: 0}
+  100% {}
+}
+
+@keyframes rotate-bar {
+  0%   {transform:rotate(210deg);}
+  100% {transform:rotate(0deg);}
+}
+
+.animate{
+  &:hover{
+    .icon-box i,
+    .animate-icon i{
+      transform: rotate(222deg);
+      font-size: 1.2em;
+    }
+  }
+
+  .fad::after {
+    animation-name: fly-in;
+    animation-duration: 500ms;
+    display: inline-block;
+  }
+  .fad::before {
+    animation-name: fly-in;
+    animation-duration: 500ms;
+    display: inline-block;
+  }
+
+  .fad.fa-chart-pie::after,
+  .fad.fa-badge-check::after{
+    animation-name:rotate-bar;
+  }
+
+  .fad.fa-chart-pie::before{
+    animation-name:opaci;
+  }
+}

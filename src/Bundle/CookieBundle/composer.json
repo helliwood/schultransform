@@ -1,0 +1,24 @@
+{
+  "name": "trollfjord/cookie-bundle",
+  "description": "Trollfjord CookieBundle",
+  "license": "proprietary",
+  "keywords": [
+    "trollfjord",
+    "cookie"
+  ],
+  "homepage": "https://helliwood.de",
+  "authors": [
+    {
+      "name": "Juan Mayoral",
+      "email": "mayoral@helliwood.com"
+    }
+  ],
+  "require": {
+    "ext-dom": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Trollfjord\\Bundle\\CookieBundle\\": "."
+    }
+  }
+}

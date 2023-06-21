@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:template id="124"
+             name="Daten | Chart Allgemeine Auswertung"
+             groups="content"
+             form="false"
+             xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:rs="http://helliwood.de"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://helliwood.de ./../rs_schema.xsd">
+
+    <div>
+        <rs:if condition="$renderMode == 'public'">
+            <rs:then><result-chart api-url="/Questionnaire/chart-data"></result-chart></rs:then>
+            <rs:else>[HIER WIRD IM FRONTEND DER CHART ANGEZEIGT!]</rs:else>
+        </rs:if>
+    </div>
+
+</rs:template>

@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            <div class="panel">
+                <h2>Fragen: {{ questionGroup.questionnaire.name }} / {{ questionGroup.name }}</h2>
+                <a class="btn btn-primary my-2"
+                   href="{{ path('questionnaire_question_add', {id:questionGroup.id}) }}">Frage
+                    hinzufügen</a>
+                <data-table
+                        sort-by="position"
+                        :sort-desc="false"
+                        :fields="[
+                    {key: 'question', label: 'Frage', sortable: true},
+                    {key: 'type', label: 'Typ', sortable: true},
+                    {key: 'schoolTypes', label: 'Schultypen', sortable: true},
+                    {key: 'recommendation', label: 'HF Potential', sortable: true},
+                    {key: 'advancedRecommendation', label: 'HF Stärken', sortable: true},
+                    {key: 'actions', label: 'Optionen', sortable: false, class:'options'}
+                ]">
+                    <template v-slot:cell(schoolTypes)="{row, callAndRefresh}">
+                        {% verbatim %}
+                        <span class="badge badge-info mr-1" v-for="schoolType in row.item.schoolTypes">{{schoolType.name}}</span>
+                        {% endverbatim %}
+                    </template>
+                    <template v-slot:cell(recommendation)="{row, callAndRefresh}">
+                        {{ '{{' }}row.item.recommendation ? row.item.recommendation.title : ''{{ '}}' }}
+
+                    </template>
+                    <template v-slot:cell(advancedRecommendation)="{row, callAndRefresh}">
+                        {{ '{{' }}row.item.advancedRecommendation ? row.item.advancedRecommendation.title : ''{{ '}}' }}
+                    </template>
+
+                    <template v-slot:cell(actions)="{row, callAndRefresh}">
+                        <b-button size="sm" variant="secondary" v-if="row.item.type === 'multiple_choice'"
+                                  :href="'{{ path('questionnaire_home') }}/QuestionGroup/Question/'+row.item.id+'/choices'"
+                                  class="mr-2 mb-1">
+                            Antworten
+                        </b-button>
+                        <b-button size="sm" variant="primary"
+                                  :href="'{{ path('questionnaire_home') }}/QuestionGroup/Question/edit/'+row.item.id"
+                                  class="mr-2 mb-1">
+                            Bearbeiten
+                        </b-button>
+                    </template>
+                </data-table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

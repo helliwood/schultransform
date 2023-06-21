@@ -1,0 +1,1196 @@
+//Vars
+//$font-size-base
+.btn-tr-gray {
+  color: gray;
+}
+
+//vertical align
+.tr-line-height-normal{
+  line-height: normal;
+}
+
+.tr-text-grow-1 {
+  font-size: 1.3em !important;
+  line-height: normal;
+}
+
+.tr-text-grow-2 {
+  font-size: $font-size-base * 1.5;
+  line-height: normal;
+}
+
+.tr-icon-size-1 {
+  font-size: $font-size-base * 1.4;
+  line-height: normal;
+}
+
+.tr-small {
+  font-size: 2.3em !important;
+  line-height: normal;
+}
+
+.tr-small-0 {
+  font-size: 1em !important;
+  line-height: normal;
+}
+
+.tr-small-1 {
+  font-size: $font-size-base * 1.2;
+  //font-size: .8em !important;
+  line-height: 1.3em;
+}
+
+.tr-small-2 {
+  font-size: $font-size-base * .8;
+  line-height: normal;
+}
+
+.tr-small-3 {
+  font-size: .6em !important;
+  line-height: normal;
+}
+
+.tr-large-1 {
+  font-size: 5em !important;
+  line-height: normal;
+}
+
+.tr-large-2 {
+  font-size: 6em !important;
+  line-height: normal;
+}
+
+.tr-large-3 {
+  font-size: 7.5em !important;
+  line-height: normal;
+}
+
+.tr-large-4 {
+  font-size: 8em !important;
+  line-height: normal;
+}
+
+.tr-large-5 {
+  font-size: 9em !important;
+  line-height: normal;
+}
+
+.tr-bg-black-50 {
+  background-color: #4f4f4f !important;
+}
+
+.tr-bg-black-25 {
+  background-color: #b7b3b3 !important;
+}
+
+.tr-bg-black-15 {
+  background-color: #f0f0f0 !important;
+}
+
+.tr-dashboard-category-flag-color {
+  color: gray;
+}
+
+.tr-dashboard-category-flag-bg-color {
+  color: gray;
+}
+
+//border color
+.tr-border-yellow {
+  border: $yellow 2px solid !important;
+}
+
+.tr-border-rad-1 {
+  border-radius: 4px;
+}
+
+.tr-border-rad-2 {
+  border-radius: 8px;
+}
+
+.tr-border-rad-3 {
+  border-radius: 12px;
+}
+
+.tr-line {
+  border-bottom: 3px solid black;
+}
+
+.tr-line-modal {
+  border-bottom: 3px solid black;
+}
+
+.tr-line-primary {
+  border-bottom: 3px solid $link-color;
+}
+
+.tr-bg-alpha1-primary {
+  background-color: mix($link-color, $white, 50);
+}
+
+//margin mi
+.tr-m-min-1 {
+  margin-top: -$font-size-base*.5;
+}
+
+//width
+.tr-w-2 {
+  width: 2%;
+}
+
+.tr-w-3 {
+  width: 3%;
+}
+
+.tr-w-5 {
+  width: 5%;
+}
+
+.tr-w-6 {
+  width: 6%;
+}
+
+.tr-w-7 {
+  width: 7%;
+}
+
+.tr-w-8 {
+  width: 8%;
+}
+
+.tr-w-10 {
+  width: 10%;
+}
+
+.tr-w-15 {
+  width: 15%;
+}
+
+.tr-w-13 {
+  width: 13%;
+}
+
+.tr-w-45 {
+  width: 45%;
+}
+
+.tr-w-48 {
+  width: 48%;
+}
+
+.tr-w-85 {
+  width: 85%;
+}
+
+.tr-w-80 {
+  width: 80%;
+}
+
+.tr-w-90 {
+  width: 90%;
+}
+
+.tr-w-95 {
+  width: 95%;
+}
+
+.tr-margin-l-5 {
+  margin-left: 5%;
+}
+
+.tr-margin-l-10 {
+  margin-left: 10%;
+}
+
+.tr-margin-l-15 {
+  margin-left: 15%;
+}
+
+.tr-margin-l-25 {
+  margin-left: 25%;
+}
+
+//display
+.tr-display-1 {
+  font-size: 3em;
+}
+
+.tr-display-2 {
+  font-size: 2.5em;
+}
+
+.tr-display-3 {
+  font-size: 2em;
+}
+
+.tr-display-4 {
+  font-size: 1.5em;
+}
+
+//text decoration
+.tr-text-decoration {
+  text-decoration: underline;
+}
+
+.tr-text-decoration-none {
+  text-decoration: none !important;
+}
+
+//colors
+.tr-color-yellow-1 {
+  color: #e0b814;
+}
+
+.tr-color-black-100 {
+  color: rgba(0, 0, 0, 1) !important;
+}
+
+.tr-color-black-50 {
+  color: rgba(0, 0, 0, .5) !important;
+}
+
+.tr-bg-white-50 {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.tr-bg-white-25 {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.tr-bg-white-10 {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.tr-bg-yellow-1 {
+  background-color: #fec226;
+}
+
+.tr-color-yellow-1 {
+  color: #fec226;
+}
+
+.tr-bg-color-gray-200 {
+  background-color: $gray-200;
+}
+
+.tr-bg-color-gray-300 {
+  background-color: $gray-300;
+}
+
+.tr-bg-color-gray-400 {
+  background-color: $gray-400;
+}
+
+.tr-bg-color-gray-500 {
+  background-color: $gray-500;
+}
+
+.tr-bg-color-gray-600 {
+  background-color: $gray-600;
+}
+
+//opacity
+.tr-opacity-50 {
+  opacity: 0.5;
+  transition: opacity ease 200ms;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+//partner materials
+.tr-partner-medias {
+
+  .tr-partner-logo {
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 30px;
+    width: 30px;
+    top: 28px;
+    left: 11px;
+    border:solid thin black;
+  }
+
+  a {
+    .fad.fa-external-link-alt {
+      display: none;
+    }
+  }
+}
+
+//cursor
+.tr-cursor-pointer {
+  cursor: pointer !important;
+}
+
+//text-ellipsis
+.tr-ellipsis {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+//categories colors
+@each $key, $value in $category-colors {
+  .tr-category-bg-#{$key} {
+    background-color: $value;
+  }
+
+  .c-#{$key} .tr-category-bg {
+    background-color: $value;
+  }
+
+  .c-#{$key} .tr-bg-dark {
+    background-color: darken($value, 20%);
+  }
+  .c-#{$key} .tr-bg-dark-2 {
+    //background-color: color-yiq(mix($value, $white, 65), $body-color, $white) !important;
+    background-color: darken($value, 10%);
+  }
+
+  .c-#{$key} .tr-name-bg {
+    background-color: $value;
+  }
+
+  .c-#{$key} .tr-cat-color {
+    color: $value !important;
+  }
+  .c-#{$key} .tr-color {
+    color: color-yiq(mix($value, $white, 65), $body-color, $white) !important;
+  }
+
+  .c-#{$key} .tr-bg-alpha1 {
+    background-color: mix($value, $white, 65);
+  }
+  .c-#{$key} .tr-bg-alpha2 {
+    background-color: mix($value, $white, 45);
+  }
+  .c-#{$key} .tr-border {
+    border: $value solid 1px !important;
+  }
+
+  .c-#{$key} .tr-border-2 {
+    border: $value solid 2px !important;
+  }
+
+  .c-#{$key} .tr-border-y {
+    border-bottom: $value solid 1px !important;
+    border-top: $value solid 1px !important;
+  }
+
+  .c-#{$key} .tr-border-bottom {
+    border-bottom: $value solid 2px !important;
+  }
+
+  .c-#{$key} .tr-border-base {
+    border-bottom: $value solid 10px !important;
+    border-radius: 0 0 10px 10px;
+    border-right: solid 1px $value;
+    border-left: solid 1px $value;
+  }
+
+  .c-#{$key} .t-potential-h5.collapsed {
+    color: $value !important;
+    background: white !important;
+  }
+  .c-#{$key} .t-potential-h5 {
+    background-color: $value !important;
+    color: white !important;
+  }
+}
+
+//category gray
+.c-gray {
+  .tr-name-bg {
+    background-color: $gray-600 !important;
+  }
+
+  .tr-border {
+    border: solid 1px $gray-600;
+  }
+
+}
+
+.tr-border-warning {
+  border: $yellow solid 1px !important;
+}
+
+.tr-bg-green-1 {
+  background-color: #285600;
+}
+
+.tr-bg-green-4 {
+  background-color: #2eacab;
+}
+
+.tr-bg-green-2 {
+  background-color: #39ad93;
+}
+
+.tr-bg-green-3 {
+  background-color: #0e9488;
+}
+
+.tr-bg-green-6 {
+  background-color: #089293;
+}
+
+.tr-bg-green-5 {
+  background-color: #45b2ac;
+}
+
+.tr-color-green-1 {
+  color: #285600;
+}
+
+.tr-color-green-3 {
+  color: #1c978b;
+}
+
+.tr-color-green-2 {
+  color: #0e9488;
+}
+
+.tr-bg-light-blue {
+  background-color: #a2c0d4;
+}
+
+.tr-bg-school-color {
+  background-color: #c24858 !important;
+}
+
+.tr-bg-school-color-2 {
+  background-color: #c14859 !important;
+}
+
+.tr-school-color {
+  color: #c24858 !important;
+}
+
+.tr-school-color-1 {
+  color: #80061c !important;
+}
+
+.tr-bg-school-color-1 {
+  background-color: #80061c !important;
+}
+
+.tr-border-radius-bottom {
+  border-radius: 0 0 8px 8px !important;
+}
+
+.tr-border-radius-right {
+  border-radius: 0 8px 8px 0 !important;
+}
+
+.tr-rotate-45 {
+  transform: rotate(45deg);
+  transition: all ease 500ms;
+
+  &:hover {
+    transform: rotate(225deg);
+  }
+
+}
+
+//position absolute with all 0
+.tr-position-absolute-plus {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+//
+.tr-height-260 {
+  height: 260px;
+}
+
+
+.t-potential-h5, .t-potential-h5.collapsed {
+  transition: all ease 500ms;
+}
+
+.btn.t-potential-h5 {
+  border-right: unset !important;
+  border-left: unset !important;
+}
+
+.tr-exclamation-mark {
+  &:before {
+    content: '!';
+    font-family: monospace;
+    position: absolute;
+    text-align: center;
+    display: flex;
+    line-height: normal;
+    justify-content: center;
+    align-items: center;
+    top: 11px;
+    width: 20px;
+    height: 20px;
+    border-radius: 11px;
+    left: 30px;
+    font-size: .8em;
+    color: white !important;
+    background: #b40404 !important;
+    border: white 2px solid;
+    font-weight: 600;
+  }
+}
+
+.tr-times-mark {
+  position: relative;
+
+  &:before {
+    content: '✔';
+    font-family: monospace;
+    position: absolute;
+    text-align: center;
+    display: flex;
+    line-height: normal;
+    justify-content: center;
+    align-items: center;
+    bottom: -2px;
+    width: 17px;
+    height: 17px;
+    border-radius: 9px;
+    right: -2px;
+    font-size: .8em;
+    color: white !important;
+    background: #004191 !important;
+    border: white 2px solid;
+    font-weight: 600;
+  }
+}
+
+.teacher-dashboard {
+  .collapsed .colla-indicator {
+    transform: rotate(0deg);
+    transition: all 0.5s;
+  }
+}
+
+
+/********************** Dashboard STYLING  ************************/
+
+//General
+.t-category-documents {
+  margin-left: ($grid-gutter-width / 4) * -1;
+  margin-right: ($grid-gutter-width / 4) * -1;
+}
+
+.t-category-col {
+  padding: 0 $grid-gutter-width / 4 !important;
+}
+
+.t-category-col > div {
+  min-height: 170px;
+}
+
+.tr-back-btn {
+  z-index: 1;
+  opacity: 0.1;
+  transition: all ease 500ms;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.t-dashboard-user-message {
+  top: -50px;
+  right: 7px;
+  z-index: 10;
+
+  i {
+    vertical-align: text-top;
+  }
+}
+
+.t-header-chart {
+  height: 185px;
+  top: -51px;
+
+  svg {
+    top: 134px !important;
+  }
+}
+
+.t-header-link-action {
+  top: -20px;
+  min-width: 45%;
+  word-wrap: break-word;
+}
+
+
+.teacher-dashboard .extras .chart::before, .school-dashboard .extras .chart::before, .school-authority-dashboard .extras .chart::before {
+  content: " ";
+  width: 196px;
+  height: 108px;
+  background: white;
+  border-radius: 100px 100px 0 0;
+  position: absolute;
+  //bottom: -34px;
+  //left: 48px;
+  bottom: -56px;
+  left: 44px;
+}
+
+////// >>> TEACHER  <<< //////
+
+/***************** ACTIONS ***********************/
+
+
+//general
+.t-category-wrapper {
+  &:hover {
+    .tr-rotate-45 {
+      transform: rotate(225deg);
+    }
+  }
+}
+
+// Start Site
+.teacher-dashboard.my-star-site {
+  .t-account-wrapper {
+    background-image: url("../../images/dashboard/teacher/bg-start-site.jpg") !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+  }
+
+  .t-category-row {
+    margin-left: ($grid-gutter-width / 4) * -1;
+    margin-right: ($grid-gutter-width / 4) * -1;
+  }
+
+  .t-category-col {
+    padding: 0 $grid-gutter-width / 4 !important;
+    text-decoration: none;
+  }
+
+  .t-category-wrapper {
+    position: relative;
+    height: 260px;
+
+    .t-information-div {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      background: rgba(255, 255, 255, .5)
+    }
+  }
+}
+
+//Category Overview
+
+.teacher-dashboard.category-overview {
+  .t-account-wrapper {
+    background-image: url("../../images/dashboard/teacher/bg-category-overview.png") !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+  }
+
+  .t-questionnaire-charts-wrapper {
+
+    div {
+      &:first-child {
+        height: 213px !important;
+      }
+    }
+  }
+
+  .t-cat-details-icon-header {
+    position: relative;
+
+    .i-1 {
+
+    }
+
+    .i-2 {
+      position: absolute;
+      top: 0;
+    }
+
+
+  }
+
+}
+
+.tr-school-info-table {
+  tr {
+    td {
+      padding-top: $font-size-base;
+      padding-bottom: $font-size-base;
+
+      &:first-child {
+        padding-left: $font-size-base*.4;
+      }
+
+      &:last-child {
+        padding-right: $font-size-base*.6;
+      }
+    }
+  }
+}
+
+
+//Potential -> action
+
+.teacher-dashboard.potential {
+
+  .t-account-wrapper {
+    background-image: url("../../images/dashboard/school/school_bg.jpg") !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+  }
+
+}
+
+
+//media queries
+@media all and (max-width: 530px) {
+
+  .teacher-dashboard.my-star-site {
+    .t-account-wrapper {
+    }
+
+    .t-text-wrapper {
+      p {
+        font-size: 0.9em !important;
+        line-height: normal !important;
+      }
+    }
+
+    .t-category-wrapper {
+      //width: 96% !important;
+      margin-right: auto;
+      margin-left: auto;
+    }
+  }
+
+  .tr-line, .tr-line-primary {
+    width: 96%;
+    margin: auto;
+
+    p {
+      //margin-left: -10px;
+    }
+  }
+}
+
+//before md viewport
+@media screen and (min-width: 200px) and (max-width: 767px) {
+
+  .tr-sm-pr-grid {
+    padding-right: $grid-gutter-width*.75 !important;
+  }
+
+}
+
+
+// >>> END TEACHER <<< //
+
+
+////// >>> SCHOOL  <<< //////
+
+
+/***************** ACTIONS ***********************/
+
+
+.school-dashboard {
+  .t-account-wrapper {
+    background-image: url("../../images/dashboard/school/school_bg.jpg") !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+  }
+}
+
+.questionaire-overlay-wrapper {
+  line-height: 30px;
+
+  .questionaire-overlay-icon {
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .questionaire-overlay-button {
+    display: block;
+
+    span {
+      color: black;
+      padding: 0 10px;
+      border-radius: 0 10px 10px 0;
+    }
+  }
+
+}
+
+//general
+
+
+.dashboard-user {
+  .content-title-bar {
+    padding-right: unset !important;
+  }
+
+  .breadcrumb-item {
+    display: block !important;
+  }
+}
+
+.t-dashboard-user-message {
+  p {
+    font-size: $font-size-base;
+  }
+}
+
+.t-cat-details-icon-header {
+  position: relative;
+
+  .t-cat-details-icon-header-icon {
+    @include media-breakpoint-down($breakpoint-mobil-style) {
+      font-size: 3rem !important;
+    }
+  }
+}
+
+
+.t-questionnaire-charts-wrapper {
+  div {
+    &:first-child {
+      height: 213px !important;
+    }
+  }
+}
+
+
+////// >>> SCHOOL AUTHORITY <<< //////
+
+
+/***************** ACTIONS ***********************/
+// Start Site
+.school-authority-dashboard.my-star-site {
+  .t-account-wrapper {
+    background-image: url("../../images/dashboard/schoolAuthority/school_authority_bg.jpg") !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+  }
+
+  .t-category-row {
+    margin-left: ($grid-gutter-width / 4) * -1;
+    margin-right: ($grid-gutter-width / 4) * -1;
+  }
+
+}
+
+
+/**MEDIA**/
+//@include
+.t-result-chart-gauge-header {
+  position: absolute;
+  left: 7px;
+  top: -48px;
+}
+
+@include media-breakpoint-down(sm) {
+  .dashboard-user .breadcrumb {
+    padding-left: $font-size-base *.5;
+  }
+  .dashboard-user.potential {
+    .breadcrumb {
+      li {
+        &:nth-child(2), &:nth-child(3) {
+          width: 24px !important;
+          overflow: hidden;
+          height: 21px;
+          position: relative;
+
+          a {
+            font-size: 3px !important;
+            padding: 0 10px;
+            height: 10px;
+            background: red;
+
+            &:before {
+              content: '...';
+              font-size: $font-size-base;
+              color: black;
+              position: absolute;
+              top: 2px;
+              left: 13px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
+
+@include media-breakpoint-down(lg) {
+  .dashboard-user.potential {
+    .breadcrumb {
+      li {
+        &:nth-child(2) {
+          width: 24px !important;
+          overflow: hidden;
+          height: 21px;
+          position: relative;
+
+          a {
+            font-size: 3px !important;
+            padding: 0 10px;
+            height: 10px;
+            background: red;
+
+            &:before {
+              content: '...';
+              font-size: $font-size-base;
+              color: black;
+              position: absolute;
+              top: 2px;
+              left: 13px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  //School potential-questionnaire
+  //School potential
+  //Teacher category-overview
+  .dashboard-user.category {
+    .breadcrumb {
+      li {
+        &:nth-child(2) {
+          width: 24px !important;
+          overflow: hidden;
+          height: 21px;
+          position: relative;
+
+          a {
+            font-size: 3px !important;
+            padding: 0 10px;
+            height: 10px;
+            background: red;
+
+            &:before {
+              content: '...';
+              font-size: $font-size-base;
+              color: black;
+              position: absolute;
+              top: 2px;
+              left: 13px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@include media-breakpoint-up(sm) {
+  //chart header
+  .teacher-dashboard .extras .chart::before, .school-dashboard .extras .chart::before, .school-authority-dashboard .extras .chart::before {
+    bottom: -32px;
+  }
+  .t-result-chart-gauge-header {
+    position: absolute;
+    left: 7px;
+    top: -2px;
+  }
+  .t-header-chart {
+    height: 250px;
+  }
+}
+
+@include media-breakpoint-down(sm) {
+
+  //width
+  .tr-sm-w-2 {
+    width: 2% !important;
+  }
+
+  .tr-sm-w-3 {
+    width: 3% !important;
+  }
+
+  .tr-sm-w-5 {
+    width: 5% !important;
+  }
+
+  .tr-sm-w-10 {
+    width: 10% !important;
+  }
+  .tr-sm-w-13 {
+    width: 13% !important;
+  }
+
+  .tr-sm-w-15 {
+    width: 15% !important;
+  }
+
+  .tr-sm-w-30 {
+    width: 30% !important;
+  }
+
+  .tr-sm-w-40 {
+    width: 40% !important;
+  }
+
+  .tr-sm-w-50 {
+    width: 50% !important;
+  }
+
+  .tr-sm-w-80 {
+    width: 80% !important;
+  }
+
+  .tr-sm-w-90 {
+    width: 90% !important;
+  }
+
+  .tr-sm-w-100 {
+    width: 100% !important;
+  }
+
+  .tr-sm-margin-l-5 {
+    margin-left: 5%;
+  }
+
+  .tr-sm-margin-l-10 {
+    margin-left: 10%;
+  }
+
+  .tr-sm-margin-l-15 {
+    margin-left: 15%;
+  }
+
+  .tr-sm-margin-l-25 {
+    margin-left: 25%;
+  }
+
+  //padding
+  .tr-md-pr-grid {
+    padding-right: $grid-gutter-width;
+  }
+}
+
+@include media-breakpoint-down(md) {
+
+  //width
+  .tr-md-w-2 {
+    width: 2% !important;
+  }
+
+  .tr-md-w-3 {
+    width: 3% !important;
+  }
+
+  .tr-md-w-5 {
+    width: 5% !important;
+  }
+
+  .tr-md-w-10 {
+    width: 10%
+  }
+
+  .tr-md-w-15 {
+    width: 15% !important;
+  }
+
+  .tr-md-w-25 {
+    width: 25% !important;
+  }
+
+  .tr-md-w-35 {
+    width: 35% !important;
+  }
+
+  .tr-md-w-50 {
+    width: 50% !important;
+  }
+
+  .tr-md-margin-l-5 {
+    margin-left: 5%;
+  }
+
+  .tr-md-margin-l-10 {
+    margin-left: 10%;
+  }
+
+  .tr-md-margin-l-15 {
+    margin-left: 15%;
+  }
+
+  .tr-md-margin-l-25 {
+    margin-left: 25%;
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  .tr-sm-position-absolute {
+    position: absolute;
+  }
+  .tr-sm-position-relative {
+    position: relative;
+  }
+  .tr-sm-position-static {
+    position: static;
+  }
+  .tr-sm-position-initial {
+    position: initial;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .t-dashboard-user-message {
+    p {
+      font-size: $font-size-base * 1.2;
+    }
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .tr-md-position-absolute {
+    position: absolute;
+  }
+  .tr-md-position-relative {
+    position: relative;
+  }
+  .tr-md-position-static {
+    position: static;
+  }
+  .tr-md-position-initial {
+    position: initial;
+  }
+  .tr-w-md-100 {
+    width: 100% !important;
+  }
+  .tr-docs-pdf div:nth-child(even) {
+    padding-left: $font-size-base*.4;
+  }
+  //partner materials
+  .tr-partner-medias {
+    &:nth-child(odd) {
+      border-right: $font-size-base*.5 solid white;
+    }
+  }
+}

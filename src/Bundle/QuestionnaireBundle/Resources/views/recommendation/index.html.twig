@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            <div class="panel">
+                <a class="btn btn-primary float-right"
+                   href="{{ path('questionnaire_recommendation_add', {}) }}">Hinzufügen</a>
+                <h2>Handlungsempfehlungen</h2>
+                <data-table
+                        sort-by="position"
+                        :sort-desc="false"
+                        :fields="[
+                    {key: 'advanced', label: 'Advanced', sortable: true},
+                    {key: 'title', label: 'Titel', sortable: false},
+                    {key: 'createdBy', label: 'Benutzer', sortable: true},
+                    {key: 'creationDate', label: 'Datum', sortable: true,
+                        formatter: (value, key, item) => {
+                        return moment(value.date).format('DD.MM.YYYY HH:mm')
+                      }
+                    },
+                    {key: 'actions', label: 'Optionen', sortable: false, class:'options'}
+                ]">
+                    <template v-slot:cell(actions)="{row, callAndRefresh}">
+                        <b-button variant="primary" size="sm" :href="'{{ path('questionnaire_recommendation_home') }}show/'+row.item.id"
+                                  class="mr-2">
+                            Anzeigen
+                        </b-button>
+                        <b-button size="sm" :href="'{{ path('questionnaire_recommendation_home') }}edit/'+row.item.id"
+                                  class="mr-2">
+                            Bearbeiten
+                        </b-button>
+                        <b-button variant="danger"
+                                  size="sm" v-b-modal="'modal-delete-recommendation-'+row.item.id"
+                                  class="mr-2"><i class="fas fa-trash"></i></b-button>
+                        <b-modal :id="'modal-delete-recommendation-'+row.item.id"
+                                 title="Handlungsempfehlung löschen"
+                                 @ok="callAndRefresh({action:'delete_recommendation', recommendation_id:row.item.id})"
+                                 ok-variant="danger"
+                                 ok-title="Handlungsempfehlung löschen"
+                                 cancel-title="Abbrechen" cancel-variant="primary-light">
+                            <p class="">Möchten Sie die Handlungsempfehlung wirklich löschen?</p>
+                        </b-modal>
+                    </template>
+                    <template v-slot:cell(advanced)="{row, callAndRefresh}">
+                        <span class="w-100 text-center d-inline-block">{{ '{{' }}row.item.advanced ? "✔" : "-" }}
+                    </template>
+                </data-table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

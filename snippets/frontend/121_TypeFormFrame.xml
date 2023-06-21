@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:template id="121"
+             name="Eingabe | Anmeldung Fragebogen"
+             groups="content"
+             xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:rs="http://helliwood.de"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://helliwood.de ./../rs_schema.xsd">
+        <div class="color-switch col-md-8 main-bg-color mb-grid animate main-title d-flex align-items-center ">
+            <h2>
+                <rs:text label="Titel" id="title" />
+                <span class="icon-box d-flex"> <i data-fa-transform="rotate-90" class="fad  fa-arrow-up"></i></span>
+            </h2>
+        </div>
+    <rs:select id="formtype" label="Typ" display="false" placeholder="Bitte wählen">
+        <rs:option value="ROLE_SCHOOL">Schulen</rs:option>
+        <rs:option value="ROLE_SCHOOL_BOARD">Schulträger</rs:option>
+    </rs:select>
+    <rs:contentarea name="alternativcont"  allowedgroups="content" display="false"></rs:contentarea>
+    <rs:text label="TypeForm Code" id="code" display="false"/>
+    <rs:link id="link" label="Link nach Fertigstellung" display="false" />
+
+
+    <rs:user check="hasUser" redirect="user_login">
+        <rs:if condition="$formtype=='ROLE_SCHOOL_BOARD'">
+            <rs:user check="hasUser" notrole="ROLE_SCHOOL_BOARD">
+                <rs:questionnaire id="quesfoschool" formkey="$code"></rs:questionnaire>
+            </rs:user>
+            <rs:user check="hasUser" role="ROLE_SCHOOL_BOARD">
+                <frame-container
+                        height="100%"
+                        src=""
+                        width="100%"
+                        allow="camera; microphone; autoplay; encrypted-media; fullscreen;"
+                        data-qa="iframe"
+                        title="typeform-embed"
+                        style="border: 0px; height: 700px;">
+                    <rs:attribute name="src" action="append" value="/form-start/$code" />
+                    <rs:attribute name="id" action="append" value="$code" />
+                    <rs:attribute name="finish-url" action="append" value="$link" />
+                </frame-container>
+
+            </rs:user>
+        </rs:if>
+        <rs:if condition="$formtype=='ROLE_SCHOOL'">
+            <rs:user check="hasUser" notrole="ROLE_SCHOOL_BOARD">
+                <frame-container
+                        height="100%"
+                        src=""
+                        width="100%"
+                        allow="camera; microphone; autoplay; encrypted-media; fullscreen;"
+                        data-qa="iframe"
+                        title="typeform-embed"
+                        style="border: 0px; height: 700px;">
+                    <rs:attribute name="src" action="append" value="/form-start/$code" />
+                    <rs:attribute name="id" action="append" value="$code" />
+                    <rs:attribute name="finish-url" action="append" value="$link" />
+                </frame-container>
+            </rs:user>
+            <rs:user check="hasUser" role="ROLE_SCHOOL_BOARD">
+                <rs:questionnaire  id="quesfoschoolboard" formkey="$code"></rs:questionnaire>
+            </rs:user>
+        </rs:if>
+
+
+
+
+        </rs:user>
+
+</rs:template>

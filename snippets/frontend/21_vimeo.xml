@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:template id="21"
+             name="Content | Video Vimeo"
+             groups="content"
+             xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:rs="http://helliwood.de"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://helliwood.de ./../rs_schema.xsd">
+
+
+    <rs:text id="vimeo" label="Vimeo Video id"  display="false"/>
+    <div  class="border-image-wrapper">
+        <rs:cookie id="my_cookie" key="External" cookie-banner-id="1">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://player.vimeo.com/video/" webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen" allowfullscreen="allowfullscreen">
+                    <rs:attribute name="src" action="append" value="$vimeo"/>
+                </iframe>
+            </div>
+        </rs:cookie>
+        <rs:if condition="$my_cookie==false">
+            <div class="p-4" style="background: #e5e5e5;">
+                <h3 class="mb-1">Vimeo Video</h3>
+                Sie haben externe Inhalte in den Cookie-Einstellungen deaktiviert.
+                <a class="text-center cookieAP" href="javascript:void(0)" data-key="External">Cookies anpassen</a>
+            </div>
+        </rs:if>
+
+    </div>
+
+
+
+</rs:template>

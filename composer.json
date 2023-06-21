@@ -1,0 +1,31 @@
+{
+  "require": {
+    "ext-dom": "*",
+    "ext-json": "*",
+    "dompdf/dompdf": "0.8.5",
+    "jms/serializer": "3.11",
+    "phpoffice/phpspreadsheet": "^1.23",
+    "endroid/qr-code-bundle": "^4.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "StarterMigrations\\": "migrations/",
+      "Trollfjord\\": "src/",
+      "Trollfjord\\Core\\": "src/Core/src",
+      "Trollfjord\\Bundle\\ContentTreeBundle\\": "src/Bundle/ContentTreeBundle",
+      "Trollfjord\\Bundle\\CookieBundle\\": "src/Bundle/CookieBundle",
+      "Trollfjord\\Bundle\\GlossaryBundle\\": "src/Bundle/GlossaryBundle",
+      "Trollfjord\\Bundle\\MediabaseBundle\\": "src/Bundle/MediabaseBundle"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "App\\Tests\\": "tests/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "endroid/installer": true
+    }
+  }
+}

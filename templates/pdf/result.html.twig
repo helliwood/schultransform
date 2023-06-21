@@ -1,0 +1,119 @@
+{% extends 'pdf/layout.html.twig' %}
+
+{% block body %}
+
+    <style>
+        .subtitle {
+            font-size: 18px;
+            font-family: "regular2";
+            font-weight: normal;
+            color: #006292;
+        }
+
+        h3 {
+            text-decoration: underline;
+        }
+
+        .subtitle b {
+            color: #000;
+        }
+
+        .question {
+            page-break-inside: avoid;
+            padding-bottom: 30px;
+            clear: both;
+        }
+
+        .question .questionTitle {
+            font-family: "semibold";
+            font-weight: normal;
+            text-align: left;
+        }
+
+        .question .questionText {
+            margin-bottom: 5px;
+        }
+
+        .iconAnswer {
+            width: 12px;
+            height: 12px;
+            margin-right: 5px;
+        }
+
+        .textAnswer {
+            font-family: "semibold";
+            font-weight: normal;
+        }
+
+        .multiple_choice div, .long_text div {
+            display: inline-block;
+        }
+    </style>
+    <span class="subtitle">{{ result.getQuestionnaire.getCategory.getName }} <b>|</b> {{ result.getQuestionnaire.getName }}</span>
+    <br>
+    <br>
+
+    {% set temp = null %}
+    {% set previousQuestion = null %}
+    <div class="question">
+    {% for answer in result.Answers %}
+
+        {% set question = answer.Question %}
+        {% set questionType = answer.Question.type %}
+        {% set questionTitle = answer.Question.title %}
+        {% set questionText = answer.Question.question %}
+        {% set questionGroupName = answer.Question.QuestionGroup.name %}
+
+        {% if question != previousQuestion %}
+            </div>
+            <div class="question">
+        {% endif %}
+
+        {% if questionGroupName != temp %}
+            <h3>{{ questionGroupName }}</h3>
+        {% endif %}
+
+        {% if question != previousQuestion %}
+            <div class="questionTitle">{{ questionTitle }}</div>
+            <div class="questionText">{{ questionText }}</div>
+        {% endif %}
+
+        {% if  questionType == 'opinion_scale' %}
+
+            {% include 'pdf/partials/opinion-scale.html.twig' %}
+
+        {% endif %}
+
+
+        {% if  questionType == 'multiple_choice' %}
+
+            {% include 'pdf/partials/multiple-choice.html.twig' %}
+
+        {% endif %}
+
+
+        {% if  questionType == 'long_text' %}
+
+            {% include 'pdf/partials/long-text.html.twig' %}
+
+        {% endif %}
+
+
+        {% set temp = questionGroupName %}
+        {% set previousQuestion = answer.question %}
+    {% endfor %}
+    </div>
+    {% include 'pdf/partials/formal.html.twig' %}
+
+    {% include 'pdf/partials/recommendations.html.twig' %}
+
+    {% if app.user.code == result.user.code %}
+        <div style="page-break-before: always;">
+            <div style="color: #990000;">Hinweis: Diese Angaben sind nur für Ihren persönlichen Gebrauch. Bitte geben
+                Sie diesen Abschnitt mit Ihrem Zugangs-CODE nicht weiter, wenn Sie anonym bleiben möchten.
+            </div>
+            <div style="margin-top: 10px;"><strong>Zugangs-CODE: {{ result.user.code }}</strong></div>
+        </div>
+    {% endif %}
+
+{% endblock %}

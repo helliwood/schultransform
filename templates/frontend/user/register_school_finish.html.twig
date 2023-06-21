@@ -1,0 +1,28 @@
+{% block dc_image %}/build_frontend/images_frontend/socialimage.jpg{% endblock %}
+{% extends 'frontend/public.html.twig' %}
+
+{% block body %}
+    <h2 class="color-switch col-12 col-md-8 main-bg-color mb-grid animate main-title d-flex align-items-center  pl-grid ">Registrierung abschließen</h2>
+
+    Vielen Dank für die Registrierung Ihrer Schule auf schultransform.org.<br/><br/>
+
+    Ihr Schulcode lautet: <strong>{{ code }}</strong><br/><br/>
+
+    Mit diesem Schulcode können sich die einzelnen Lehrkräfte ab sofort unter Wahrung der
+    vollständigen Anonymität auf schultransform.org mit Ihrer Schule verbinden.<br/><br/>
+
+    Notieren Sie sich bitte unbedingt diesen Schulcode und verteilen Sie ihn an die am Transformationsprozess beteiligten Kolleg:innen.
+    <br/><br/>
+
+    Wir haben Ihnen parallel eine E-Mail gesendet, um die Registrierung vollständig abzuschließen. Diese E-Mail enthält:<br/><br/>
+    <ol>
+        <li>einen Link zur Bestätigung Ihrer E-Mail-Adresse, damit Ihre Schule im System von Schultransform verfügbar
+            ist.
+        </li>
+        <li>ein Faxformular zur Verifizierung Ihrer Schule.</li>
+    </ol>
+    Beides ist wichtig, um die Angebote auf schultransform.org vollständig nutzen zu können.
+    <br/>
+    <br/>
+    <strong>Ihr Projektbüro Schultransform</strong>
+{% endblock %}

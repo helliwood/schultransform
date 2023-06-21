@@ -1,0 +1,6 @@
+twig:
+  paths:
+    - '%kernel.project_dir%/templates'
+  globals:
+    track: '@Trollfjord\Service\TrackingService'
+    schoolTypes: '@Trollfjord\Service\SchoolTypeService'

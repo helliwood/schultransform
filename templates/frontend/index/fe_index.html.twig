@@ -1,0 +1,10 @@
+{% extends 'public.html.twig' %}
+
+{% block body %}
+    {% include 'index/fe_hero2.html.twig' %}
+    <section class="part">
+        {% include 'index/fe_title.html.twig' with {'title': 'aKategorien des Selbstchecks'} only %}
+        {% include 'index/fe_teaser.html.twig'
+        with {'teaserclass': "object.picture", 'teasertitle': "object.link", 'teasericon': "fad fa-pennant", 'info': "object.info"} %}
+    </section>
+{% endblock %}

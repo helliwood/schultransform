@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>View Log File: {{ filename }}</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Time</th>
+            <th>channel</th>
+            <th>logLevel</th>
+            <th>Message</th>
+            <th>Optional</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for log in logs %}
+            <tr>
+                <td>{{ log.timestamp }}</td>
+                <td>{{ log.channel }}</td>
+                <td>{{ log.logLevel }}</td>
+                <td>{{ log.message }}</td>
+                <td>{{ log.optionalFields }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {{ shownLines }}
+    {% if prevLine > 1 %}
+        <a class="btn btn-primary" href="{{ path('TFSecurity_view_big_logfile', {'filename': filename, 'line': prevLine}) }}">Previous</a>
+    {% endif %}
+    {% if shownLines == 0 %}
+        <a  class="btn btn-primary"  class="btn" href="{{ path('TFSecurity_view_big_logfile', {'filename': filename, 'line': nextLine}) }}">Next</a>
+    {% endif %}
+{% endblock %}

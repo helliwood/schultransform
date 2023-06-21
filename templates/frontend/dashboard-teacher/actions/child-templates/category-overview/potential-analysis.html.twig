@@ -1,0 +1,64 @@
+<div class="row row-cols-1 row-cols-lg-2 px-2 tr-bg-color-gray-200 no-gutters">
+    <div class="tr-small-1 pb-lg-4 pb-2 pt-3 px-2">
+        {% include "frontend/dashboard-general/school_info_data.html.twig" %}
+        <div class="py-lg-2 px-2">
+            <p class="m-0"></p>
+        </div>
+    </div>
+
+    <div class="pb-4 pt-md-3 px-md-0 px-2">
+        {% include "frontend/dashboard-general/privacy.html.twig" %}
+    </div>
+
+
+</div>
+<div class="tr-bg-alpha1-primary d-flex flex-column
+    pt-sm-3 px-3 pb-1 position-relative
+    t-text-wrapper
+    align-content-end tr-border-radius-bottom">
+    <div class="d-flex t-header-link-action tr-sm-position-absolute">
+        <div class="bg-primary px-2 py-1 text-white">
+            <p>Potenzial&shy;analyse</p>
+        </div>
+        <div class="tr-bg-yellow-1 px-2 py-1 tr-border-radius-right mr-4">
+            {% if user.school | default(null) %}
+                {% if allowOpenPotential |default(false) %}
+                    <a href="{{ path('dashboard_teacher_potential', {'category':category.id}) }}"><p
+                                class="tr-color-black-100">Öffnen</p></a>
+                {% else %}
+                    <p class="d-inline-block p-0 m-0">
+                        <b-link v-b-modal.modal-profil class="tr-color-black-100">
+                            <span>Lehrkräfte einladen</span>
+                        </b-link>
+                    </p>
+                {% endif %}
+            {% else %}
+                <b-link v-b-modal.modal-profil class="tr-color-black-100">Schule ver&shy;knüpfen</b-link>
+            {% endif %}
+        </div>
+    </div>
+    <div class="d-flex justify-content-between
+        mt-2 mt-sm-2 flex-column flex-sm-row tr-small-1 tr-color-black-100">
+        {% if user.school | default(null) %}
+            {#     Number of teachers that have filled out a questionnaire in this category       #}
+            {% if allowOpenPotential  | default(null) %}
+                <p> {{ "teachersActiveByCategory"|trans({'%teachersActiveByCategory%': teachersActiveByCategory}, "dashboard")| raw }}</p>
+            {% else %}
+                <p class="mb-1 m-md-0">
+                    Es sind zu wenig Lehrkräfte in diesem Handlungsfeld aktiv (mind. 2).
+                </p>
+            {% endif %}
+            <p class="d-inline-block p-0 m-0">
+                <b-link v-b-modal.modal-profil class="tr-color-black-100 tr-text-decoration">
+                    {% trans  from 'dashboard' %}inviteMorePeople{% endtrans %}
+                </b-link>
+            </p>
+        {% else %}
+            <p class="m-0">
+                <span>{% trans  from 'dashboard' %}noSchoolConnected{% endtrans %}</span>
+            </p>
+            <b-link v-b-modal.modal-profil
+                    class="d-inline-block p-0 m-0 tr-color-black-100 tr-text-decoration">{% trans  from 'dashboard' %}connectSchool{% endtrans %}</b-link>
+        {% endif %}
+    </div>
+</div>

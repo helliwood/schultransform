@@ -1,0 +1,56 @@
+{% block dc_image %}/build_frontend/images_frontend/socialimage.jpg{% endblock %}
+
+{% extends 'frontend/public.html.twig' %}
+
+{% form_theme form 'frontend/forms.html.twig' %}
+
+{% block body %}
+    <div class="color-switch col-md-8 main-bg-color mb-grid animate main-title d-flex align-items-center ">
+        <h2>Schule / <span>Stammdaten</span><span class="icon-box d-flex"><i data-fa-transform="rotate-90"
+                                                                             class="fad  fa-arrow-up"></i></span>
+        </h2>
+    </div>
+    <div class="col-md-9 col-12 p-grid p-md-0 mt-0">
+        <p class="title-copy  mb-grid">
+            Hier können Sie die Stammdaten Ihrer Schule eigenständig bearbeiten oder ergänzen.
+            Bei Rückfragen wenden Sie sich bitte an das Team des Projektbüros über Kontakt.
+        </p>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="c-3 border-wrapper">
+                <div class="topLabel">Stammdaten:</div>
+                <div class="p-grid pt-grid3">
+                    {{ form_start(form, {'action': path("user_edit_school"), 'attr': {'novalidate': 'novalidate'}}) }}
+                    <div class="row">
+                        <div class="col-8">
+                            <form-manipulator :manipulations="[
+                                    {
+                                        watch: '#school_address_other_country',
+                                        if: {
+                                            'checked': [{elem: '#federal-state-row', style: {display: 'none'}}, {elem: '#country-row', style: {display: 'flex'}}],
+                                            'unchecked': [{elem: '#federal-state-row', style: {display: 'flex'}}, {elem: '#country-row', style: {display: 'none'}}]
+                                        }
+                                    }]">
+                                {{ form_widget(form) }}
+                            </form-manipulator>
+                        </div>
+                        <div class="col d-flex flex-column">
+                            <b>Hinweis:</b>
+                            <p>Geben Sie hier die Daten zu Ihrer Schule ein. Schreiben Sie nach Möglichkeit den
+                                vollständigen Namen Ihrer Schule und verwenden Sie keine Abkürzung. Wählen Sie bei der
+                                E-Mail-Adresse den offiziellen Kontakt der Schule.</p>
+                        </div>
+                    </div>
+                    <div class="pt-2 border-top d-flex">
+                        <button type="submit" value="save" class=" btn btn-school px-grid mt-auto ml-auto">
+                            Speichern
+                        </button>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

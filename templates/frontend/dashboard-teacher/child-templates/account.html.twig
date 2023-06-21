@@ -1,0 +1,108 @@
+{% block teacher_account_wrapper %}
+    <div class="position-relative overflow-hidden d-block t-account-wrapper mt-lg-2">
+        {% block teacher_account_1 %}
+
+        {% endblock %}
+
+        {% block teacher_account_2 %}
+        {% endblock %}
+        {% block teacher_account_3 %}
+            {# header chart #}
+            {% if headerChartValue | number_format(1) %}
+                {# color of the category or fall back 'primary' in HEX #}
+                {% set color = category.color ??  '#006292' %}
+                <div class="col-md-8 col-12 t-header-chart">
+                    <div class="extras">
+                        <div class="chart">
+                            <result-chart-gauge :chart-height="280"
+                                                class="t-result-chart-gauge-header"
+                                                chart-value="{{ headerChartValue }}"
+                                                tick-color="#666"
+                                                the-url="/"
+                                                chart-color="{{ color }}">
+                            </result-chart-gauge>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endblock %}
+    </div>
+{% endblock %}
+{% block teacher_account_4 %}
+    <div class="tr-bg-green-6 d-flex flex-column
+    pt-sm-4 px-3 pb-2 position-relative
+    t-text-wrapper
+    align-content-end tr-border-radius-bottom">
+        {# link to action in header #}
+        <div class="d-flex t-header-link-action tr-sm-position-absolute">
+            <div class="tr-bg-green-4 px-2 py-1 text-white">
+                <p>{% trans  from 'dashboard' %}teacherHeaderText{% endtrans %}</p>
+            </div>
+            <div class="tr-bg-yellow-1 px-2 py-1 tr-border-radius-right mr-4">
+
+                {% set cat_details = [] %}
+                {% for cat in categories %}
+
+                    {% if  cat.userHasQuestionnairesFilledOut %}
+                        {% set numberOfQuestionnairesFilledOut = cat.questionnairesFilledOut | length %}
+                    {% else %}
+                        {% set numberOfQuestionnairesFilledOut = 0 %}
+                    {% endif %}
+                    <!-- This is the line of code that does the magic -->
+                    {% set cat_details = cat_details|merge({(loop.index0) : {'id': cat.id,'name': cat.name, 'icon': cat.icon, 'numberOfQuestionnairesFilledOut':numberOfQuestionnairesFilledOut,'userHasQuestionnairesFilledOut': cat.userHasQuestionnairesFilledOut, 'noQuestionnairesFilledOutByUser': cat.noQuestionnairesFilledOutByUser,"subcats":questionairs[cat.id],"questionnairesInCategory":questionairs[cat.id] | length} }) %}
+                {% endfor %}
+
+
+                {% if numberQuestionnairesDone | default(0) %}
+
+                    <b-link v-b-modal.modal-catchoose
+                            class="tr-color-black-100 tr-text-decoration">
+                        {% if numberQuestionnairesDone | length > 0 and nrQuestionaires > numberQuestionnairesDone %}
+                            {% trans  from 'dashboard' %}continue{% endtrans %}
+                        {% else %}
+                            {% trans  from 'dashboard' %}repeat{% endtrans %}
+                        {% endif %}
+                    </b-link>
+                    <dashboard-modal :data="{{ cat_details | json_encode }}"
+                                     :id="'modal-catchoose'"
+                                     :texts="['Weitermachen','Starten','noch nicht gestartet','Wiederholen']"
+                                     :intro="'Bearbeiten Sie die Fragebögen der folgenden Handlungsfelder für Ihre Momentaufnahme zur ganzheitlichen Schultransformation. Die Fragebögen können Sie jederzeit bearbeiten und wiederholen. \n'"
+                                     :title="'Handlungsfeld auswählen'"
+                                     modal-component-name="TeacherQuestionairs"></dashboard-modal>
+
+                {% else %}
+
+                    <b-link href="{{ path('dashboard_teacher_next_questionair') }}"
+                            class="tr-color-black-100">
+                        {% trans  from 'dashboard' %}quickStart{% endtrans %}
+                    </b-link>
+                    <dashboard-modal :data="{{ cat_details | json_encode }}"
+                                     :id="'modal-catchoose'"
+                                     :texts="['starten','öffnen','']"
+                                     :intro="'Lorem Ipsum'"
+                                     :title="'asd3'"
+                                     modal-component-name="TeacherQuestionairs"></dashboard-modal>
+                {% endif %}
+            </div>
+        </div>
+        <div class="d-flex align-items-sm-end flex-column flex-sm-row t-code pt-1 pt-md-0">
+            {% if numberQuestionnairesDone | default(0) %}
+                {% if numberQuestionnairesDone | length > 0 %}
+                    <p class="d-inline-block mb-1 mb-sm-0 p-0 m-0 tr-small-1 text-white">
+                        {{ "questionairesActive"|trans({'%nrQuestionaires%': nrQuestionaires,'%numberQuestionnairesDone%': numberQuestionnairesDone}, "dashboard")| raw }}
+                    </p>
+                {% endif %}
+            {% else %}
+                <p class="d-inline-block p-0 m-0 tr-small-1 text-white">
+                    {{ "noTopicsDone"|trans({'%nrQuestionaires%': nrQuestionaires,'%numberQuestionnairesDone%': numberQuestionnairesDone}, "dashboard")| raw }}
+                </p>
+            {% endif %}
+            <p class="d-inline-block p-0 m-0 tr-small-1 text-white">
+                {% trans  from 'dashboard' %}yourLogincode{% endtrans %}
+                <b-link v-b-modal.modal-profil>
+                    <b>{{ user.code }}</b></b-link>
+            </p>
+        </div>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:template id="8"
+             name="Content | Box Icon-Titel-Link"
+             groups="teaser"
+             xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:rs="http://helliwood.de"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://helliwood.de ./../rs_schema.xsd">
+
+    <div class="row">
+        <rs:for id="boxen" label="Boxen">
+            <rs:color-select id="color" label="Farbe"  display="false"/>
+            <rs:text id="ticon" label="Icon" display="false" />
+            <rs:link id="link" label="link" display="false" />
+            <div class="col-6 col-md-4 col-lg-2">
+                <a class="teaser animate " >
+                    <rs:attribute name="class" action="append" value="color-style-$color"/>
+                    <rs:attribute name="href" action="append" value="$link"/>
+                    <rs:attribute name="title" action="append" value="$link_title"/>
+                    <i class="teaser-icon ">
+                        <rs:attribute name="class" action="append" value=" $ticon"/>
+                    </i>
+                    <span class="teaser-title">    <rs:text id="ttitle" label="Title" /></span>
+                    <span class="icon-box d-flex"> <i data-fa-transform="rotate-90" class="fad  fa-arrow-up"></i></span>
+                </a>
+            </div>
+        </rs:for>
+    </div>
+</rs:template>
+

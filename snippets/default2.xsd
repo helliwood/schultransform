@@ -1,0 +1,95 @@
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://helliwood.de"
+           xmlns="http://helliwood.de"
+>
+
+    <!-- Importing XHTML namespace -->
+    <xs:import namespace="http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd"
+               schemaLocation="http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd"/>
+    <xs:redefine schemaLocation="http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd">
+        <xs:complexType name="Block">
+            <xs:complexContent>
+                <xs:extension base="Block">
+                    <xs:sequence>
+                        <xs:any processContents="strict" namespace="http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd"/>
+                        <xs:element ref="title"/>
+                        <xs:element ref="text"/>
+                        <xs:element ref="if"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:redefine>
+
+
+    <xs:element name="if">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="Block">
+                    <xs:attribute name="condition" type="xs:string" use="required"/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:simpleType name="String255">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="50"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:element name="title">
+        <xs:annotation>
+            <xs:documentation>Titel (255 Zeichen)</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="String255">
+                    <xs:attribute name="id" use="required" type="xs:ID"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="text">
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:group ref="filters"/>
+                <xs:group ref="form_validators"/>
+            </xs:choice>
+            <xs:attribute name="id" type="xs:ID" use="required"/>
+            <xs:attribute name="label" use="required" type="String255"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:group name="form_validators">
+        <xs:choice>
+            <xs:element ref="validator_numeric"/>
+        </xs:choice>
+    </xs:group>
+
+    <xs:group name="filters">
+        <xs:choice>
+            <xs:element ref="filter_trim"/>
+        </xs:choice>
+    </xs:group>
+
+    <xs:element name="filter_trim">
+    </xs:element>
+
+    <xs:element name="validator_numeric">
+    </xs:element>
+
+    <!-- Now, your custom 'Html' element has the same content model as the standard
+        XHTML <body> element! -->
+    <xs:element name="template">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="Block">
+                    <xs:attribute name="id" type="xs:string" use="required"/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

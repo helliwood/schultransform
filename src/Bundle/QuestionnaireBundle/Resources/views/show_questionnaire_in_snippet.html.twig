@@ -1,0 +1,88 @@
+{% block body %}
+    <h1>{{ questionnaire.name }} <i style="font-size: 0.5em"> (Lese-Ansicht)</i></h1>
+    <style>
+
+
+    </style>
+    <div class="row questionaire-result-view">
+
+        <div class="col">
+            <div class="panel">
+
+                {% for group in questionnaire.questionGroups %}
+
+                    <h4 class="collapselement collapsed" data-toggle="collapse" href="#cola{{ loop.index }}"
+                        role="button" aria-expanded="false" aria-controls="#cola{{ loop.index }}">
+                        {{ group.name }}
+                    </h4>
+                    <div class="collapse pl-grid" id="cola{{ loop.index }}">
+                        {% if  group.description!="" %}
+                            <div class=""><strong>{{ group.description }}</strong></div>
+                        {% endif %}
+                        {% for question in group.questions %}
+                            <h5 class="mt-grid">{{ question.title }}</h5>
+                            <div class="pl-grid">
+                                <div class="main-border p-2 main-bg-color mb-2">{{ question.question }}
+                                    {% if question.type == 'multiple_choice' and question.properties.allow_multiple_selection %}(Mehrfachauswahl){% endif %}
+                                </div>
+
+                                {% if question.type == 'multiple_choice' %}
+                                    <ol type="A" class="mt-grid">
+                                        {% for choice in question.choices %}
+                                            {% if questionnaire.results.count > 0 %}
+                                                {% set perc = (choice.answers.count / questionnaire.results.count * 100 )|round(1, 'floor') %}
+                                            {% else %}
+                                                {% set perc = 0 %}
+                                            {% endif %}
+                                            <li class="my-2 " style="position: relative">
+                                                <div class="p-grid main-border pr-grid2 "
+                                                     style="color:black;background:linear-gradient(to right,#006292 0%, #006292 {{ perc }}%,transparent {{ perc+0.1 }}%,transparent 100%);">{{ choice.choice }}</div>
+                                                <div class="p-grid main-border pr-grid2"
+                                                     style="position:absolute;top:0;width:100%;background:linear-gradient(to right,#ffffff 0%, #ffffff {{ perc }}%,#000 {{ perc }}%,#000 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
+                                                    {{ choice.choice }}
+                                                </div>
+                                                <span style="top:50%; -ms-transform: translateY(-50%);transform: translateY(-50%);font-size:0.8em;padding:12.5px;position: absolute;right:-12.5px;color:white;background:#006292">{{ perc|number_format(1, ',', '.') }}%</span>
+                                            </li>
+                                        {% endfor %}
+                                    </ol>
+                                {% elseif question.type == 'opinion_scale' %}
+                                    <p><i>Entscheiden Sie zwischen 0 und {{ question.properties.steps-1 }}.</i></p>
+                                    <div>
+                                        {% for i in 0..question.properties.steps-1 %}
+                                            {% set perc = 0 %}
+                                            {% if question.stats[loop.index0]  is defined %}
+                                                {% set perc = (question.stats[loop.index0].count / questionnaire.results.count * 100 )|round(1, 'floor') %}
+                                            {% endif %}
+
+                                            <div style=" float: left;text-align: center;margin:25px 25px 0 0;"
+                                                 title="{{ perc }} %">
+                                                <div class="op_scale_ele color-style-a" style="">
+                                                    <div class="percbar" style="height: {{ 100-perc }}%;">
+                                                        <span class="perc-nr">{{ loop.index0 }}</span>
+                                                    </div>
+                                                    <span class="perc-nr" style="z-index: 21;">{{ loop.index0 }}</span>
+                                                </div>
+                                                <span style="font-size:0.75em">{{ perc|number_format(1, ',', '.') }} %</span>
+                                            </div>
+
+
+                                        {% endfor %}
+                                        <div style="clear:both"></div>
+                                    </div>
+                                {% elseif question.type == 'yes_no' %}
+                                    <ul>
+                                        <li>Ja</li>
+                                        <li>Nein</li>
+                                    </ul>
+                                {% else %}
+                                    <strong>Freitext, bisher: <i>{{ question.answers.count }} Antworten</i></strong>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

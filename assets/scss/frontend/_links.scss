@@ -1,0 +1,24 @@
+@each $key, $value in $cms-colors {
+  a.link-#{$key} {
+    color: $value;
+    text-decoration: underline;
+  }
+  a.link-#{$key}:hover {
+    color: darken($value, 20%);
+    text-decoration: none;
+  }
+}
+
+.underline a,
+a.underline{
+  text-decoration: underline;
+}
+
+a.ext-link{
+  padding-right: 25px;
+}
+
+a .fa-external-link-alt {
+  position: absolute;
+  font-size: 0.8em;
+}

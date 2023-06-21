@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="d-flex">
+        <h1>{{ site.name }}</h1>
+        <div class="ml-auto">
+            <a href="{{ path('content_tree_site_preview', {id:site.id}) }}" target="_blank" class="btn btn-primary"><i class="fas fa-eye"></i> Vorschau</a>
+            <snippet-tree :tree="{{ site.snippetTree | json_encode }}"></snippet-tree>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="panel">
+                <snippet-content-area
+                        :allowed-groups="['[root]']"
+                        snippet-paste-path="{{ path('content_tree_site_sitecontent_paste', {site:site.id}) }}"
+                        content-path="{{ path('content_tree_site_sitecontent_content_area', {site:site.id}) }}"
+                        add-path="{{ path('content_tree_site_sitecontent_add', {site:site.id}) }}"
+                        snippets-path="{{ path('content_tree_site_sitecontent_snippets', {allowedGroups:'[root]'}) }}">{{ siteContent | raw }}</snippet-content-area>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {# {{ encore_entry_script_tags('content-tree-bundle') }} #}
+{% endblock %}

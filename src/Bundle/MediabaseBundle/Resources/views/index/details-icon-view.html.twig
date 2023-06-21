@@ -1,0 +1,40 @@
+<div class="container-fluid media-base">
+    <div class="py-2">
+        {% if media.mimeType matches '{^image}' %}
+            <div class="row pb-3">
+                <div class="col">
+                    Bild:
+                    <div class="preview-border">
+                        <a target="_blank" title="{{ media.name }}" href="{{ path('media_base_show', {id:media.id}) }}"
+                           class="preview-container"
+                           style="background-image: url({{ path('media_base_show', {id:media.id}) }})"></a>
+                    </div>
+                </div>
+                {% if media.getChildren()|length > 0 %}
+                    <div class="col">
+                        Alternativbild:
+                        <div class="preview-border">
+                            <a target="_blank" title="{{ media.getChildren()[0].name }}"
+                               href="{{ path('media_base_show', {id:media.getChildren()[0].id}) }}"
+                               class="preview-container"
+                               style="background-image: url({{ path('media_base_show', {id:media.getChildren()[0].id}) }})"></a>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        {% else %}
+            <div class="pb-2">
+                <a class="btn btn-primary btn-sm" target="_blank" href="{{ path('media_base_show', {id:media.id}) }}"><i
+                            class="{{ icons[media.extension] }} pr-1"></i>Anzeigen: {{ media.getDownloadFilename() }}</a>
+            </div>
+        {% endif %}
+        <div class="d-flex flex-column">
+            <div>Name: <b>{{ media.name }}</b></div>
+            <div>Type: <b>{{ media.mimeType }}</b></div>
+            <div>Endung: <b>{{ media.extension }}</b></div>
+            <div>Dateigröße: <b>{{ media.getFormatFileSize() }}</b></div>
+            <div>Copyright: <b>{{ media.copyright }}</b></div>
+            <div>Beschreibung: <b>{{ media.description }}</b></div>
+        </div>
+    </div>
+</div>

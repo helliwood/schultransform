@@ -1,0 +1,176 @@
+{% block dc_image %}/build_frontend/images_frontend/socialimage.jpg{% endblock %}
+
+{% extends 'frontend/public.html.twig' %}
+
+{% if form is defined and form is not null %}
+
+    {% form_theme form 'frontend/forms.html.twig' %}
+
+{% endif %}
+
+{% block dc_description %}Schulträger-Registrierung auf schultransform.org{% endblock %}
+
+{% block body %}
+    <div class="color-switch col-md-8 main-bg-color mb-grid animate main-title d-flex align-items-center ">
+        <h2>Anmeldung / <span>Schulträger</span><span class="icon-box d-flex"><i data-fa-transform="rotate-90"
+                                                                                 class="fad  fa-arrow-up"></i></span>
+        </h2>
+    </div>
+    <div class="col-md-9 col-12 p-grid p-md-0 mt-0">
+        <p class="title-copy  mb-grid">
+            Melden Sie sich als Schulträger an, um das Angebot von Schultransform vollumfänglich nutzen zu können. Über
+            die Fragebögen erhalten Sie eine differenzierte Sicht auf Ihren Entwicklungsstand im Transformationsprozess
+            und zukünftig auch den Ihrer Schulen.
+        </p>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="c-8 border-wrapper">
+                <div class="topLabel">Schritt {{ step }}:
+                    {% if step == 1 %}Schulträgersuche
+                    {% elseif step == 2 %}Allgemeine Schulträger-Daten
+                    {% elseif step == 3 %}Ansprechpartner:in Schulträger
+                    {% elseif step == 4 %}Überprüfen Ihrer Daten
+                    {% endif %}</div>
+                <div class="p-grid pt-grid3">
+                    {% if step == 1 %}
+                        <div class="mb-3">Bitte geben Sie Ihre Postleitzahl ein, um nach Ihrem vorhandenen
+                            Schulträger-Datensatz zu suchen. Diesen können Sie anschließend bearbeiten. Wenn Ihr
+                            Schulträger noch nicht vorhanden ist, nutzen Sie bitte die Funktion „neu anlegen“.
+                            Wird Ihr Träger bereits verwaltet, nehmen Sie Kontakt mit uns auf: <a href="/kontakt" target="_blank">Zum Kontaktformular</a>.
+                        </div>
+                        <register-school-authorities url="{{ path('school_authority_search') }}"
+                                                     set-school-authority-url="{{ path('school_authority_set_session') }}"
+                                                     next-step="{{ path('school_authority_register', {step:2}) }}">
+                        </register-school-authorities>
+                        {% if usedSchoolAuthority is not null %}
+                            <hr/>
+                            <div class="mb-grid">
+                                <b class="d-block mb-1">Gewählter Träger:</b> {{ usedSchoolAuthority.name }}
+                                aus {{ usedSchoolAuthority.address.postalcode }} {{ usedSchoolAuthority.address.city }}
+                            </div>
+                            <div class="pt-2 border-top">
+                                <div class="d-flex">
+                                    <a href="{{ path("school_authority_register", {step:2}) }}"
+                                       class="btn btn-bearer ml-auto px-grid">Weiter</a>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% elseif step == 2 %}
+                        {{ form_start(form, {'action': path("school_authority_register", {step:2}), 'attr': {'novalidate': 'novalidate'}}) }}
+                        <div class="row">
+                            <div class="col-8">
+                                <form-manipulator :manipulations="[
+                                            {
+                                                watch: '#school_authority_address_other_country',
+                                                if: {
+                                                    'checked': [{elem: '#federal-state-row', style: {display: 'none'}}, {elem: '#country-row', style: {display: 'flex'}}],
+                                                    'unchecked': [{elem: '#federal-state-row', style: {display: 'flex'}}, {elem: '#country-row', style: {display: 'none'}}]
+                                                }
+                                            }]">
+                                    {{ form_widget(form) }}
+                                </form-manipulator>
+                            </div>
+                            <div class="col">
+                                <b>Hinweis:</b>
+                                <p>Geben Sie hier die Daten als Schulträger ein. Schreiben Sie nach Möglichkeit den
+                                    vollständigen Namen Ihres Schulträgers und verwenden Sie keine Abkürzung. Wählen Sie
+                                    bei der E-Mail-Adresse den offiziellen Kontakt des Schulträgers. Die Kontaktdaten
+                                    der Ansprechperson im Rahmen von Schultransform werden in einem weiteren Schritt
+                                    erfragt.</p>
+                            </div>
+                        </div>
+                        <div class="pt-2 border-top">
+                            <div class="d-flex">
+                                <button type="submit" id="back" name="back" class="btn-primary btn px-grid">Zurück
+                                </button>
+                                <button type="submit" id="save" name="save" class="btn-bearer btn ml-auto px-grid">
+                                    Weiter
+                                </button>
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    {% elseif step == 3 %}
+                        {{ form_start(form, {'action': path("school_authority_register", {step:3}), 'attr': {'novalidate': 'novalidate'}}) }}
+                        <div class="row">
+                            <div class="col-8">
+                                {{ form_widget(form) }}
+                            </div>
+                            <div class="col">
+                                <b>Hinweis:</b>
+                                <p>Benennen Sie hier den/die Ansprechpartner:in Ihres Schulträgers, über den/die die
+                                    Kommunikation zu Schultransform laufen soll. Beachten Sie, dass an diese angegebene
+                                    E-Mail-Adresse auch die Bestätigungslinks zur vollständigen Aktivierung gesendet
+                                    werden.</p>
+                            </div>
+                        </div>
+
+                        <div class="pt-2 border-top">
+                            <div class="d-flex">
+                                <button type="submit" id="back" name="back" class="btn-primary btn px-grid">Zurück
+                                </button>
+                                <button type="submit" id="save" name="save" class="btn-bearer btn ml-auto px-grid">
+                                    Weiter
+                                </button>
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    {% elseif step == 4 %}
+                        <div class="row">
+                            <div class="col">
+                                <b class="d-block mb-1 color-f">Schulträger:</b>
+                                {{ schoolAuthority.name }}<br/>
+                                <div class="small mt-1 color-f">Adresse</div>
+                                {{ schoolAuthority.address.street }}<br/>
+                                {{ schoolAuthority.address.postalcode }} {{ schoolAuthority.address.city }}<br/>
+                                {% if schoolAuthority.address.country %}{{ schoolAuthority.address.country }}<br/>{% endif %}
+                                <div class="small mt-1 color-f">Kontakt</div>
+                                {% if schoolAuthority.phoneNumber %}<i
+                                        class="fad fa-phone-alt color-f mr-1"></i> {{ schoolAuthority.phoneNumber }}
+                                    <br/>{% endif %}
+                                {% if schoolAuthority.faxNumber %}<i
+                                        class="fad fa-fax color-f mr-1"></i> {{ schoolAuthority.faxNumber }}
+                                    <br/>{% endif %}
+                                {% if schoolAuthority.emailAddress %}<i
+                                        class="fad fa-envelope-open-text color-f mr-1"></i> {{ schoolAuthority.emailAddress }}
+                                    <br/>{% endif %}
+                                {% if schoolAuthority.contactPerson %}<i
+                                        class="fad fa-envelope-open-text color-f mr-1"></i> {{ schoolAuthority.contactPerson }}
+                                    <br/>{% endif %}
+                            </div>
+                            <div class="col">
+                            </div>
+                        </div>
+                        <div class="row mt-grid">
+                            <div class="col">
+                                <b class="mb-1 d-block color-f">Account:</b>
+                                <i class="fad fa-user color-f mr-1"></i> {{ user.salutation }} {{ user.firstName }} {{ user.lastName }}
+                                <br/>
+                                <i class="fad fa-envelope-open-text color-f mr-1"></i> {{ user.email }}<br/>
+                            </div>
+                            <div class="col"></div>
+                        </div>
+
+
+                        <b class="mb-1 mt-grid d-block color-f">Nutzungsbedingungen</b>
+                        {{ form_start(form, {'action': path("school_authority_register", {step:4}), 'attr': {'novalidate': 'novalidate'}}) }}
+                        <div class="mb-grid">
+                            {{ form_widget(form.dsgvo) }}
+                        </div>
+                        <div class="row pt-2 border-top">
+                            <div class="col d-flex">
+                                <button type="submit" id="back" name="back" class="btn-primary btn px-grid">Zurück
+                                </button>
+                                <button type="submit" id="save" name="save" class="btn-bearer btn ml-auto px-grid">
+                                    Weiter
+                                </button>
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

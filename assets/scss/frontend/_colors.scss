@@ -1,0 +1,89 @@
+@each $key, $value in $cms-colors {
+  .c-#{$key} .color-default,
+  .color-#{$key} {
+    color: $value !important;
+  }
+
+
+
+  .c-#{$key} .bgcolor-default,
+  .bgcolor-#{$key} {
+    background-color: $value !important;
+  }
+
+  .c-#{$key} .border-default,
+  .border-#{$key} {
+    border: 1px solid;
+    border-color: $value !important;
+  }
+
+  .c-#{$key} .border-color-default,
+  .border-color-#{$key} {
+    border-color: $value !important;
+  }
+
+
+
+  .icon-color-style-#{$key}{
+    &:before{
+      color: map-get($cms-sub-colors, $key) !important;
+    }
+
+  }
+
+  .color-style-force-#{$key} {
+    color: map-get($cms-sub-colors, $key) !important;
+    background-color: $value !important;;
+
+    &:hover {
+      color: lighten(map-get($cms-sub-colors, $key), 10%) !important;;
+      background-color: darken($value, 5%) !important;;
+    }
+  }
+
+
+  .c-#{$key} .color-style-default,
+  .color-style-#{$key} {
+    color: map-get($cms-sub-colors, $key);
+    background-color: $value;
+
+    &:hover {
+      color: lighten(map-get($cms-sub-colors, $key), 10%);
+      background-color: darken($value, 5%);
+    }
+
+
+  }
+  .color-style-dark-#{$key} {
+    color: map-get($cms-sub-colors, $key);
+    background-color: darken($value, 5%) !important;
+  }
+}
+
+
+@each $key, $value in $category-colors {
+
+  .category-#{$key}{
+    color: map-get($category-sub-colors , $key) !important;
+    background-color: map-get($category-colors, $key) !important;
+  }
+
+  .category-color-#{$key}{
+    color: map-get($category-colors, $key) !important;
+  }
+  .bg-category-#{$key}{
+    background-color: map-get($category-colors, $key) !important;
+  }
+  .color-category-#{$key}{
+    color: map-get($category-sub-colors , $key) !important;
+  }
+  .border-category-#{$key}{
+    border-width: 1px;
+    border-style: solid;
+    border-color: map-get($category-colors, $key) !important;
+  }
+}
+
+.light-subtitle-color{
+  color:$dark-icon-color;
+}

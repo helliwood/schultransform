@@ -1,0 +1,48 @@
+{% if results | default(null) %}
+    <div class="tr-bg-color-gray-200 px-2 pt-2 pb-0">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 mx-2 mt-2 bg-white">
+        {% for index,result in results %}
+                <div class="t-questionnaire-charts-wrapper pb-3">
+                <result-chart-gauge :chart-height="280" chart-value="{{ result.value }}"
+                                    the-url=""
+                                    tick-color="#666"
+                                    chart-color="{{ result.categoryColor }}">
+                </result-chart-gauge>
+                <div class="text-center">{{ result.questionnaireName }}<br>
+                    <span class="tr-small-2">
+                        <span>Stand: {{ result.creationDate | date("d.m.Y") }}</span>
+                         |
+                        <b>{{ result.users }}</b> Lehrkräfte
+                    </span>
+                    {#                            <span class="small-text">{{ avrg.detail|raw }}</span>/ #}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    </div>
+
+    <div class="c-{{ category.id }}">
+        <div class="tr-category-bg tr-border-radius-bottom h-100 tr-small-1">
+            {#    Number of questionnaires not filled out        #}
+            <p class="p-2 text-white">
+                {% if open is not null %}
+                    {% if open=="1" %}
+                        {{ "teacherPotentialQuestionnairesDone"|trans({ '%categoryName%': category.name,'%numberQuestionnairesDone%': (open),'%numberQuestionnairesTotal%':  results | length,'%plural%': 'ist'}, "dashboard")| raw }}
+                    {% else %}
+                        {{ "teacherPotentialTextUnderCharts"|trans({ '%categoryName%': category.name,'%numberQuestionnairesDone%': numberQuestionnairesDone,'%numberQuestionnairesTotal%':  questionairsInCat,'%plural%': 'sind'}, "dashboard")| raw }}
+                    {% endif %}
+                {% endif %}
+                <a class="d-inline" href="{{ path('dashboard_teacher_category_overview', {category:category.id}) }}">
+                    Weitermachen
+                </a>
+            </p>
+            <dashboard-modal :data="{{ questionairs[category.id] | json_encode }}"
+                             :id="'modal-cat'+ {{ category.id }}"
+                             :category="{{ category.id }}"
+                             :intro="'{{ "questionairModalIntro"|trans({"%catname%": category.name }, "dashboard")| raw }}'"
+                             :title="'{{ "questionairModalTitle"|trans({"%catname%": category.name }, "dashboard")| raw }}'"
+                             modal-component-name="teacherCategory"></dashboard-modal>
+        </div>
+    </div>
+
+{% endif %}

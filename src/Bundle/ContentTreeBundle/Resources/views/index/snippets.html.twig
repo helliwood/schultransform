@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Snippets</h1>
+    <div class="row">
+        <div class="col">
+            <div class="panel">
+                <data-table
+                        sort-by="position"
+                        :sort-desc="false"
+                        :fields="[
+                    {key: 'id', label: 'Id', sortable: true},
+                    {key: 'name', label: 'Name', sortable: true},
+                    {key: 'originalName', label: 'Orig.-Name', sortable: true},
+                    {key: 'groups', label: 'Gruppen', sortable: true,
+                      formatter: (value, key, item) => {
+                        return value.join(', ');
+                      }
+                    },
+                    {key: 'uses', label: 'Nutzung', sortable: true},
+                    {key: 'actions', label: 'Optionen', sortable: false, class:'options'}
+                ]">
+                    <template v-slot:cell(name)="{row}">
+                        <strong>{{ '{{' }}row.item.name{{ '}}' }} <span v-if="row.item.form"
+                                                                        class="badge badge-primary">Form</span></strong><br/>
+                        <span class="text-muted small">{{ '{{' }}row.item.file{{ '}}' }}</span>
+                    </template>
+                    <template v-slot:cell(actions)="{row, callAndRefresh}">
+                        <b-button variant="primary" size="sm" :href="'/Backend/ContentTree/edit-snippet/'+row.item.id" class="mr-2">
+                            Bearbeiten
+                        </b-button>
+                    </template>
+                </data-table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

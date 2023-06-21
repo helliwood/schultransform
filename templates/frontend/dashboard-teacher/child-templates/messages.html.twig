@@ -1,0 +1,30 @@
+{# is the user has a linked school #}
+<div class="d-flex float-right
+            justify-content-between
+            position-absolute t-dashboard-user-message mx-2 mx-md-0">
+    {# has the user a linked school #}
+    {% if user.school | default(null) %}
+        <p>
+            <b-link class="tr-color-black-100 tr-text-decoration" v-b-modal.modal-profil>
+                {% trans  from 'dashboard' %}connectedToSchool{% endtrans %}
+            </b-link>
+        </p>
+        <div v-b-modal.modal-profil class="position-relative h-100">
+            <i class="fad fa-school ml-1  school-color tr-icon-size-1"></i>
+            <span class="tr-times-mark"></span>
+        </div>
+    {% else %}
+        <p>
+            <b-link class="tr-text-decoration tr-color-black-100" v-b-modal.modal-profil>
+                {% trans  from 'dashboard' %}notConnectedToSchool{% endtrans %}
+            </b-link>
+        </p>
+        <b-link v-b-modal.modal-profil>
+            <div class="position-relative mr-2">
+                <i class="fad fa-school ml-2 school-color tr-icon-size-1"></i>
+                <span class="tr-exclamation-mark"></span>
+            </div>
+        </b-link>
+    {% endif %}
+
+</div>

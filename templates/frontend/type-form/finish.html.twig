@@ -1,0 +1,13 @@
+{% extends 'frontend/pure.html.twig' %}
+
+{% block body %}{% endblock %}
+
+{% block javascripts %}
+    <script>
+        console.log("top.postMessage");
+        parent.postMessage({
+            "op": "frame-finish",
+            "id": "{{ id }}",
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,7 @@
+$theme-colors: () !default;
+$theme-colors: map-merge(
+      (
+              "glossary-gray": #2c2c2c,
+      ),
+      $theme-colors
+);

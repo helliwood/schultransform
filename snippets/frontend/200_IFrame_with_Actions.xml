@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:template id="200"
+             name="Eingabe | IFrame mit dynamischen Inhalten"
+             groups="content"
+             form="true"
+             xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:rs="http://helliwood.de"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://helliwood.de ./../rs_schema.xsd">
+    <rs:select label="TypeForm Code" id="content" display="false">
+        <rs:option value="/kontakt-form">Kontaktformular</rs:option>
+        <rs:option value="/registrierungs-form">Anmeldung Dialogforum</rs:option>
+        <rs:option value="/results-list">Ergebnisse</rs:option>
+    </rs:select>
+    <iframe height="100%"
+            width="100%"
+            data-qa="iframe"
+            id="dynamic-iframe"
+            style="border: 0px; height: 0px;">
+        <rs:attribute name="src" action="append" value="$content"/>
+    </iframe>
+    <script type="application/javascript">
+        (function () {
+            window.addEventListener('message', function (event) {
+                if (event.data.resizeIframe) {
+                    document.getElementById('dynamic-iframe').style.height = event.data.resizeIframe + "px";
+                }
+            }, false);
+        })();
+    </script>
+</rs:template>

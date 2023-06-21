@@ -1,0 +1,37 @@
+{% extends 'iframe.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid overflow-hidden mt-4">
+        {{ form_start(form) }}
+
+
+        <div class="bg-white my-2 p-3 d-flex flex-column h-100 border border-secondary shadow mb-3">
+            <div>
+                <h3>Datensatzname: {{ form.vars.value.name }}</h3>
+                <h5 class="m-0">Gespeicherte Elemente</h5></div>
+           <div>
+               {{ form_widget(form.save) }}
+           </div>
+        </div>
+        <div>
+            {# the data-index attribute is required for the JavaScript code below #}
+            <ul class="items d-flex flex-column justify-content-start p-0"
+                data-index="{{ form.item|length > 0 ? form.item|last.vars.name + 1 : 0 }}"
+                data-prototype="{{ form_widget(form.item.vars.prototype)|e('html_attr') }}"
+            ></ul>
+
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        window.onload = function () {
+            top.postMessage({op: 'contentLoaded', content: 'form'}, "*");
+        }
+    </script>
+{% endblock %}

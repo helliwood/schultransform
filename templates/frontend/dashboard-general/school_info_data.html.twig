@@ -1,0 +1,95 @@
+{% if user.school | default(null) %}
+    <div class="d-flex flex-column flex-sm-row">
+        <div class="mr-3">
+            <div class="position-relative" style="font-size: 1.65rem">
+                <i class="fad fa-school school-color tr-display-4"></i>
+                <span class="tr-times-mark text-primary"></span>
+            </div>
+        </div>
+        <div>
+            <p class="tr-small-1 m-0"><strong>{{ user.school.name }}</strong>
+            </p>
+            <p class="tr-small-2">
+                {% if user.school and(user.school.getMainUser.registrationDate) %}
+                    <span>Mitglied seit: {{ user.school.getMainUser.registrationDate |date("d.m.Y") }}</span>
+                {% endif %}
+                {% if user.school and(user.school.getMainUser.registrationDate) and user.school.confirmed %}
+                    /
+                {% endif %}
+                {% if user.school.confirmed %}
+                    <span class="text-primary">verifiziert</span>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    <div class="my-2">
+        {% if user.getUserType()=="SCHOOL" %}
+            <p class="tr-small-1">{% trans  from 'dashboard' %}SchoolHintsAndContact{% endtrans %}</p>
+        {% else %}
+            <p class="tr-small-1">{% trans  from 'dashboard' %}teacherHintsAndContact{% endtrans %}</p>
+
+        {% endif %}
+
+    </div>
+{% else %}
+    <div class="d-flex flex-column flex-sm-row">
+        <div class="position-relative mr-3">
+            <i class="fad fa-school text-danger tr-display-4 mb-1 mb-sm-0"></i>
+            <span class="tr-exclamation-mark"></span>
+        </div>
+        <div>
+            <p class="tr-small-1">{% trans  from 'dashboard' %}schoolboxNoSchoolText{% endtrans %}</p>
+        </div>
+    </div>
+    <div class="w-100 my-2 ml-0 ml-sm-3">
+        <b-link v-b-modal.modal-profil class="tr-small-1 btn tr-border-rad-2 bg-white border border-danger px-3 ml-sm-4"
+        >{% trans  from 'dashboard' %}connectSchool{% endtrans %}</b-link>
+    </div>
+{% endif %}
+{% if user.school | default(null) %}
+    <div class="table-responsive-sm">
+        <table class="tr-small-1 w-100 table-striped tr-school-info-table">
+            {% if teacherNr | default(null) %}
+                <tr>
+                    <td>Anzahl der Kolleg:innen:</td>
+                    <td>{{ teacherNr }}</td>
+                </tr>
+            {% endif %}
+
+            {% if transformationIndex | default(null) %}
+                <tr>
+                    <td>Transinformations&shy;index:</td>
+                    <td>{{ transformationIndex | number_format(2, ',', '.') }}</td>
+                </tr>
+            {% endif %}
+
+            {% if user.school.schoolAuthority | default(null) %}
+                <tr>
+                    <td>Schulträger:</td>
+                    <td>{{ user.school.schoolAuthority.name }}</td>
+                </tr>
+            {% endif %}
+
+            {% if user.school.getSchoolType() | default(null) %}
+                <tr>
+                    <td>Schultyp:</td>
+                    <td>{{ user.school.getSchoolType() }}</td>
+                </tr>
+            {% endif %}
+            <!--
+                        <tr>
+                            <td>Netzwerk:</td>
+                            <td></td>
+                        </tr>
+                        -->
+        </table>
+    </div>
+    {% if app.user.getUserType() is same as 'SCHOOL' %}
+        <div>
+            <a href="{{ path('user_edit_school') }}">
+                <span>{% trans  from 'dashboard' %}editSchool{% endtrans %}</span>
+                <i class="fad fa-edit"></i>
+            </a>
+        </div>
+    {% endif %}
+{% endif %}

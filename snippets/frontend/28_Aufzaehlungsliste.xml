@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:template id="28"
+             name="Content | Aufzählungsliste"
+             groups="content"
+             xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:rs="http://helliwood.de"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://helliwood.de ./../rs_schema.xsd">
+    <rs:select id="type" label="Typ" display="false" placeholder="Bitte wählen">
+        <rs:option value="UL">Ungeordnete Liste</rs:option>
+        <rs:option value="OL">Geordnete Liste</rs:option>
+    </rs:select>
+    <rs:if condition="$title!=''">
+        <h6 class="h4 pb-1 pt-3">
+            <rs:text id="title" label="Titel"/>
+        </h6>
+    </rs:if>
+    <rs:if condition="$type=='UL'">
+        <rs:then>
+            <![CDATA[<ul>]]>
+        </rs:then>
+        <rs:else>
+            <![CDATA[<ol>]]>
+        </rs:else>
+    </rs:if>
+    <rs:for id="items" label="Einträge">
+        <li>
+            <rs:textarea id="item" label="Eintrag"></rs:textarea>
+        </li>
+    </rs:for>
+    <rs:if condition="$type=='UL'">
+        <rs:then>
+            <![CDATA[</ul>]]>
+        </rs:then>
+        <rs:else>
+            <![CDATA[</ol>]]>
+        </rs:else>
+    </rs:if>
+</rs:template>

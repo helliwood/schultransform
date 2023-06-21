@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            <div class="panel">
+                <h2>Glossar</h2>
+                <glossary-table :items-per-page="{{ itemsPerPage }}"></glossary-table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

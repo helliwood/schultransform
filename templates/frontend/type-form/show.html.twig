@@ -1,0 +1,15 @@
+{% extends 'frontend/iframe_postmsg.html.twig' %}
+
+{% block body %}
+    {% include 'frontend/index/typeformframe.html.twig' with {'formcode': formId} only %}
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        top.postMessage({
+            "op": "change",
+            "label": "{{ app.user.getDisplayName() }}",
+            "url": "{{ path("user_success") }}"
+        });
+    </script>
+{% endblock %}

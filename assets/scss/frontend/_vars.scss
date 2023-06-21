@@ -1,0 +1,193 @@
+
+
+
+$breakpoint-mobil-style: "md";
+
+//Colors
+$body-color: #000000;
+$fe_border-color:#b3b3b3;
+$fe_border-color-light:#d7d7d7;
+$dark-icon-color: #606060;
+
+
+
+$cms-colors: (
+        a: #006292,
+        b: #899e0b,
+        c: #cb0a61,
+        d: #f46403,
+        e: #005238,
+        f: #5d0a4e,
+        g: #9f7e00,
+        h: #0f968a,
+        i: #6b5876,
+        j: #798ea4,
+        k: #c34959,
+        l: #e5e5e5,
+        l2: #909090,
+        m: #f2f2f2,
+        n: #f8f8f8,
+        o: #0f968a,
+        p: #6b5876,
+        q: #c24858
+);
+
+
+$theme-colors: (
+      "primary":    map-get($cms-colors, 'a'),
+      "secondary":  map-get($cms-colors, 'b'),
+      "success":    map-get($cms-colors, 'b'),
+      "info":       map-get($cms-colors, 'h'),
+      "warning":    map-get($cms-colors, 'c'),
+      "danger":     #c34959,
+      "light":      map-get($cms-colors, 'j'),
+      "dark":       map-get($cms-colors, 'f'),
+      "lightgray":  map-get($cms-colors, 'l2'),
+      "school":  map-get($cms-colors, 'o'),
+      "bearer":  map-get($cms-colors, 'p'),
+      "white": #fff
+);
+
+
+$cms-sub-colors: (
+        a: #FFFFFF,
+        b: #FFFFFF,
+        c: #FFFFFF,
+        d: #FFFFFF,
+        e: #FFFFFF,
+        f: #FFFFFF,
+        g: #FFFFFF,
+        h: #FFFFFF, //  graynormal
+        i: #FFFFFF, //  green
+        j: #FFFFFF, //  lila
+        k: #FFFFFF, //  darklila
+        l: #000000, //darker gray
+        l2: #000000, //darker gray
+        m: #000000,  //light  gray
+        n: #000000,
+        o: #FFFFFF,
+        p: #FFFFFF,
+        q: #FFFFFF
+);
+
+
+
+$theme-color:map-get($cms-colors, 'a');
+$light-bg-color:map-get($cms-colors, 'n');
+$main-bg-color:map-get($cms-colors, 'm');
+$dark-bg-color:map-get($cms-colors, 'l');
+
+
+//Bootstrap and Helper vars
+$grid-gutter-width: 25px;
+$grid-gutter-halfwidth: $grid-gutter-width/2;
+$grid-gutter-doublewidth: $grid-gutter-width*2;
+$positioning-space: $grid-gutter-width/4;
+$font-big-gutter: 2.5rem;
+$normal-font-size: 1.6rem;
+$normal-font-size-mobile: 1rem;
+$headings-font-size-mobile: 1.4rem;
+$normal-border-radius: 10px;
+
+$sb-width: $grid-gutter-width*3;
+$spacer: $grid-gutter-width;
+
+
+$spacers: (
+        0: 0,
+        1: ($spacer * .25),
+        2: ($spacer * .5),
+        3: $spacer,
+        4: ($spacer * 1.5),
+        5: ($spacer * 3),
+        grid: $spacer,
+        grid2: ($spacer * 2),
+        grid3: ($spacer * 3),
+        grid4: ($spacer * 4)
+);
+
+$container-max-widths: (
+        sm: 540px,
+        md: 720px,
+        lg: 960px,
+        xl: 1200px
+);
+
+
+  //deactivate round borders
+$border-radius:     0;
+$border-radius-lg:  0;
+$border-radius-sm:  0;
+
+
+
+$btn-border-radius:           $border-radius ;
+$btn-border-radius-lg:        $border-radius-lg ;
+$btn-border-radius-sm:        $border-radius-sm ;
+
+
+
+//FONTS
+$font-size-base:              1rem !default; // Assumes the browser default, typically `16px`
+$h1-font-size:                $font-size-base * 2.5 !default;
+$h2-font-size:                $font-size-base * 1.8 !default;
+$h3-font-size:                $font-size-base * 1.7 !default;
+$h4-font-size:                $font-size-base * 1.5 !default;
+$h5-font-size:                $font-size-base * 1.25 !default;
+$h6-font-size:                $font-size-base !default;
+
+
+//Breadcrump
+$breadcrumb-bg: transparent;
+$breadcrumb-item-padding: $grid-gutter-halfwidth/2;
+$breadcrumb-padding-y: 0;
+$breadcrumb-padding-x: 0;
+$breadcrumb-margin-bottom: 0;
+
+
+//category colors questionnaire component
+$category-colors :(
+        1: #899e0b,  /* Vision und Ziele */
+        2: #005238,  /* Leadership */
+        3: #f46403,  /* Lehren und Lernen */
+        4: #cb0a61,  /* Personalentwicklung */
+        5: #5d0a4e,  /* Ausstattung & Support */
+        6: #9f7e00,  /* Lernräume */
+);
+
+$category-sub-colors :(
+        1: #fff,  /* Vision und Ziele */
+        2: #fff,  /* Leadership */
+        3: #fff,  /* Lehren und Lernen */
+        4: #fff,  /* Personalentwicklung */
+        5: #fff,  /* Ausstattung & Support */
+        6: #fff,  /* Lernräume */
+);
+
+//TODO: nach Rücksprache mit Thomas Farben oben integrieren und via //background-color:  map-get($cms-colors, 'a');;
+.teacher-bg-color{
+  background-color: #0e9488;
+}
+.teacher-color{
+  color: #0e9488;
+}
+.school-bg-color {
+  background-color: #c24858;
+  &.btn-primary,&.btn{
+    background-color: #c24858 !important;
+    color: white;
+  }
+}
+.school-color,
+a.school-color{
+  color: #c24858;
+}
+.school_authority-bg-color-bri {
+  background-color:  rgba(0,0,0,0.5) !important;
+}
+.school_authority-bg-color {
+  background-color:  map-get($cms-colors, 'f');
+}
+.school_authority-color {
+  color:  map-get($cms-colors, 'f');
+}

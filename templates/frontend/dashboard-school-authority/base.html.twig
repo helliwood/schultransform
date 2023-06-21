@@ -1,0 +1,24 @@
+{% extends 'frontend/public.html.twig' %}
+
+{% block body %}
+    <div class="col p-0 school-authority-dashboard position-relative {{ cssClassWrapper | default('') }}">
+        {% if user.schoolAuthority | default(null)  %}
+            {% block school_authority_messages %}
+                {# User messages #}
+                {% include "frontend/dashboard-school-authority/child-templates/messages.html.twig" %}
+            {% endblock %}
+
+            {% block school_authority_header %}
+
+            {% endblock %}
+
+            {% block school_authority_content %}
+
+            {% endblock %}
+
+            {% block school_authority_footer %}
+
+            {% endblock %}
+        {% endif %}
+    </div>
+{% endblock %}

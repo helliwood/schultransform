@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ questionnaire.name }}</h1>
+    <div class="row">
+        <div class="col">
+            <div class="panel">
+                {% for type in schoolTypes %}
+                    <a href="?schoolType={{ type }}"
+                       class="btn {% if schoolType == type %}btn-secondary{% else %}btn-primary{% endif %} mr-2">{{ type }}</a>
+                {% endfor %}
+                <hr/>
+
+                {% for group in questionnaire.questionGroups %}
+                    <h3>{{ group.name }}</h3>
+                    <p>{{ group.description }}</p>
+                    {% for question in group.questions %}
+                        <h5>{{ question.title }}</h5>
+                        <p>Typ: <strong>{{ question.type }}</strong>
+                            {% if question.type == 'multiple_choice' and question.properties.allow_multiple_selection %}(Mehrfachauswahl){% endif %}
+                        </p>
+                        <p>{{ question.question }}</p>
+                        {% if question.type == 'multiple_choice' %}
+                            <ol type="A">
+                                {% for choice in question.choices %}
+                                    <li>{{ choice.choice }}
+                                        (<strong>{{ choice.answers.count }}/{{ questionnaire.results.count }}
+                                            Antworten</strong>
+                                        {{ choice.answers.count ? choice.answers.count / questionnaire.results.count * 100 : 0 }}
+                                        %)
+                                    </li>
+                                {% endfor %}
+                            </ol>
+                        {% elseif question.type == 'opinion_scale' %}
+                            <ul>
+                                {% for stat in question.stats %}
+                                    <li>{{ stat.value }} (<strong>{{ stat.count }} Antworten</strong>
+                                        {{ stat.count / questionnaire.results.count * 100 }}%)
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            {{ question.answers.count }} Antworten
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

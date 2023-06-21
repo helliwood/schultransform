@@ -1,0 +1,8 @@
+<script>
+    {% if email | default(null) %}
+    let email = '{{ email }}';
+    top.postMessage({op: 'closeFrame', email: email}, "*");
+    {% else %}
+    top.postMessage({op: 'closeFrame'}, "*");
+    {% endif %}
+    </script>

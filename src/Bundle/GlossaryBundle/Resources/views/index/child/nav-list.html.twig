@@ -1,0 +1,14 @@
+<div class="d-flex flex-wrap w-100">
+    {% for letter in letters %}
+            <div>
+                    <b-button size="sm"
+                              :disabled="{% if letter.numberOfWords < 1 %}true{% else %} false{% endif %}"
+                       href="{% if letter.numberOfWords > 0 %}  {{ path(path,{'letter':letter.value} ) }}{% endif %}"
+                       class="btn btn-secondary mr-1{% if letter.numberOfWords < 1 %} bg-light {% else %} bg-info{% endif %}"
+                    >
+                            {{ letter.display }}
+                    </b-button>
+            </div>
+
+    {% endfor %}
+</div>

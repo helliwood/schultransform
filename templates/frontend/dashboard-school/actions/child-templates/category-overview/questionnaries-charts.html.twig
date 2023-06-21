@@ -1,0 +1,45 @@
+{% if results | default(null) %}
+    <div class="tr-bg-color-gray-200 px-2 pt-2 pb-0">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 mx-2 mt-2 bg-white">
+            {% for index,result in results %}
+                <div class="t-questionnaire-charts-wrapper pb-3">
+                    <result-chart-gauge :chart-height="280" chart-value="{{ result.value }}"
+                                        the-url=""
+                                        tick-color="#666"
+                                        chart-color="{{ result.categoryColor }}">
+                    </result-chart-gauge>
+                    <div class="text-center"
+                         style="z-index: 9">{{ result.questionnaireName }}<br>
+                        <span class="small-text">
+                        <span>Stand: {{ result.creationDate | date("d.m.Y") }}</span>
+                        <span class="mx-1">|</span>
+                        <a href="{{ result.urlQuestionnaire }}">jetzt wiederholen</a>
+                    </span>
+                        {#                            <span class="small-text">{{ avrg.detail|raw }}</span>/ #}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="c-{{ category.id }}">
+        <div class="tr-category-bg tr-border-radius-bottom h-100 tr-small-1">
+            {#    Number of questionnaires not filled out        #}
+
+            <p class="p-2 text-white">
+                {{ "teacherQuestionairsNotCompleted"|trans({'%numberQuestionnairesNotCompleted%': numberQuestionnairesNotCompleted,'%categoryname%': category.name}, "dashboard")| raw  }}
+
+
+                <b-link v-b-modal.modal-cat{{ category.id }}
+                        class="d-inline">
+                    {% trans  from 'dashboard' %}proceed{% endtrans %}
+                </b-link>
+            </p>
+            <dashboard-modal :data="{{ questionairs[category.id] | json_encode }}"
+                             :id="'modal-cat'+ {{ category.id }}"
+                             :category="{{ category.id }}"
+                             modal-component-name="teacherCategory"></dashboard-modal>
+        </div>
+    </div>
+
+{% endif %}

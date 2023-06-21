@@ -1,0 +1,49 @@
+{% extends 'frontend/dashboard-teacher/base.html.twig' %}
+
+    {% block teacher_header %}
+        {# Account data #}
+        {% include "frontend/dashboard-teacher/actions/child-templates/category-overview/account.html.twig" %}
+
+    {% endblock %}
+
+    {% block teacher_content %}
+        {# hr & title #}
+        <div class="mt-3 mb-2 py-1 tr-line">
+            <p>{% trans  from 'dashboard' %}teacherDetailedResults{% endtrans %}</p>
+        </div>
+
+        {# charts by questionnaire #}
+        <div class="m-0">
+            {% include "frontend/dashboard-teacher/actions/child-templates/category-overview/questionnaries-charts.html.twig" %}
+        </div>
+
+        {# hr & title #}
+        <div class="mt-3 mb-2 py-1 tr-line-primary d-flex justify-content-between">
+            <p class="m-0">{% trans  from 'dashboard' %}teacherOpenPotential{% endtrans %}</p>
+            <i class="fad fa-arrow-up tr-rotate-45 float-right text-primary tr-text-grow-1"></i>
+        </div>
+
+        {# Potential analysis #}
+        {% include "frontend/dashboard-teacher/actions/child-templates/category-overview/potential-analysis.html.twig" %}
+
+        {# hr & title #}
+        <div class="mt-3 mb-2 py-1 tr-line">
+            <p>{% trans  from 'dashboard' %}documentationAndMats{% endtrans %}</p>
+        </div>
+
+        {# Dokumentation & Materialien #}
+        {% include "frontend/dashboard-teacher/actions/child-templates/category-overview/documentation-and-materials.html.twig" %}
+
+    {% endblock %}
+
+    {% block teacher_footer %}
+        {# hr & title #}
+        <div class="mt-3 mb-2 py-1 tr-line d-flex justify-content-between">
+            <p class="m-0">{% trans  from 'dashboard' %}hintsAndContact{% endtrans %}</p>
+            <i class="fad fa-arrow-up tr-rotate-45 float-right tr-text-grow-1"></i>
+        </div>
+
+        {# School info & more #}
+        {% include "frontend/dashboard-teacher/actions/child-templates/category-overview/additional-information.html.twig" %}
+
+    {% endblock %}

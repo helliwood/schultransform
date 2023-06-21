@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:template id="122"
+             name="Eingabe | Fragebogen Leseansicht"
+             groups="content"
+             xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:rs="http://helliwood.de"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://helliwood.de ./../rs_schema.xsd">
+    <rs:questionnaire-id id="questionnaireId" display="false"></rs:questionnaire-id>
+    <rs:user check="hasUser" role="ROLE_SCHOOL_AUTHORITY">
+        <rs:questionnaire questionnaireId="$questionnaireId"></rs:questionnaire>
+    </rs:user>
+</rs:template>

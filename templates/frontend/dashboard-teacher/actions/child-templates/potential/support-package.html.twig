@@ -1,0 +1,121 @@
+<div class="row c-{{ category.id }}">
+    <div class="w-100 tr-bg-color-gray-200 tr-border-radius-bottom mx-2">
+        <div class="col-12 no-gutters p-0">
+            <h5 class="tr-bg-color-gray-300 text-white p-2 my-0">Ihre Stärken</h5>
+        </div>
+
+        <div class="col-12 mt-2 no-gutters p-0 mb-2">
+            <h5 class="bg-primary text-white p-2 my-1">Entwicklungspotenziale</h5>
+        </div>
+        {% if recommendations | default(null) %}
+        {#  Questions loop minus equal 4  #}
+        {% for key,recommendation in recommendations %}
+            <div class="col-12">
+                {#            <h5 class="my-1"><b>{{ key }}</b></h5> #}
+                {% for question in recommendation %}
+                    <div class="mb-2 mx-2 bg-white tr-border-radius-bottom tr-border-base tr-small-1">
+                        <h5 data-toggle="collapse"
+                            data-target="#question_{{ question.idDropdown }}"
+                            aria-expanded="true"
+                            aria-controls="question_{{ question.idDropdown }}"
+                            class="btn tr-border-y p-2 m-0 d-flex justify-content-between tr-cat-color t-potential-h5 collapsed">
+                            <span class="tr-text-grow-1">{{ question.title }}</span>
+                            <span class="mr-4"><span class="tr-small-1 mr-2">Mehr erfahren</span><i
+                                        class="tr-display-4 fad fa-chevron-down colla-indicator mx-3"></i></span>
+                        </h5>
+                        {% if question.description %}
+                            <div class="tr-small-1 m-0 p-2">
+                                <p><strong>Bedeutung für den Transformationsprozess</strong></p>
+                                <p>{{ question.description|markdown }}</p>
+                            </div>
+                        {% endif %}
+                        <div class="m-0 p-2 collapse tr-small-1" id="question_{{ question.idDropdown }}">
+
+                            {% if question.implementation %}
+                                <p><strong>Umsetzung</strong></p>
+                                <p>{{ question.implementation|markdown }}</p>
+                            {% endif %}
+
+
+                            {% if question.tips %}
+                                <p class="mb-1"><strong>Tipps für Schulentwicklungsteams</strong></p>
+                                <p>{{ question.tips|markdown }}</p>
+                            {% endif %}
+
+                            {% if question.tipsSchoolManagement %}
+                                <p><strong>Tipps für Schulleitungen</strong></p>
+                                {{ question.tipsSchoolManagement|markdown }}
+                            {% endif %}
+
+                            {% if question.examples %}
+                                <p><strong>Beispiele</strong></p>
+                                <p>{{ question.examples|markdown }}</p>
+                            {% endif %}
+
+                            {% if question.additionalInformation %}
+                                <p><strong>Weiterführende Informationen</strong></p>
+                                {{ question.additionalInformation|markdown }}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                {% endfor %}
+            </div>
+        {% endfor %}
+        {% endif %}
+        <div class="col-12 mt-2 no-gutters p-0">
+<!--            <div class="d-flex flex-column flex-md-row pt-3 px-2 tr-bg-color-gray-300">
+                <div>
+                    <div class="px-4 d-flex flex-column justify-content-between mb-2">
+                        <div class="d-flex mb-1">
+                            <div class="c-1"><a href="#" target="_blank " class="tr-small pr-3"><i
+                                            class="fad fa-download tr-cat-color"></i></a></div>
+                            <div><p class="tr-small-1 m-0">
+                                    <b>Materialien zum Handlungsfeld von​
+                                        unserem Partner | Version 1.2​</b>
+                                </p>
+                                <p class="tr-small-2">
+                                    ausgefüllt am 24.08.2022
+                                </p>
+                            </div>
+                        </div>
+                        <div>
+                            <a href="#" class="tr-small-2">
+                                Herunterladen (PDF)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="px-4 d-flex flex-column justify-content-between mb-2">
+                        <div class="d-flex mb-1">
+                            <div class="c-1">
+                                <a href="#" target="_blank " class="tr-small pr-3">
+                                    <i class="tr-cat-color tr-bg-yellow-1 px-3"></i>
+                                </a>
+                            </div>
+                            <div><p class="tr-small-1 m-0">
+                                    <b>Materialien zur Ergänzun von Schultransform | Version 1.3</b>
+                                </p>
+                                <p class="tr-small-2">
+                                    ausgefüllt am 24.08.2022
+                                </p>
+                            </div>
+                        </div>
+                        <div>
+                            <a href="#" class="tr-small-2">
+                                Herunterladen (PDF)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-primary tr-border-radius-bottom p-2">
+                <p class="tr-small-1 text-white">Im Handlungsfeld Vision & Prozesse können Sie noch x Themen bearbeiten:
+                    <b-link v-b-modal.modal-2>Weitere Personen einladen</b-link>
+                </p>
+            </div>-->
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:template id="120"
+             name="Daten | Diagramm Chart-Ergebnis Form"
+             groups="content"
+             xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:rs="http://helliwood.de"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://helliwood.de ./../rs_schema.xsd">
+
+    <div class="row row p-grid p-md-0">
+        <div class="col">
+            <rs:textarea id="text1" label="Text" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <gradient-navigation
+                    params="chart=results"
+                    show-details="true">
+
+                <div class="row pb-grid">
+                    <div class="col p-4 p-md-2">
+                        <rs:textarea id="text2" label="Text 2" />
+                    </div>
+                </div>
+
+            </gradient-navigation>
+        </div>
+    </div>
+
+    <div class="row chart-bottom-text p-grid p-md" data-d-none="">
+        <div class="col">
+            <rs:textarea id="text3" label="Text 3" />
+        </div>
+    </div>
+
+</rs:template>

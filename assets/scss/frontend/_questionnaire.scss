@@ -1,0 +1,129 @@
+/***** defining questionnaire vars ******/
+
+$q-category-1-color: #899e0b;
+$q-category-2-color: #005238;
+$q-category-3-color: #f46403;
+$q-category-4-color: #cb0a61;
+$q-category-5-color: #5d0a4e;
+$q-category-6-color: #9f7e00;
+
+$q-category-1-color-rgba-5:rgba(137, 158, 11, .5);
+$q-category-1-color-rgba-4:rgba(137, 158, 11, .4);
+$q-category-1-color-rgba-3:rgba(137, 158, 11, .3);
+$q-category-1-color-rgba-2:rgba(137, 158, 11, .2);
+
+$q-category-2-color-rgba-5:rgba(0, 82, 56, .5);
+$q-category-2-color-rgba-4:rgba(0, 82, 56, .4);
+$q-category-2-color-rgba-3:rgba(0, 82, 56, .3);
+$q-category-2-color-rgba-2:rgba(0, 82, 56, .2);
+
+$q-category-3-color-rgba-5:rgba(244, 100, 3, .5);
+$q-category-3-color-rgba-4:rgba(244, 100, 3, .4);
+$q-category-3-color-rgba-3:rgba(244, 100, 3, .3);
+$q-category-3-color-rgba-2:rgba(244, 100, 3, .2);
+
+$q-category-4-color-rgba-5:rgba(203, 10, 97, .5);
+$q-category-4-color-rgba-4:rgba(203, 10, 97, .4);
+$q-category-4-color-rgba-3:rgba(203, 10, 97, .3);
+$q-category-4-color-rgba-2:rgba(203, 10, 97, .2);
+
+$q-category-5-color-rgba-5:rgba(93, 10, 78, .5);
+$q-category-5-color-rgba-4:rgba(93, 10, 78, .4);
+$q-category-5-color-rgba-3:rgba(93, 10, 78, .3);
+$q-category-5-color-rgba-2:rgba(93, 10, 78, .2);
+
+$q-category-6-color-rgba-5:rgba(159, 126, 0, .5);
+$q-category-6-color-rgba-4:rgba(159, 126, 0, .4);
+$q-category-6-color-rgba-3:rgba(159, 126, 0, .3);
+$q-category-6-color-rgba-2:rgba(159, 126, 0, .2);
+
+
+
+
+
+
+
+$q-icon-lg : 8em;
+$q-icon-md : 5em;
+$q-icon-sm : 2.4em;
+
+$p-text-size-lg: 2em;
+$p-text-size-md: 1.5em;
+
+$q-bg-gray: #cccccc;
+$q-bg-gray-1: #b2b2b2;
+$q-bg-gray-2: #989797;
+$q-bg-gray-dark: #646464;
+$q-color-gray: #4b4b4b;
+$q-checkbox-group-disabled : #ececec;
+
+$q-right-0: 0;
+
+
+/***checkbox square size questions***/
+$q-checkbox-sq:1.4em;
+
+
+/*Navigation squares*/
+$q-nav-square-size: 20px;
+
+/**
+1 Vision und Ziele,1,#748609
+2 Leadership,2,#005238
+3 Personalentwicklung,3,#b30955
+4 Schulische Ausstattung,4,#46083b
+5 Weitere Lernorte,5,#866a00
+6 schulisches Lernen,6,#f46403
+
+**/
+
+
+
+@mixin theme-colors($q-category-number: true) {
+  @if $q-category-number == 'q-category-1' {
+    $theme-colors: (
+            "btn-secondary": #748609,
+    );
+  } @else if $q-category-number == 'q-category-2'  {
+    $theme-colors: (
+            "btn-secondary": #005238,
+    );
+  } @else if $q-category-number == 'q-category-3' {
+    $theme-colors: (
+            "btn-secondary": #b30955,
+    );
+  } @else if $q-category-number == 'q-category-4' {
+    $theme-colors: (
+            "btn-secondary": #46083b,
+    );
+  }@else if $q-category-number == 'q-category-5' {
+    $theme-colors: (
+            "btn-secondary": #46083b,
+    );
+  }@else if $q-category-number == 'q-category-6' {
+    $theme-colors: (
+            "btn-secondary": #f46403,
+    );
+  } @else {
+    @error "Unknown category class";
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

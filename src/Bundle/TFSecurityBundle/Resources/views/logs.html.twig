@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Log Files</h1>
+
+    {% if logFiles is empty %}
+        <p>No log files found.</p>
+    {% else %}
+       <div class="text-right">
+           <a href="{{ path('TFSecurity_search_logfile') }}" class="btn btn-primary">zur Suche</a>
+       </div>
+        <table cellpadding="5" cellspacing="0" class="w-100 table table-striped">
+            <thead>
+            <tr>
+                <th>Filename</th>
+                <th>Last Update</th>
+                <th>Size</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for logFile in logFiles %}
+                <tr>
+                    <td>{{ logFile.filename }}</td>
+                    <td>{{ logFile.last_update }}</td>
+                    <td>{{ logFile.size }} mb</td>
+                    <td class="text-right">
+
+                        {% if logFile.bigfile%}
+                            <a href="{{ path('TFSecurity_view_big_logfile', {'filename': logFile.filename}) }}" class="btn btn-info">große Datei ansehen</a>
+                        {% else %}
+                        <a href="{{ path('TFSecurity_view_logfile', {'filename': logFile.filename}) }}" class="btn btn-info">Ansehen</a>
+
+
+                        {% endif %}
+                        <a href="" class="btn btn-danger">löschen</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

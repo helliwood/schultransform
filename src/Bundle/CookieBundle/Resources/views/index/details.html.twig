@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            <div class="panel">
+                <div class="d-flex justify-content-end">
+                    <h5 class="text-black-50">Cookie Details</h5>
+                </div>
+                <cookie-details
+                        record-id="{{ recordId }}"
+                        app-url="{{ appUrl | default('/Backend/Cookie/') }}"
+                >
+                </cookie-details>
+            </div>
+        </div>
+    </div>
+{% endblock %}

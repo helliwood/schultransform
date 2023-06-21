@@ -1,0 +1,19 @@
+{% form_theme form _self %}
+
+{% block link_row %}
+    <div class="form-group row">
+        {{ block('form_label') }}
+        <div class="col-sm-10">
+            <snippet-link id="{{ id }}" tree-path="{{ path('content_tree_tree') }}">
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        {{ form_widget(form.children.type) }}
+                    </div>
+                    {{ form_widget(form.children.link_intern) }}
+                    {{ form_widget(form.children.link_extern) }}
+                    {{ form_errors(form.children.link_intern) }}
+                </div>
+            </snippet-link>
+        </div>
+    </div>
+{% endblock %}

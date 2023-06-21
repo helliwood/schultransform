@@ -1,0 +1,132 @@
+{# categories with questionnaires filled out #}
+{% if (strongPoints or weakPoints) | default(null) %}
+<div class="d-md-flex d-block  justify-content-between p-grid" style="background: #f2f2f2">
+    <div class="w-md-50 w-100 mr-1">
+        <div class="bg-primary">
+            <p class="p-2 text-white">{% trans  from 'dashboard' %}yourStrengths{% endtrans %}</p>
+        </div>
+        {% for questionnaire in strongPoints %}
+            <a href="{{ path('dashboard_school_potential_questionnaire', {questionnaire:questionnaire.id}) }}"
+               class="d-flex mt-1 animate">
+                <div class="bg-category-{{ questionnaire.categoryId }}"
+                     style="width: 50px;font-size: 16px;overflow:hidden;padding:3px 0;text-align:center">
+                    <i class="{{ questionnaire.icon }} text-white p-1" style="font-size: 1.6em;"></i>
+                </div>
+                <div class="w-100 d-flex ml-2 p-1 position-relative justify-content-between align-items-center  border-category-{{ questionnaire.categoryId }}"
+                     style="background-color:#fefefe;">
+                    <div class="tr-sm-w-90">
+                        {{ questionnaire.name }}
+                    </div>
+
+                    <div class="animate-icon">
+                        <i data-fa-transform="rotate-90"
+                           class="fad fa-arrow-up  category-color-{{ questionnaire.categoryId }}"
+                           style=" font-size: 1.6em;"></i>
+                    </div>
+
+                </div>
+
+            </a>
+
+        {% endfor %}
+    </div>
+
+    {% endif %}
+
+    {% if  (weakPoints or strongPoints) | default(null) %}
+    <div class="w-md-50 w-100 mr-1 mt-grid mt-md-0">
+        <div class="bg-primary">
+            <p class="p-2 text-white">Ihr Entwicklungspotenzial</p>
+        </div>
+        {% for questionnaire in weakPoints %}
+            <a href="{{ path('dashboard_school_potential_questionnaire', {questionnaire:questionnaire.id}) }}"
+               class="d-flex mt-1 animate">
+
+                <div class="bg-category-{{ questionnaire.categoryId }}"
+                     style="width: 50px;font-size: 16px;overflow:hidden;padding:3px 0;text-align:center">
+                    <i class="{{ questionnaire.icon }} text-white p-1" style="font-size: 1.6em;"></i>
+                </div>
+                <div class="w-100  position-relative d-flex ml-2 p-1 justify-content-between align-items-center border-category-{{ questionnaire.categoryId }}"
+                     style="background-color:#fefefe;">
+                    <div class="tr-sm-w-90">
+                        {{ questionnaire.name }}
+                    </div>
+
+                    <div class="animate-icon">
+                        <i class="fad fa-arrow-up category-color-{{ questionnaire.categoryId }}"
+                           style=" font-size: 1.6em;"></i>
+                    </div>
+
+                </div>
+            </a>
+
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+
+{% if (strongPoints or weakPoints) | default(null) %}
+    <div class="mt-grid">
+        <div style="background-color: #d8d8d8;padding-bottom:60px !important; " class="p-grid">
+            <p>{% trans  from 'dashboard' %}schoolPotentialFilledText{% endtrans %}
+            </p>
+        </div>
+        <b-link v-b-modal.modal-catchoose style="margin-top:-50px;font-weight: bold" class="d-flex ml-0 ml-md-grid">
+            <span class="d-block p-2 bg-primary text-white">Unterstützungs&shy;paket</span>
+            <span class="d-block p-2 tr-bg-yellow-1 tr-border-radius-right tr-text-decoration tr-color-black-100">
+                    {% trans  from 'dashboard' %}schoolOpenPotential{% endtrans %}
+            </span>
+        </b-link>
+        <div style="margin-top:-25px;"
+             class="pb-2 px-grid justify-content-between d-md-flex d-block tr-border-radius-bottom tr-bg-light-blue pt-4">
+            {% if open=="0" %}
+                <p class="d-inline-block  p-0 m-0 ">{{ "handlungsfelderDone"|trans({'%handlungsfelderOpen%': (open),'%handlugsfeldergesamt%': ges,'%plural%': 'ist'}, "dashboard")| raw }}</p>
+            {% elseif open=="1" %}
+                <p class="d-inline-block  p-0 m-0 ">{{ "handlungsfelderOpen"|trans({'%handlungsfelderOpen%': (open),'%handlugsfeldergesamt%': ges,'%plural%': 'ist'}, "dashboard")| raw }}</p>
+            {% else %}
+                <p class="d-inline-block  p-0 m-0 ">{{ "handlungsfelderOpen"|trans({'%handlungsfelderOpen%': (open),'%handlugsfeldergesamt%': ges,'%plural%': 'sind'}, "dashboard")| raw }}</p>
+            {% endif %}
+            <p class=" d-inline-block p-0 m-0">{% trans  from 'dashboard' %}yourSchoolcode{% endtrans %}
+                <b-link v-b-modal.modal-profil>
+                    <b class="tr-text-decoration tr-color-black-100">{{ user.school.code }}</b>
+                </b-link>
+            </p>
+        </div>
+    </div>
+    <!-- ⁣ -->
+    <dashboard-modal :data="{{ modalAllCategories | json_encode }}"
+                     :id="'modal-catchoose'"
+                     :texts="['starten','öffnen','']"
+                     :intro="'{% trans  from 'dashboard' %}schoolCategoryIntro{% endtrans %}'"
+                     :title="'{% trans  from 'dashboard' %}schoolCategoryTitle{% endtrans %}'"
+                     modal-component-name="SchoolCategory"></dashboard-modal>
+
+{% else %}
+    <div class="">
+        <div style="background-color: #d8d8d8;" class="pb-5 px-3 pt-3">
+            <p>
+                {% trans  from 'dashboard' %}schoolPotentialNotFilledText{% endtrans %}
+            </p>
+        </div>
+        <a target="_blank" href="{{ path('print_teacher_invitation') }}" style="margin-top:-50px;font-weight: bold"
+           class="d-flex  ml-0 ml-md-grid">
+            <span class="d-block  p-2" style="background-color:#80051c;color:white ">
+                  {% trans  from 'dashboard' %}nextSteps{% endtrans %}
+            </span>
+            <span class="d-block p-2 tr-color-black-100"
+                  style="background-color:#fec000;border-radius: 0 15px 15px 0;text-decoration: underline ">{% trans  from 'dashboard' %}inviteTeacher{% endtrans %}</span>
+        </a>
+        <div style="margin-top:-25px;background-color: #cea0a4;border-radius: 0  0 15px 15px;padding-top:40px !important;"
+             class="py-2 px-grid justify-content-between d-md-flex d-block">
+            <p class="d-inline-block p-0 m-0 ">Es sind {{ anz }} von 24 Fragebögen bearbeitet.</p>
+            <p class="d-inline-block p-0 m-0">
+                {% trans  from 'dashboard' %}yourSchoolcode{% endtrans %}
+                <b-link class="tr-text-decoration tr-color-black-100" v-b-modal.modal-profil>
+                    <b>{{ user.school.code }}</b>
+                </b-link>
+            </p>
+        </div>
+    </div>
+
+{% endif %}

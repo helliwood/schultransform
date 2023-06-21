@@ -1,0 +1,152 @@
+{% block dc_image %}/build_frontend/images_frontend/socialimage.jpg{% endblock %}
+
+{% extends 'frontend/public.html.twig' %}
+
+{% block body %}
+    <div class="color-switch col-md-8 main-bg-color mb-grid animate main-title d-flex align-items-center ">
+        <h2>Anmeldung / <span>Registrierung</span><span class="icon-box d-flex"><i data-fa-transform="rotate-90"
+                                                                                   class="fad  fa-arrow-up"></i></span>
+        </h2>
+    </div>
+    <div class="col-md-9 col-12 p-grid p-md-0 mt-0">
+        <p class="title-copy  mb-grid">
+            Datenschutz ist uns wichtig und so nutzen Sie unsere Angebote vollständig anonym. Mithilfe eines
+            individuellen Zugangscodes können Sie immer wieder auf Ihre Ergebnisse zugreifen.
+            <br/><br/>
+            Um eine Gesamtsicht der Ergebnisse Ihrer Schule zu erhalten, sollten sich Schulen registrieren und bekommen
+            einen Schulcode zur Weitergabe an alle beteiligten Lehrkräfte.
+    </div>
+
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            <i class="fad fa-exclamation-square"></i> {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('notice') %}
+        <div class="alert alert-info">
+            <i class="fad fa-exclamation-square"></i> {{ message }}
+        </div>
+    {% endfor %}
+    {# If there's any error, display it to the user #}
+    {% if error %}
+        <div class="alert alert-danger"><i
+                    class="fad fa-exclamation-square"></i> {{ error.messageKey|trans(error.messageData, 'security') }}
+        </div>
+    {% endif %}
+    <div class="row mb-grid2">
+        <div class="col-12 col-xl-6 mb-grid mb-xl-0">
+            <div class="c-7 border-wrapper">
+                <form method="post" class="h-100" id="codeForm">
+                    <div class="d-flex flex-column p-grid h-100">
+                        {# CSRF Token Input #}
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+                        <h3 class="pb-1">Für Lehrkräfte</h3>
+                        <p>
+                            Generieren Sie Ihren individuellen Zugangscode und notieren Sie sich diesen unbedingt. Im
+                            späteren Verlauf können Sie sich zudem mit Ihrer Schule verknüpfen.
+                        </p>
+                        <div class="mt-auto">
+                            <user-login :school-types="{{ schoolTypes.getSchoolTypes() | json_encode }}"
+                                        :school="{{ school | json_encode}}"
+                                        api-url="{{ path('user_api') }}"
+                                        code="{{ app.request.cookies.get('ST_CODE') }}"></user-login>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-12 col-xl-6">
+            <div class="c-10 border-wrapper">
+                <form method="post" class="h-100">
+                    <div class="d-flex flex-column p-grid h-100">
+
+                        {# CSRF Token Input #}
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+                        <h3 class="pb-1">Für Schulen</h3>
+                        <p>
+                            Registrierte Schulen erhalten einen Schulcode, den die Schulen an ihre Lehrkräfte
+                            weitergeben. Damit werden die ausgefüllten Fragebögen Ihrer Schule zugeordnet.
+                        </p>
+                        <div class="mt-auto row">
+                            <div class="col-9 d-flex flex-column">
+                                <label for="inputName" class="sr-only">E-Mail</label>
+                                <input type="textfield" name="username" id="inputName" class="form-control mb-1"
+                                       placeholder="E-Mail" required>
+                                <label for="inputPass" class="sr-only">Passwort</label>
+                                <input type="password" name="password" id="inputPass" class="form-control mb-1"
+                                       placeholder="Passwort" required>
+                                <button class="btn btn-lg school-bg-color big  mt-1" type="submit">
+                                    Login
+                                </button>
+                                <p class="pt-1">
+                                    <a class="school-color underline py-1 d-block small"
+                                       href="{{ path('user_register_school') }}">Schule registrieren</a>
+                                    <a class="school-color underline py-1 d-block small"
+                                       href="{{ path('public_user_public_reset') }}">Passwort vergessen</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="c-8 border-wrapper p-grid">
+                <form method="post" class="h-100">
+                    <h3 class="pb-1">Für Schulträger</h3>
+                    <div class="row">
+                        <div class="col-md col-12">
+                            <div class="d-flex flex-column h-100">
+
+
+                                {# CSRF Token Input #}
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+
+                                <p class="pb-grid">Die Nutzung der Fragebögen als Schulträger erfolgt mit einem verifizierten Account.
+                                    Registrieren Sie sich oder loggen Sie sich mit Ihrem Account ein.</p>
+                            </div>
+                        </div>
+                        <div class="col-md col-12">
+                            <div class="d-flex flex-column h-100">
+                                <div class="mt-auto row">
+                                    <div class="col-9 d-flex flex-column">
+                                        <label for="inputName" class="sr-only">E-Mail</label>
+                                        <input type="textfield" name="username" id="inputName" class="form-control mb-1"
+                                               placeholder="E-Mail" required>
+                                        <label for="inputPass" class="sr-only">Passwort</label>
+                                        <input type="password" name="password" id="inputPass" class="form-control mb-1"
+                                               placeholder="Passwort" required>
+                                        <button class="btn btn-lg big btn-bearer mt-1" type="submit">
+                                            Login
+                                        </button>
+                                        <p class="pt-1">
+                                            <a class="link-p py-1 d-block small"
+                                               href="{{ path('school_authority_register') }}">Zugang
+                                                für Schulträger beantragen</a>
+                                            <a class="link-p py-1 d-block small"
+                                               href="{{ path('public_user_public_reset') }}">Passwort
+                                                vergessen</a>
+                                        </p>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

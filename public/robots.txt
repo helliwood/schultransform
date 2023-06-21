@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Verzeichnis /redaktion soll nicht von * gespidert werden 
+User-agent: *
+Disallow: /Backend

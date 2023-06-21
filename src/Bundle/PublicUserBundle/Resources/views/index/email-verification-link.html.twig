@@ -1,0 +1,47 @@
+{% extends 'iframe.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid mt-2 p-5">
+        {% if data.user | default(null) %}
+            <h5>Anzahl der an den Benutzer gesendeten Erinnerungen: {{ data.user.numberOfReminders }}</h5>
+            {% if data.user.reminderEmailDate | default(null) %}
+                <p>Letzte Erinnerungsmail gesendet: <b>{{ data.user.reminderEmailDate | date() }}</b></p>
+            {% endif %}
+        {% endif %}
+        <div class="pt-4">
+            {{ form(form) }}
+        </div>
+    </div>
+
+    <div class="px-5 mx-auto">
+
+        <div>
+            {% if data.user | default(null) %}
+                {% if data.user.school | default(null) %}
+                    <h4 class="text-black-50"><i>An den Benutzer zu sendende E-Mail(Schule)</i></h4>
+                    <div class="p-4 m-auto border">
+                        {% include "mail/email_confirmation_link_school.html.twig" %}
+                    </div>
+                {% endif %}
+
+                {% if data.user.schoolAuthority | default(null) %}
+                    <h4>An den Benutzer zu sendende E-Mail(Schulträger)</h4>
+                    <div class="p-4 m-auto border">
+                        {% include "mail/email_confirmation_link_school_authority.html.twig" %}
+                    </div>
+                {% endif %}
+
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        window.onload = function () {
+            top.postMessage({op: 'contentLoaded'}, "*");
+        }
+    </script>
+{% endblock %}

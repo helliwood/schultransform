@@ -1,0 +1,26 @@
+{% extends 'frontend/public.html.twig' %}
+
+{% block body %}
+    <div class="p-0 teacher-dashboard position-relative {{ cssClassWrapper | default('') }}">
+        {% if user | default(null) %}
+
+            {% block teacher_messages %}
+                {# Messages #}
+                {% include "frontend/dashboard-teacher/child-templates/messages.html.twig" %}
+
+            {% endblock %}
+
+            {% block teacher_header %}
+
+            {% endblock %}
+
+            {% block teacher_content %}
+
+            {% endblock %}
+
+            {% block teacher_footer %}
+
+            {% endblock %}
+        {% endif %}
+    </div>
+{% endblock %}

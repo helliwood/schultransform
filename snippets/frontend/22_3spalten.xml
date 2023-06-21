@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:template id="22"
+             name="Block | Spalten 33/33/33"
+             groups="[root], marginal, content"
+             form="false"
+             xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:rs="http://helliwood.de"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://helliwood.de rs_schema.xsd">
+    <div class="row block-one-third">
+        <div class="col-md-4">
+            <rs:contentarea name="left" allowedgroups="content, marginal"></rs:contentarea>
+        </div>
+        <div class="col-md-4">
+            <rs:contentarea name="middle" allowedgroups="content, marginal"></rs:contentarea>
+        </div>
+        <div class="col-md-4">
+            <rs:contentarea name="right" allowedgroups="content, marginal"></rs:contentarea>
+        </div>
+    </div>
+</rs:template>

@@ -1,0 +1,24 @@
+{
+  "name": "trollfjord/glossary-bundle",
+  "description": "Trollfjord GlossaryBundle",
+  "license": "proprietary",
+  "keywords": [
+    "trollfjord",
+    "glossary"
+  ],
+  "homepage": "https://helliwood.de",
+  "authors": [
+    {
+      "name": "Juan Mayoral",
+      "email": "mayoral@helliwood.com"
+    }
+  ],
+  "require": {
+    "ext-dom": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Trollfjord\\Bundle\\GlossaryBundle\\": "."
+    }
+  }
+}

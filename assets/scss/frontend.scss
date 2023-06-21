@@ -1,0 +1,30 @@
+@import "frontend/vars";
+@import "frontend/fonts";
+@import "frontend/section_shemes";
+@import "~bootstrap/scss/bootstrap";
+@import '~bootstrap-vue/src/index';
+@import "frontend/general";
+@import "frontend/btn";
+@import "frontend/links";
+@import "frontend/teaser";
+@import "frontend/offset_item";
+@import "frontend/bootstrap_overload";
+@import "frontend/animate";
+@import "frontend/nav";
+@import "frontend/footer";
+@import "frontend/color_offset_item";
+@import "frontend/news_teaser";
+@import "frontend/form";
+@import "frontend/questionnaire";
+@import "frontend/dashboard";
+@import "frontend/userstatus";
+
+@import "frontend/hero";
+@import "frontend/colors";
+
+@import "~@fortawesome/fontawesome-pro/scss/fontawesome";
+@import "~@fortawesome/fontawesome-pro/scss/duotone";
+@import "~@fortawesome/fontawesome-pro/scss/_duotone-icons.scss";
+@import "~@fortawesome/fontawesome-pro/scss/brands";
+@import "~@fortawesome/fontawesome-pro/scss/regular";
+@import "~@fortawesome/fontawesome-pro/scss/solid";

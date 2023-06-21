@@ -1,0 +1,3 @@
+media_base:
+  file_path: "%kernel.project_dir%/var/data/mediabase"
+  file_path_cache: "%kernel.project_dir%/var/data/mediabase/cache"

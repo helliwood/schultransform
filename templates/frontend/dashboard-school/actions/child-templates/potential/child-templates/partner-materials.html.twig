@@ -1,0 +1,83 @@
+{% if media.categoriesIds | default(null) %}
+    {% if category.id in media.categoriesIds %}
+        <div class="tr-partner-medias w-50 tr-sm-w-100 mb-1 tr-bg-color-gray-200">
+            <div class="h-100 small tr-line-height-normal d-flex flex-column justify-content-between px-3 py-3">
+                <div class="d-flex mb-2">
+                    <div class="c-{{ category.id }} position-relative">
+                        {% if media.type | default(null) %}
+                            {% if media.type.name is same as('file') %}
+                                <b-link href="{{ path('dashboard_school_get_partner_material') }}/{{ media.id }}"
+                                        target="_blank"
+                                        class="tr-small pr-3">
+                                    <i class="fad fa-file tr-cat-color"></i>
+                                </b-link>
+                            {% else %}
+                                <b-link href="{{ media.link_set }}"
+                                        target="_blank"
+                                        class="tr-small pr-3">
+                                    <i class="fad fa-link tr-cat-color"></i>
+                                </b-link>
+                            {% endif %}
+                        {% endif %}
+
+                        <div class="position-absolute tr-partner-logo"
+                             style="background-image: url('{{ media.organization.logo }}');">
+                        </div>
+                    </div>
+                    <div class="w-100">
+                        <p class="m-0 tr-small-1">
+                            {% if media.title | default(null) %}
+                                <b>{{ media.title }}</b>
+                            {% endif %}
+                        </p>
+                        {% if media.license | default(null) %}
+                            <p class="m-0 position-relative">
+                                Art der Lizenz |
+                                {% if media.license is not same as('Keine Lizenz') %}
+                                    <b-link @click="$bvToast.show('{{ media.id }}_toast')">{{ media.license }}
+                                    </b-link>
+                                    <b-toast class="position-absolute" id="{{ media.id }}_toast"
+                                             title="{{ media.license }}"
+                                             static
+                                    >
+                                        {{ media.cclicense }}
+                                    </b-toast>
+                                {% else %}
+                                    <span>
+                                {{ media.license }}
+                            </span>
+                                {% endif %}
+                            </p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="">
+                    <div class="mt-2">
+                        {% if media.type | default(null) %}
+                            {% if media.type.name is same as('file') %}
+                                <span>Öffnen/Download:</span>
+                                <b-link href="{{ path('dashboard_school_get_partner_material') }}/{{ media.id }}"
+                                        target="_blank"
+                                        class="pr-3">
+                                    <span>{{ media.shorttitle }} <span class="tr-color-black-100">|</span> <span class="text-capitalize tr-color-black-100">{{ media.extension }}</span></span>
+                                </b-link>
+                            {% else %}
+                                <span>Öffnen/Download:</span>
+                                <b-link href="{{ media.link_set }}"
+                                        target="_blank"
+                                        class="pr-3">
+                                    <span>{{ media.shorttitle }} <span class="tr-color-black-100">|</span> <span class="text-capitalize tr-color-black-100">Link</span></span>
+                                </b-link>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <div>
+                        <p>Material von Partner:
+                            <b class="text-primary">{{ media.organization.name }}</b></p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    {% endif %}
+{% endif %}

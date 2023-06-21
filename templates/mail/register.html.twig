@@ -1,0 +1,46 @@
+{% block body %}
+    Hallo {{ data.name }},<br/>
+    <br/>
+    Sie haben sich erfolgreich angemeldet. Wir freuen uns über Ihre Teilnahme an der Veranstaltung:<br/>
+    <br/>
+    <strong>Kooperation@MINT: Schultransformation gestalten – MINT-Cluster stärken</strong><br/>
+    Donnerstag, 6. Juli 2023 | 13:00 bis 22:00 Uhr (Einlass ab 11:00 Uhr) und<br/>
+    Freitag, 7. Juli 2023 | 10:00 bis 15:15 Uhr (Einlass ab 8:00 Uhr)<br/>
+    <br/>
+    Veranstaltungsort: Bundesministerium für Bildung und Forschung (BMBF), Kapelle-Ufer 1, 10117 Berlin<br/>
+    <br/>
+    Alle Informationen & Programm finden Sie <a href="https://www.schultransform.org/zum-projekt/vernetzungsveranstaltung-2023">hier</a>.<br/>
+    <br/>
+    Name: {{ data.name }}<br/>
+    Einrichtung / Institution: {{ data.organisation }}<br/>
+    E-Mail: {{ data.email }}<br/>
+    Nachricht: <br/>{{ data.message | nl2br }}<br/><br/>
+    <hr/>
+    Wir werden uns in Kürze bei Ihnen melden und Ihnen weitere Informationen zum Programm und Details zur Veranstaltung zukommen lassen.
+    <br/><br/>
+    Sie haben uns Ihre Zustimmung gegeben, dass oben stehende Daten von uns entsprechend der Datenschutzerklärung in einem automatisierten Verfahren erhoben, gespeichert und verarbeitet werden, um Ihre Anfrage zu bearbeiten. Die Daten werden ausschließlich für die Verarbeitung der Konversation verwendet.
+    <br/><br/>
+    {% if data.allow_contact %}
+        Sie haben uns zusätzlich die Zustimmung gegeben, dass Sie das Projektbüro im Rahmen von Schultransform kontaktieren darf.
+        <br/><br/>
+    {% endif %}
+    Bei Rückfragen schreiben Sie uns gerne eine E-Mail.<br/>
+    <br/>
+    <strong>Projektbüro Schultransform</strong><br/>
+    <br/>
+    <strong>c/o Helliwood media & education im fjs e.V.</strong><br/>
+    Marchlewskistraße 27, 10243 Berlin<br/>
+    Telefon: +49 30 2938 1680<br/>
+    Telefax: +49 30 2938 1689<br/>
+    E-Mail: <a href="mailto:support@schultransform.org">support@schultransform.org</a><br/>
+    Internet: <a href="https://www.schultransform.org">https://www.schultransform.org</a><br/>
+    <br/>
+    <strong>Förderverein für Jugend und Sozialarbeit e.V. (fjs)</strong><br/>
+    Geschäftsführender Vorstand: Thomas Schmidt<br/>
+    Vereinsregisternummer: VR 11338 B, Amtsgericht Berlin-Charlottenburg<br/>
+    <a href="https://fb.tipp.fm/3938_fjs_transparenzdatenbank.htm">Transparenzdatenbank</a><br/><br/>
+
+    <strong>Gefördert durch:</strong><br/>
+    Das Forschungs- und Entwicklungsprojekt zur Entwicklung einer Plattform zur digitalen Schultransformation [SchulTransform] wird gefördert durch das Bundesministerium für Bildung und Forschung (BMBF) und wird von Helliwood media & education und dem Bündnis für Bildung gemeinsam umgesetzt.
+    <br/>
+{% endblock %}

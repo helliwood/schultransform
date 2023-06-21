@@ -1,0 +1,38 @@
+{% extends 'iframe.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid overflow-hidden mt-4">
+        <div>
+            {{ form_start(form) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.title) }}
+            {{ form_row(form.cookieDuration) }}
+            {{ form_row(form.content) }}
+            {{ form_row(form.privacylinktext) }}
+            {{ form_row(form.privacylinkpage) }}
+            {{ form_row(form.btnmainsettings) }}
+            {{ form_row(form.btnmainall) }}
+            <hr>
+            <p>Einstellungen für "Auswahl ändern"</p>
+            {{ form_row(form.btnsubsettings) }}
+            {{ form_row(form.btnsuball) }}
+            {{ form_row(form.titlesub) }}
+            {{ form_row(form.contentsub) }}
+            <br>
+            <hr>
+            {{ form_row(form.save) }}
+            {{ form_end(form) }}
+        </div>
+
+    </div>
+
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        window.onload = function () {
+            top.postMessage({op: 'contentLoaded', content: 'form'}, "*");
+        }
+    </script>
+{% endblock %}

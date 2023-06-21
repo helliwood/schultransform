@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Public Users</h1>
+    <div class="row">
+        <div class="col">
+            <div class="panel">
+                <user-table
+                        api-url="/Backend/PublicUserBackend"></user-table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

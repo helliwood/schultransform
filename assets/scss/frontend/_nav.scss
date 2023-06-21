@@ -1,0 +1,108 @@
+nav{
+  width: $sb-width;
+  position: absolute;
+  top: $sb-width;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  display: none;
+  max-height:0;
+  transition:all 0.5s ease-in;
+
+  a.nav-item{
+    color: $dark-icon-color;
+    border: 1px solid $fe-border-color;
+    border-top-width: 0;
+    display: flex;
+    text-decoration: none;
+    height: $sb-width;
+    &:hover{
+      color: map-get($cms-colors, 'a');
+    }
+  }
+}
+.nav-linker{
+  left:0;
+}
+
+
+.main-nav-icon:hover nav,
+nav.open,{
+  visibility: visible;
+  display: block;
+  opacity:1;
+  max-height:none;
+}
+
+
+
+.nav-item{
+  position: relative;
+}
+
+.nav-item-text{
+  position: absolute;
+  left: 73px;
+  border: 1px solid #b3b3b3;
+  top: -1px;
+  background: #f2f2f2;
+  height: 76px;
+  padding: 0;
+  width: 1px;
+  overflow: hidden;
+  font-weight: bold;
+  color: black;
+  display: block;
+  opacity: 1;
+}
+
+
+.nav-item:hover .nav-item-text {
+  display: block !important;
+  width: 270px !important;
+  opacity: 1 !important;
+}
+
+
+
+.main-nav-icon:hover #icon-nav .nav-item:nth-child(1) .nav-item-text,
+#icon-nav.open  .nav-item:nth-child(1) .nav-item-text
+{animation: splash 3.5s normal forwards ease-in-out;
+  animation-delay: 0.2s }
+.main-nav-icon:hover #icon-nav .nav-item:nth-child(2) .nav-item-text,
+#icon-nav.open  .nav-item:nth-child(2) .nav-item-text
+{animation: splash 3.5s normal forwards ease-in-out; animation-delay: 0.4s;}
+.main-nav-icon:hover #icon-nav .nav-item:nth-child(3) .nav-item-text,
+#icon-nav.open  .nav-item:nth-child(3) .nav-item-text
+{animation: splash 3.5s normal forwards ease-in-out; animation-delay: 0.6s }
+.main-nav-icon:hover #icon-nav .nav-item:nth-child(4) .nav-item-text,
+#icon-nav.open  .nav-item:nth-child(4) .nav-item-text
+{animation: splash 3.5s normal forwards ease-in-out; animation-delay: 0.8s}
+
+#icon-nav.open .nav-item-text,
+.main-nav-icon:hover #icon-nav .nav-item-text{
+  display: block !important;
+}
+
+
+@keyframes splash {
+  from {
+    display: block !important;
+    width: 0;
+    border-width:0;
+  }
+  10% {
+    opacity: 1;
+    width: 270px;
+    border-width:1px;
+  }
+  95%{
+    opacity: 1;
+    width: 270px;
+  }
+  to {
+    width: 0;
+    transition: all 0.2s linear;
+    border-width:1px;
+  }
+}

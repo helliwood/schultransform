@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:template id="128"
+             name="Content | Teaser 2-spaltig"
+             groups="content"
+             xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:rs="http://helliwood.de"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://helliwood.de ./../rs_schema.xsd">
+
+    <div class="mt-grid teaser-list">
+        <div class="row">
+            <rs:for id="teaser" label="Teaser">
+                <rs:media id="image" label="Bild" filetype="image" display="false"/>
+                <rs:color-select id="color" label="Farbe"  display="false"/>
+                <rs:text id="icon" label="Icon" display="false"/>
+                <rs:link id="link" label="Link" display="false"/>
+                <div class="col-12 col-lg-6">
+                    <div class="teaser-item animate">
+                        <rs:attribute name="class" action="append" value=" color-style-$color"/>
+                        <rs:if condition="$image!=''"><rs:attribute name="style" action="append" value="background-image: url('$image_url')"/></rs:if>
+                        <rs:if condition="$link!=''">
+                            <rs:attribute name="class" action="append" value=" link"/>
+                            <rs:if condition="$link_type=='extern'">
+                                <rs:attribute name="onclick" action="append" value="window.open('$link')"/>
+                            </rs:if>
+                            <rs:if condition="$link_type=='intern'">
+                                <rs:attribute name="onclick" action="append"
+                                              value="window.location.href='$link'"/>
+                            </rs:if>
+                        </rs:if>
+                        <span class="icon-box d-flex"><i data-fa-transform="rotate-90" class="fad  fa-arrow-up"></i></span>
+                        <div class="teaser-content d-flex align-items-center justify-content-center">
+                            <rs:if condition="$icon!=''"><div class="teaser-icon"><i class="">
+                                <rs:attribute name="class" action="append" value="$icon"/>
+                            </i></div></rs:if>
+                            <div class="teaser-text">
+                                <rs:attribute name="class" action="append" value=" color-style-dark-$color"/>
+                                <rs:textarea id="text" label="Text" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </rs:for>
+        </div>
+    </div>
+</rs:template>

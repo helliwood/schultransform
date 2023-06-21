@@ -1,0 +1,83 @@
+{% if user.schoolAuthority | default(null) %}
+    <div class="d-flex flex-column flex-sm-row">
+        <div class="mr-3">
+            <div class="position-relative" style="font-size: 1.65rem">
+                <i class="fad fa-building school_authority-color  tr-display-4"></i>
+                <span class="tr-times-mark text-primary"></span>
+            </div>
+        </div>
+        <div>
+            <p class="tr-small-1 m-0"><strong>{{ user.schoolAuthority.name }}</strong>
+            </p>
+            <p class="tr-small-2">
+                {% if user.schoolAuthority and(user.registrationDate) %}
+                    <span>Mitglied seit: {{ user.registrationDate |date("d.m.Y") }}</span>
+                {% endif %}
+                {% if user.schoolAuthority and(user.registrationDate) and user.schoolAuthority.confirmed %}
+                    /
+                {% endif %}
+                {% if user.schoolAuthority.confirmed %}
+                    <span class="text-primary">verifiziert</span>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    <div class="my-2">
+        {% if user.getUserType()=="SCHOOL_AUTHORITY" %}
+            <p class="tr-small-1">
+                {% if allQuestionnaires is same as allQuestionnairesFilledOut %}
+                    {% trans  from 'dashboard' %}schoolAuthorityHintsAndContactAllDone{% endtrans %}
+                {% else %}
+                    {% if allQuestionnairesFilledOut is same as 0 %}
+                        {% trans  from 'dashboard' %}schoolAuthorityHintsAndContactNoneDone{% endtrans %}
+                    {% else %}
+                        {% trans  from 'dashboard' %}schoolAuthorityHintsAndContactNotAllDone{% endtrans %}
+                    {% endif %}
+
+                {% endif %}
+            </p>
+        {% else %}
+            <p class="tr-small-1">{% trans  from 'dashboard' %}teacherHintsAndContact{% endtrans %}</p>
+        {% endif %}
+    </div>
+{% else %}
+
+{% endif %}
+{% if user.schoolAuthority | default(null) %}
+    <div class="table-responsive-sm">
+        <table class="tr-small-1 table table-striped">
+
+            {% if transformationIndex | default(null) %}
+                <tr>
+                    <td>Transinformations&shy;index:</td>
+                    <td>{{ transformationIndex | number_format(2, ',', '.') }}</td>
+                </tr>
+            {% endif %}
+            {% if user.schoolAuthority.getSchools() | default(null) %}
+                <tr>
+                    <td>Anzahl der Schulen:</td>
+                    <td>{{ user.schoolAuthority.getSchools() | length }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td>Anzahl der Schulen:</td>
+                    <td>
+                        <p class="alert-danger p-0 small-text p-1 d-flex justify-content-center">
+                            <i class="fad fa-warning mr-1"></i>
+                            {% trans  from 'dashboard' %}schoolAuthorityNoSchools{% endtrans %}
+                        </p>
+                    </td>
+                </tr>
+            {% endif %}
+
+        </table>
+    </div>
+    {% if app.user.getUserType() is same as 'SCHOOL_AUTHORITY' %}
+        <div>
+            <a href="{{ path('user_edit_school_authority') }}">
+                <span>{% trans  from 'dashboard' %}editSchoolAuthority{% endtrans %}</span>
+                <i class="fad fa-edit"></i>
+            </a>
+        </div>
+    {% endif %}
+{% endif %}

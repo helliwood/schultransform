@@ -1,0 +1,33 @@
+<div class="col-12 col-md-6">
+    <div class="c-8 border-wrapper  mr-grid">
+        <div class="d-flex flex-column p-grid h-100">
+            <h3 class="pb-1">Schulträger</h3>
+            {% if app.user.schoolauthority %}
+                <p>
+                    <strong>  {{ app.user.schoolauthority.name }}<br></strong>
+                    {{ app.user.schoolauthority.getAddress.street }}<br>
+                    {{ app.user.schoolauthority.getAddress.postalcode }} {{ app.user.schoolauthority.getAddress.city }}
+                    <br><br>
+                </p>
+                <p>Tel: {{ app.user.schoolauthority.phoneNumber }}<br>
+                    Fax: {{ app.user.schoolauthority.faxNumber }}<br>
+                    Mail: {{ app.user.schoolauthority.emailAddress }}<br></p>
+            {% elseif app.user.school and app.user.school.schoolAuthority %}
+                <p>
+                    <strong>  {{ app.user.school.schoolauthority.name }}<br></strong>
+                    {{ app.user.school.schoolauthority.getAddress.street }}<br>
+                    {{ app.user.school.schoolauthority.getAddress.postalcode }} {{ app.user.school.schoolauthority.getAddress.city }}
+                    <br><br>
+                </p>
+                <p>Tel: {{ app.user.school.schoolauthority.phoneNumber }}<br>
+                    Fax: {{ app.user.school.schoolauthority.faxNumber }}<br>
+                    Mail: {{ app.user.school.schoolauthority.emailAddress }}<br></p>
+            {% endif %}
+            {% if is_granted('ROLE_SCHOOL_AUTHORITY_LITE') %}
+                <p>
+                    <a class="btn btn-lg big btn-bearer mt-1" href="{{ path('print_school_invitation') }}">Schuleinladung herunterladen</a>
+                </p>
+            {% endif %}
+        </div>
+    </div>
+</div>

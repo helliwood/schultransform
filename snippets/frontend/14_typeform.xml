@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:template id="14"
+             name="Typeform"
+             groups="content"
+             xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:rs="http://helliwood.de"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://helliwood.de ./../rs_schema.xsd">
+
+    <rs:text id="formcode" label="Form-ID"  display="false"/>
+
+    <div class="typeform-widget" style="width: 100%; height: 700px;">
+        <rs:attribute name="data-url" action="append" value="https://form.typeform.com/to/$formcode"/>
+
+    </div>
+
+    <script> (function () {
+        var qs, js, q, s, d = document, gi = d.getElementById, ce = d.createElement, gt = d.getElementsByTagName,
+                id = "typef_orm", b = "https://embed.typeform.com/";
+        if (!gi.call(d, id)) {
+            js = ce.call(d, "script");
+            js.id = id;
+            js.src = b + "embed.js";
+            q = gt.call(d, "script")[0];
+            q.parentNode.insertBefore(js, q)
+        }
+    })() </script>
+
+
+</rs:template>
+

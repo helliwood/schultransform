@@ -1,0 +1,23 @@
+{% extends 'frontend/public.html.twig' %}
+
+{% block body %}
+    <div class="color-switch col-md-8 main-bg-color mb-grid animate main-title d-flex align-items-center ">
+        <h2>Neues Passwort / <span>anfordern</span><span class="icon-box d-flex"><i data-fa-transform="rotate-90" class="fad  fa-arrow-up"></i></span></h2>
+    </div>
+    <div class="col-md-9 col-12 p-grid p-md-0 mt-0"><p class="title-copy  mb-grid">
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="c-8 border-wrapper p-grid">
+                <h3 class="pb-1">Passwort vergessen</h3>
+                <p>Bitte geben Sie Ihre E-Mail-Adresse an.</p>
+                {{ form_start(form) }}
+                {{ form_widget(form.email, {'label_attr': {'class': 'col'} }) }}
+                <div class="">
+                    <button type="submit" id="save" name="save" class="btn-primary btn mt-3">Link senden</button>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

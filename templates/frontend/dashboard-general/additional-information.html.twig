@@ -1,0 +1,13 @@
+<div class="w-100 tr-bg-black-15 p-2">
+    {% block institution_info %}
+        {% include "frontend/dashboard-general/school_info_data.html.twig" %}
+    {% endblock %}
+</div>
+<div class="w-100 w-md-50 p-2">
+    {% block contact %}
+        {% include "frontend/dashboard-general/contact.html.twig" %}
+    {% endblock %}
+    {% block privacy %}
+        {% include "frontend/dashboard-general/privacy.html.twig" %}
+    {% endblock %}
+</div>

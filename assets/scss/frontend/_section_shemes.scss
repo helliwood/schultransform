@@ -1,0 +1,36 @@
+
+$color-shemes: (
+        0: a,
+        1: b,
+        2: e,
+        3: c,
+        4: f,
+        5: g,
+        6: d,
+        7: o,
+        8: p,
+        9: l,
+        10: q
+);
+
+
+  @each $key, $value in $color-shemes {
+    .color-sheme-#{$key}{
+      .hr-spacer,
+      .btn-primary,
+      .shemed-color{
+        background-color: map-get($cms-colors, $value);
+        color: map-get($cms-sub-colors, $value);
+
+      }
+      .shemed-font-color{
+        color: map-get($cms-colors, $value);
+      }
+      .shemed-border-color{
+        border-color: map-get($cms-colors, $value);
+
+      }
+    }
+  }
+
+

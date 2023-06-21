@@ -1,0 +1,72 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+
+services:
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+  # controllers are imported separately to make sure services can be injected
+  # as action arguments even if you don't extend any base controller class
+  Trollfjord\Bundle\MediaBaseBundle\Controller\:
+    resource: '../../Controller/'
+    tags: [ 'controller.service_arguments' ]
+
+  Trollfjord\Bundle\MediaBaseBundle\Repository\:
+    resource: '../../Repository/'
+    tags: [ 'doctrine.repository_service' ]
+
+  Trollfjord\Bundle\MediaBaseBundle\Service\MediaService: ~
+
+  media_base.storage.filesystem:
+    class: Trollfjord\Bundle\MediaBaseBundle\Storage\Filesystem
+    public: true
+    arguments:
+      - '%media_base.file_path%'
+
+  media_base.storage.filesystem_cache:
+    class: Trollfjord\Bundle\MediaBaseBundle\Storage\IndexCache
+    public: true
+    arguments:
+      - 'MediaBaseBundle_IndexCache'
+      - 60
+      - '%media_base.file_path_cache%'
+
+  Trollfjord\Bundle\MediaBaseBundle\Storage\Store:
+    arguments:
+      - '%media_base.storage_service%'
+      - '%media_base.storage_service_cache%'
+      - '%media_base.mimeTypes%'
+      - '@service_container'
+
+  Trollfjord\Bundle\MediaBaseBundle\Arranger\Arranger:
+    arguments:
+      - '%media_base.mimeTypes%'
+      - '@Trollfjord\Bundle\MediaBaseBundle\Storage\Store'
+      - '@service_container'
+
+  Trollfjord\Bundle\MediaBaseBundle\Form\Upload:
+    arguments:
+      - '@Trollfjord\Bundle\MediaBaseBundle\Service\MediaService'
+      - '%media_base.mimeTypes%'
+
+  Trollfjord\Bundle\MediaBaseBundle\Form\FileEdit:
+    arguments:
+      - '@Trollfjord\Bundle\MediaBaseBundle\Service\MediaService'
+      - '%media_base.mimeTypes%'
+
+  Trollfjord\Bundle\MediaBaseBundle\TemplateEngine\Element\Media:
+    shared: false
+    public: true
+    tags: [ 'content_tree.template_engine.element' ]
+
+  Trollfjord\Bundle\MediaBaseBundle\Component\Form\Type\MediaType: ~
+
+  Trollfjord\Bundle\MediaBaseBundle\ControllerPublic\:
+    resource: '../../ControllerPublic/'
+    tags: [ 'controller.service_arguments' ]

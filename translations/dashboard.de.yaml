@@ -1,0 +1,104 @@
+loggedInText: Mein Schultransform
+loggedOutText: Anmelden
+linkSchool: Schule verknüpfen
+linkDashboard: Meine Startseite
+inviteColleague: Kolleg:innen einladen
+editSchool: Schule bearbeiten
+editSchoolAuthority: Schulträger bearbeiten
+inviteSchool: Schulen einladen
+logout: Abmelden
+teacherActive: "Es sind %teacherNr% Lehrkräfte in Ihrer Schule aktiv!"
+topicsActive: "Sie haben <b class=\"tr-color-yellow-1\">%numberQuestionnairesDone%</b> Fragebögen  bearbeitet."
+questionairesActive: "Sie haben %numberQuestionnairesDone% von %nrQuestionaires% Fragebögen für Ihre Momentaufnahme  bearbeitet. "
+noTopicsDone:  "Sie haben %numberQuestionnairesDone% von %nrQuestionaires% Fragebögen bearbeitet. "
+proceed: Weitermachen
+yourSchoolcode: "Ihr Schulcode:"
+yourSchoolcodeForSchoolAuthority: "Schulcode:"
+yourSchoolAuthorityCode: "Ihr Schulträgercode:"
+yourLogincode: "Ihr Zugangscode:"
+yourSnapshot: "Ihre Momentaufnahme"
+furtherInformation: Weitere Informationen
+schoolCategoryIntro: Lorem Ipsum
+schoolCategoryNextStep: Nächster Schritt
+schoolPotentialNotFilledText: "Um weitere Informationen und ganz konkrete Handlungsempfehlungen zu Ihren Stärken und Entwicklungspotenzialen zu erhalten klicken sie einfach auf den jeweiligen Pfeil       und wir stellen Ihnen im jeweiligen Handlungsfeld ein individuelles Unterstützungspaket online zusammen."
+schoolPotentialFilledText:  "Um weitere Informationen und ganz konkrete Handlungsempfehlungen zu Ihren Stärken und Entwicklungspotenzialen zu erhalten, klicken Sie einfach auf den jeweiligen Pfeil und wir stellen Ihnen im jeweiligen Handlungsfeld Ihr individuelles Unterstützungspaket online zusammen."
+schoolOpenPotential: "zusammen&shy;stellen"
+schoolOpenPotentialSessionExist: "Öffnen"
+openPotential: abrufen
+handlungsfelderOpen: "Es %plural% %handlungsfelderOpen% von %handlugsfeldergesamt%  Fragebögen noch nicht bearbeitet."
+handlungsfelderDone: "Es sind %handlugsfeldergesamt% von %handlugsfeldergesamt%  Fragebögen  bearbeitet."
+inviteMoreTeacher: "Weitere Lehrkräfte einladen"
+inviteMoreTeacherHeaderTeacher: "<span class='d-none d-sm-block tr-text-decoration'>Weitere Lehrkräfte einladen</span>"
+inviteMoreTeacherHeaderSchool: "<u><span class='d-none d-xl-inline-block tr-text-decoration'>Weitere </span> <span class='d-none d-sm-inline-block tr-text-decoration' > Lehrkräfte einladen</span></u>"
+messageSchoolAuthority: "<u><span class='d-none d-xl-inline-block tr-text-decoration'>Weitere </span> <span class='d-none d-sm-inline-block tr-text-decoration' > Schulen einladen</span></u>"
+inviteMoreTeacherSchool: "Weitere Lehrkräfte einladen"
+inviteMorePeople: Weitere Kolleg:innen einladen
+inviteTeacher: Lehrkräfte einladen
+teacherHeaderText: Willkommen auf Ihrer persönlichen Seite
+teacherResults: "Ergebnisse:"
+schoolAuthorityResults: "Ergebnisse:"
+teacherResultsOpen: "öffnen"
+schoolAuthorityResultsOpen: "öffnen"
+teacherFirstResults: "Ergebnisse:"
+teacherResultsMissing: "noch nicht vorhanden"
+teacherFirstResultsOpen: "öffnen"
+questionairModalIntro: "Bearbeiten Sie die Fragebögen zu folgenden Themenfeldern für Ihre individuelle Sicht auf das Handlungsfeld „%catname%“. Sie können einzelne Fragebögen jederzeit wiederholen."
+questionairModalTitle: "Momentaufnahme: %catname%"
+teacherUndoneCategoryText: Lorem ipsum dolor sit amet, consetetur
+teacherNrQuestionaires: "Anzahl der Fragebögen:"
+schoolAuthorityNrQuestionaires: "Anzahl der Fragebögen:"
+schoolAuthorityLinkedSchoolsTitle: "Verbundene Schulen"
+teacherDetailedResults: Ihre Ergebnisse im Detail
+teacherOpenPotential: Zur Potenzialanalyse Ihrer Schule
+schoolAuthorityOpenPotential: Potenzialanalyse
+teacherPotentialTextUnderCharts: "Im Handlungsfeld %categoryName% haben Sie <b>%numberQuestionnairesDone% von %numberQuestionnairesTotal%</b> Fragebögen bearbeitet."
+teacherPotentialQuestionnairesDone: "Im Handlungsfeld %categoryName% können noch <b>%numberQuestionnairesDone% von %numberQuestionnairesTotal%</b> Fragebögen bearbeitet werden:"
+documentationAndMats: Dokumentation & Materialien
+teacherQuestionairsDone: "<b>Glückwunsch!</b> Sie haben  bereits <b>%numberQuestionnairesDone% von %totalQuestionnaires%</b> Fragebögen bearbeitet."
+schoolAuthorityQuestionnairesDone: "<b>Glückwunsch!</b> Sie haben <b>%numberQuestionnairesDone% von %totalQuestionnaires%</b> Fragebögen bearbeitet."
+teacherQuestionairsNotCompleted: "Im Handlungsfeld %categoryname% können Sie noch <b>%numberQuestionnairesNotCompleted%</b> Fragebögen bearbeiten:"
+teacherQuestionnairesCompleted: "Im Handlungsfeld %categoryname% haben Sie <b>%numberQuestionnairesDone%</b> von %numberQuestionnairesInCategory% Fragebögen bearbeitet."
+hintsAndContact: Hinweise & Kontakt
+teacherHintsAndContact: "Sie haben Ihre Momentaufnahme mit Ihrer Schule geteilt, damit Ihre Fragebogen-Ergebnisse in die Potenzialanalyse einfließen."
+schoolAuthorityHintsAndContactAllDone: "Sie haben alle Fragebögen bearbeitet und können diese jederzeit wiederholen. Bitte denken Sie daran, Ihre Schulen einzuladen."
+schoolAuthorityHintsAndContactNoneDone: "Sie haben noch keine Fragebögen bearbeitet. Starten Sie jetzt mit Ihrer Momentaufnahme. Bitte denken Sie daran, Ihre Schulen einzuladen."
+schoolAuthorityHintsAndContactNotAllDone: "Sie haben erste Fragebögen für Ihre Momentaufnahme bearbeitet. Bitte denken Sie daran, Ihre Schulen einzuladen."
+SchoolHintsAndContact: "Es wurden die Momentaufnahmen aus dem Kollegium mit Ihrer Schule geteilt, damit die Fragebogen-Ergebnisse in die Potenzialanalyse einfließen."
+teachersActiveByCategory: "Es sind <b>%teachersActiveByCategory%</b> Lehrkräfte in diesem Handlungsfeld aktiv!"
+yourStrengths: Ihre Stärken
+continue: Fortsetzen
+start: Starten
+repeat: Wiederholen
+quickStart: Schnellstart
+dataSafety: '<a href="/datenschutz" target="_blank">Datenschutz ist uns wichtig</a>. Bitte teilen Sie uns deshalb nie Ihren persönlichen Code mit. Wir werden Ihre Fragen und Anliegen auch ohne diese Information lösen.'
+contactTeamButtonText: "Team kontaktieren"
+contactTeam: "Sie haben Fragen zur Plattform und den Angeboten von <strong>schul</strong>transform? Das Team des Projektbüros steht Ihnen zur Seite. Wir freuen uns auf Ihre Anfrage!"
+teacherPotentialTitleStart: Die Ergebnisse Ihrer Schule im Bereich
+teacherPotentialTitleEnd: im Detail
+supportPackage: "Unterstützungspaket:"
+documentation: "Dokumentation"
+schoolboxNoSchoolText: "Verknüpfen Sie Ihre Momentaufnahme mit Ihrer Schule, damit Ihre Fragebogen-Ergebnisse in die Potenzialanalyse einfließen."
+connectedToSchool: "<span class='d-none d-sm-block'>Sie sind mit einer Schule verknüpft!</span>"
+notConnectedToSchool: "<span class='d-none d-md-inline-block tr-text-decoration'>Sie sind noch nicht mit einer Schule verknüpft!</span>"
+noSchoolConnected: Noch keine Schule verküpft
+schoolPageTitle: Potenziale im Bereich der Schultransformation
+lastLogin: "Letzter Login: "
+connectSchool: Schule verknüpfen
+result: Ergebnis
+
+schoolQuestionnaireChartTitle: "Die Ergebnisse Ihrer Schule im Fragebogen <b>%fragebogen%</b> im Detail"
+schoolQuestionnairesDone: "Es sind <b>%teachersActiveByQuestionnaire%</b> Lehrkräfte in diesem Fragebogen aktiv!"
+schoolPotentialTitleStart: Die Ergebnisse Ihrer Schule im Bereich
+schoolPotentialTitleEnd: im Detail
+
+responseTimeTeam: "Antwortzeit: 2 Werktage"
+nextSteps: "Nächster Schritt"
+
+schoolAuthorityNoSchools: "Es gibt keine verbundenen Schulen"
+schoolAuthorityNoConfirmed: "Bitte bestätigen Sie Ihre Schulträger über das <a class='d-inline' target='_blank' href='%url%'>Fax zur Verifizierung</a>, damit Sie alle Funktionen nutzen können. Wenn Sie dies bereits getan haben und diese Meldung immer noch erscheint, wenden Sie sich bitte an uns:"
+
+RequestMoreInformationFromSchool: "Detaillierte Informationen von der Schule anfordern"
+
+myDashboard: "zurück zu meinem Dashboard"
+noStrongPoints: "<i class='fad fa-exclamation-triangle'></i><span class='pl-2'>In diesem Handlungsfeld gibt es keine.</span>"
+noWeakPoints: "<i class='fad fa-check'></i><span class='pl-2'>In diesem Handlungsfeld gibt es keine.</span>"

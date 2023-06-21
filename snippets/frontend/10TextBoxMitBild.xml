@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:template id="10"
+             name="Textbox mit Bild"
+             groups="content"
+             xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:rs="http://helliwood.de"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://helliwood.de ./../rs_schema.xsd">
+
+    <div class="offset-item offset-item-revert picture-box d-md-flex position-relative  mb-grid">
+        <div class="offset-item-back-border-helper mb-grid d-none d-md-block position-absolute offset-md-6 col-md-2 main-bg-color h-100"></div>
+
+        <div class="offset-item-front col-md-6 mb-md-grid main-bg-color p-grid mobile-indent-left" >
+            <div>
+                <h3><rs:text id="t1" label="Titel" /></h3>
+                <p><rs:textarea id="text" label="Text" nl2br="true"/></p>
+                <rs:contentarea name="content1" allowedgroups="basics"></rs:contentarea>
+            </div>
+        </div>
+        <div class="offset-item-back  col-md-6 dark-bg-color pl-grid mt-md-grid d-flex mobile-indent-right">
+            <gradient-navigation></gradient-navigation>
+        </div>
+    </div>
+
+
+
+</rs:template>

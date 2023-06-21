@@ -1,0 +1,17 @@
+
+.media-base {
+  .preview-border {
+    border: 1px solid $gray-600;
+    background-color: $white;
+    padding: $grid-gutter-width;
+  }
+  .preview-container {
+    display: block;
+    width: 100%;
+    height: 0px;
+    padding-bottom: 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+  }
+}

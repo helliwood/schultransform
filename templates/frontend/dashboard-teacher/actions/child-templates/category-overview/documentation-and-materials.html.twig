@@ -1,0 +1,34 @@
+<div class="mb-1 d-flex flex-column flex-sm-row flex-wrap tr-docs-pdf">
+    {# mb-1 justify-content-between t-category-row row row-cols-1 row-cols-md-2 row-cols-lg-3 #}
+    {% for download in downloads %}
+        {# t-category-wrapper d-flex flex-column p-2 mb-1 position-relative tr-border-radius-bottom #}
+        <div class="w-50 tr-sm-w-100 mb-1">
+            <div class="d-flex flex-column justify-content-between h-100 tr-bg-color-gray-200 px-3 py-3">
+                <div class="d-flex mb-1">
+                    <div class="c-{{ category.id }}">
+                        <a href="{{ download.url }}"
+                           target="_blank "
+                           class="tr-small pr-3">
+                            <i class="fad fa-{{ download.type }} tr-cat-color"></i></a>
+                    </div>
+                    <div>
+                        <p class="tr-small-1 m-0">
+                            <b>{{ download.title }}</b>
+                        </p>
+                        <p class="tr-small-2">
+                            {{ download.desc }}
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <a href="{{ download.url }}" target="_blank "
+                       class="tr-small-2">
+                        {{ download.FileText }}
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+    {% endfor %}
+</div>

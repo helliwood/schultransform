@@ -1,0 +1,24 @@
+{% if results | default(null) %}
+    <div class="tr-bg-color-gray-200 px-2 pt-2 pb-0">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 mx-2 mt-2 bg-white">
+            {% include "frontend/dashboard-school-authority/actions/child-templates/potential/child-templates/charts-all.html.twig" %}
+        </div>
+    </div>
+
+    <div>
+        <div class="tr-bg-school-color tr-border-radius-bottom h-100 tr-small-1">
+            <br/>
+            <p class="p-2 text-white">
+{#                <b-link v-b-modal.modal-request-info-school>#}
+{#                    {% trans  from 'dashboard' %}RequestMoreInformationFromSchool{% endtrans %}#}
+{#                </b-link>#}
+{#                {% set modal_data = app.user.toArray|merge({'schoolDataModal':{id: school.id,name:school.name,mainUser:school.getMainUser()},schoolAuthority:app.user.schoolAuthority }) %}#}
+{#                <dashboard-modal :data="{{ modal_data | json_encode}}"#}
+{#                                 modal-component-name="SchoolAuthorityRequestInfoSchool"#}
+{#                                 id="modal-request-info-school"#}
+{#                ></dashboard-modal>#}
+            </p>
+        </div>
+    </div>
+
+{% endif %}

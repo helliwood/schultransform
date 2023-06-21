@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:template id="11"
+             name="Block | Box für Teaser"
+             groups="content"
+             form="false"
+             xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:rs="http://helliwood.de"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://helliwood.de ./../rs_schema.xsd">
+    <div class="paddingbox main-bg-color main-border">
+        <div class="row">
+            <div class="col">
+                <rs:contentarea name="teasercontent" allowedgroups="teaser"></rs:contentarea>
+            </div>
+        </div>
+    </div>
+</rs:template>

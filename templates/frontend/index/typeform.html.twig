@@ -1,0 +1,14 @@
+{% extends 'frontend/pure.html.twig' %}
+
+
+{% block body %}
+    {% include 'frontend/index/title-bar.html.twig' with {'title': '<span></span>Fragebogen'} %}
+
+    <section class="part">
+        {% include 'frontend/index/fe_title.html.twig' with {'title': '<span>Fragebogen</span> Vision, Ziele und Bewusstsein'} only %}
+        {# {% include 'frontend/index/typeformframe.html.twig' with {'formcode': 'COSYZXCn'} only %} #}
+        <iframe frameborder="0" height="100%" src="{{ path('form_start', {"code": "COSYZXCn"}) }}" width="100%" allow="camera; microphone; autoplay; encrypted-media; fullscreen;" data-qa="iframe" title="typeform-embed" style="border: 0px; height: 700px;"></iframe>
+    </section>
+
+
+{% endblock %}

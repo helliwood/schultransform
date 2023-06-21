@@ -1,0 +1,7 @@
+{% extends 'frontend/public.html.twig' %}
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+    Success: {{ user.getCode() }}
+    <a href="{{ path('public_user_public_logout') }}">logout</a>
+{% endblock %}

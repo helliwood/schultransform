@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:template id="126"
+             name="Content | Zitat"
+             groups="content"
+             xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:rs="http://helliwood.de"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://helliwood.de ./../rs_schema.xsd">
+
+    <rs:text id="icon" label="Icon" display="false"/>
+    <rs:link id="link" label="Link" display="false"/>
+
+    <div class="note my-grid position-relative">
+        <div class="row">
+            <div class="col">
+                <div class="note-bg">
+                    <div class="row">
+                        <div class="col-12 col-md-4 col-lg-3 order-2 order-md-1 pl-3 d-flex align-items-center flex-column">
+                            <div class="mt-auto pb-4">
+                                <div>
+                                    <rs:if condition="$icon!=''">
+                                        <rs:then>
+                                            <i class=" icon pb-2">
+                                                <rs:attribute name="class" action="prepend" value="$icon"/>
+                                            </i>
+                                        </rs:then>
+                                        <rs:else>
+                                            <i class="far fa-comment icon pb-2"></i>
+                                        </rs:else>
+                                    </rs:if>
+                                </div>
+                                <rs:if condition="$link!=''">
+                                    <div>
+                                        <a href="" class="btn btn-white">
+                                            <rs:attribute name="href" action="append" value="$link"/>
+                                            Mehr erfahren
+                                        </a>
+                                    </div>
+                                </rs:if>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-8 col-lg-9 order-1 order-md-2 py-4 px-4 pl-md-0">
+                            <rs:if condition="$shorttext!=''">
+                                <div>
+                                    <rs:text id="shorttext" label="Kurztitel"/>
+                                </div>
+                            </rs:if>
+                            <rs:if condition="$text!=''">
+                                <div class="text pr-md-3">
+                                    <rs:textarea id="text" label="Text"/>
+                                </div>
+                            </rs:if>
+                            <rs:if condition="$shorttext2!=''">
+                                <div>
+                                    <rs:text id="shorttext2" label="Kurztitel 2"/>
+                                </div>
+                            </rs:if>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span class="icon-box d-flex">
+            <i data-fa-transform="rotate-90" class="fad fa-arrow-up"></i>
+        </span>
+    </div>
+</rs:template>

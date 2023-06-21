@@ -1,0 +1,56 @@
+{% extends 'frontend/dashboard-teacher/actions/category-overview.html.twig' %}
+
+    {% block teacher_messages %}
+        {% include "frontend/dashboard-school-authority/child-templates/messages.html.twig" %}
+        <div class="position-absolute tr-back-btn text-white tr-small-0" title="Zurück">
+            <a href="{{ path('dashboard_school_authority_home') }}">
+                <i class="fad fa-arrow-left tr-display-2 float-left py-2 px-2"></i>
+            </a>
+        </div>
+    {% endblock %}
+
+    {% block teacher_header %}
+        {# Account data #}
+        {% include "frontend/dashboard-school-authority/actions/child-templates/category-overview/account.html.twig" %}
+    {% endblock %}
+
+    {% block teacher_content %}
+        {# hr & title #}
+        <div class="mt-3 mb-2 py-1 tr-line">
+            <p>{% trans  from 'dashboard' %}teacherDetailedResults{% endtrans %}</p>
+        </div>
+
+        {# charts by questionnaire #}
+        <div class="m-0">
+            {% include "frontend/dashboard-school-authority/actions/child-templates/category-overview/questionnaries-charts.html.twig" %}
+        </div>
+
+        {# hr & title #}
+        <div class="mt-3 mb-2 py-1 tr-line-primary d-flex justify-content-between">
+            <p class="m-0">{% trans  from 'dashboard' %}schoolAuthorityOpenPotential{% endtrans %}</p>
+            <i class="fad fa-arrow-up tr-rotate-45 float-right text-primary tr-text-grow-1 mr-3 mr-sm-0"></i>
+        </div>
+
+        {# Potential analysis #}
+        {% include "frontend/dashboard-school-authority/actions/child-templates/category-overview/support-package.html.twig" %}
+
+        {# hr & title #}
+        <div class="mt-3 mb-2 py-1 tr-line">
+            <p>{% trans  from 'dashboard' %}documentationAndMats{% endtrans %}</p>
+        </div>
+
+        {# Dokumentation & Materialien #}
+        {% include "frontend/dashboard-teacher/actions/child-templates/category-overview/documentation-and-materials.html.twig" %}
+
+    {% endblock %}
+
+    {% block teacher_footer %}
+        {# hr & title #}
+                <div class="mt-3 mb-2 pb-1 tr-line d-flex justify-content-between">
+                    <p class="m-0">{% trans  from 'dashboard' %}furtherInformation{% endtrans %}</p>
+                </div>
+        {# School info & more #}
+        <div class="d-flex justify-content-around flex-column flex-md-row">
+            {% include "frontend/dashboard-school-authority/child-templates/additional-information.html.twig" %}
+        </div>
+    {% endblock %}

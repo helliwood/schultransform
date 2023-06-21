@@ -1,0 +1,68 @@
+{% block body %}
+    <div class="newsarea">
+        <div class="row">
+        {% for newsitem in mainnews %}
+
+                <div class="col-md-6">
+                    <div class="news-teaser col mb-grid animate px-grid px-md-0 color-sheme-0">
+                        <div class="news-content-wrapper">
+                            <a href="{{ newsitem.url }}">
+                                <div class="border-image-wrapper  ">
+                                    <div class="news-teaser-cat shemed-color">
+                                        {{ newsitem.title }}
+                                    </div>
+                                    <span class="icon-box d-flex"><i data-fa-transform="rotate-90" class="fad  fa-arrow-up"></i></span>
+                                    <img src="/MediaBasePublic/show/{{ newsitem.img }}" class="img-fluid"></div>
+                                <h6 class="h2 news-teaser-title shemed-font-color">
+                                    {{ newsitem.name }}
+                                </h6>
+                                <p class="news-teaser-text">
+                                    {{ newsitem.description }}
+                                </p>
+                            </a>
+                            <div class="news-teaser-info-area shemed-font-color">
+                                <div class="news-teaser-devider shemed-color col-3"></div>
+                                <span class="news-author">    {{ newsitem.creator }} |</span>
+                                <span>    {{ newsitem.date }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+        {% endfor %}
+        </div>
+        <div class="row block-one-third">
+
+            {% for newsitem in news %}
+
+            <div class="col-md-4">
+                <div class="news-teaser col mb-grid animate px-grid px-md-0 color-sheme-0">
+                    <div class="news-content-wrapper">
+                        <a href="{{ newsitem.url }}">
+                            {% if loop.index <= amountimages and newsitem.img!="" %}
+                            <div class="border-image-wrapper" style="display: block">
+                                <img src="/MediaBasePublic/show/{{ newsitem.img }}" class="img-fluid">
+                            </div>
+                            {% endif %}
+                            <h6 class="h2 news-teaser-title shemed-font-color">
+
+                                {{ newsitem.name }}</h6>
+                            <p class="news-teaser-text">
+                                {{ newsitem.description }}
+                            </p>
+                        </a>
+                        <div class="news-teaser-info-area shemed-font-color">
+                            <div class="news-teaser-devider shemed-color col-3"></div>
+                            <span class="news-author">    {{ newsitem.creator }} |</span>
+                             <span>    {{ newsitem.date }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+
+
+    </div>
+{% endblock %}

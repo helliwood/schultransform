@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:template id="7"
+             name="Block | Spalten 100-Label"
+             groups="[root]"
+             xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:rs="http://helliwood.de"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://helliwood.de ./../rs_schema.xsd">
+
+
+    <rs:select id="color_sheme" label="Typ" display="false" placeholder="Bitte wählen">
+        <rs:option value="0">Default</rs:option>
+        <rs:option value="1">Vision und Ziele</rs:option>
+        <rs:option value="2">Leadership</rs:option>
+        <rs:option value="3">Personalentwicklung</rs:option>
+        <rs:option value="4">Schulische Ausstattung</rs:option>
+        <rs:option value="5">Weitere Lernorte</rs:option>
+        <rs:option value="6">Unterricht</rs:option>
+    </rs:select>
+    <rs:text id="title" label="Titel" />
+
+    <section class="part">
+        <rs:attribute name="class" action="append" value=" color-sheme-$color_sheme"/>
+
+
+        <rs:if condition="$text">
+            <span class="section-name">
+                <rs:text id="text" label="Label" />
+            </span>
+        </rs:if>
+        <rs:contentarea name="content1" allowedgroups="content"></rs:contentarea>
+    </section>
+</rs:template>

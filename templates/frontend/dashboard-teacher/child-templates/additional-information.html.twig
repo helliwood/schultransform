@@ -1,0 +1,73 @@
+<div class="w-100 w-50 tr-bg-black-15 p-2">
+    {% if user.school | default(null) %}
+        <div class="d-flex">
+            <div class="mr-3">
+                <div class="position-relative">
+                    <i class="fad fa-school text-primary tr-display-4"></i>
+                    <span class="tr-times-mark"></span>
+                </div>
+            </div>
+            <div>
+                <p class="tr-small-1">{{ user.school.name }}
+                    {% if user.registrationDate %}
+                        <span>Mitglied seit: {{ user.registrationDate |date("m/d/Y")}}</span>
+                    {% endif %}
+
+                    {% if user.school.confirmed %}
+                        / <span class="text-primary">verifiziert</span>
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+    {% else %}
+        <div class="d-flex">
+            <div class="position-relative mr-3">
+                <i class="fad fa-school ml-2 text-danger tr-display-4"></i>
+                <span class="tr-exclamation-mark"></span>
+            </div>
+            <div>
+                <p class="tr-small-1">Lorem ipsum dolor sit amet, consetetur sadipscing
+                    elitr, sed diam nonumy eirmod tempor invidunt ut labore et</p>
+            </div>
+        </div>
+        <div class="w-100 my-3 ml-3">
+            <b-link v-b-modal.modal-profil class="tr-small-1 btn tr-border-rad-2 bg-white border border-danger px-3 ml-4">Schule
+                verknüpfen</b-link>
+        </div>
+    {% endif %}
+    <div class="my-2">
+        <p class="tr-small-1">Lorem ipsum dolor sit amet, consetetur sadipscing
+            elitr, sed diam nonumy eirmod tempor invidunt ut labore et</p>
+    </div>
+    {% if user.school.schoolAuthority | default(null) %}
+        <p class="tr-small-1">
+            Schulträger: {{ user.school.schoolAuthority.name }}
+        </p>
+    {% endif %}
+
+    {% if user.school.getSchoolType() | default(null) %}
+        <strong> {{ user.school.getSchoolType() }}</strong>
+        <p class="tr-small-1">
+        elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+        </p>
+    {% endif %}
+
+
+</div>
+<div class="w-100 w-md-50 ml-md-2 p-2">
+    <p class="tr-small-1">Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+        sed diam nonumy eirmod tempor invidunt ut labore et dolore
+        magna aliquyam erat, sed diam voluptua. At vero eos et accusam.
+    </p>
+    <div class="d-flex">
+        <div>
+            <i class="fad fa-shield-check tr-display-4  text-primary"></i>
+        </div>
+        <div class="ml-2 tr-small-1">
+            <a href="#">Datenschutz ist uns wichtig</a>. Deshalb teilen Sie uns nie Ihre
+            persönliche ID in eine E-Mail bitte. Wir schaffen es auch so
+            gemeinsam Lösungen für ihre spezifischen
+            Herausforderungen zu finden.
+        </div>
+    </div>
+</div>

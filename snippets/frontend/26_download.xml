@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:template id="26"
+             name="Content | Download"
+             groups="content"
+             xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:rs="http://helliwood.de"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://helliwood.de ./../rs_schema.xsd">
+    <div class="animate d-flex download-wrapper pr-md-grid">
+        <div class="download-area dark-bg-color pt-grid px-grid my-grid mb-grid2 col-12 ">
+            <h3>
+                <rs:text id="title" label="Downloadtitel" display="true"/>
+            </h3>
+            <rs:color-select id="color" label="Farbe" display="false"/>
+            <rs:attribute name="class" action="append" value="color-style-$color"/>
+
+
+            <div class="row flex-wrap mt-grid r-lg-grid">
+                <rs:for id="downloads" label="Downloads">
+                    <rs:media id="download" label="datei" display="false"/>
+                    <div class="col-12 col-md-6 pb-grid pb-md-0 d-flex mb-grid">
+                        <div class="col-9 download-description p-grid">
+                            <rs:text id="title" label="Downloadtitel" display="false"/>
+                            <rs:media id="downloadicon" label="alternatives icon" display="false"/>
+                            <rs:if condition="$title!=''">
+                                <strong>
+                                    <rs:variable name="title"></rs:variable>
+                                </strong>
+                            </rs:if>
+
+                            <p>
+                                <rs:textarea id="descriptioon" label="Beschreibungstext"/>
+                            </p>
+                            <rs:text id="cta" label="Call To Action" display="false"/>
+
+                            <a href="" target="_blank " class="mt-grid download-description-link">
+                                <rs:attribute name="href" action="append" value="$download_url"/>
+                                <rs:if condition="$cta!=''">
+                                    <rs:variable name="cta"></rs:variable>
+                                </rs:if>
+                                <rs:if condition="$cta==''">
+                                    <span style="text-transform: uppercase">
+                                        <rs:variable name="$download_extension"></rs:variable>
+                                    </span>
+                                    herunterladen
+                                </rs:if>
+                                |
+                                <rs:variable name="$download_size"></rs:variable>
+                            </a>
+                        </div>
+
+                        <div class="col-3 text-right d-flex p-0">
+
+                            <a href="" target="_blank " class="btn btn-primary m-auto h-100 w-100 d-flex download-icon">
+                                <rs:attribute name="href" action="append" value="$download_url"/>
+
+                                <rs:if condition="$downloadicon_url!=''">
+                                    <div class=" mg-auto w-100 h-100 alt-icon">
+                                        <rs:attribute name="style" action="append" value="background-image:url($downloadicon_url)"/>
+                                    </div>
+
+                                </rs:if>
+                                <rs:if condition="$downloadicon_url==''">
+                                    <i class="fad fa-download m-auto"></i>
+                                </rs:if>
+
+
+
+                            </a>
+                        </div>
+                    </div>
+                </rs:for>
+            </div>
+        </div>
+
+    </div>
+</rs:template>
+

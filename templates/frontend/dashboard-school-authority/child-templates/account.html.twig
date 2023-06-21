@@ -1,0 +1,79 @@
+{% extends 'frontend/dashboard-general/account.html.twig' %}
+{% block bg_color %}school_authority-bg-color {% endblock %}
+
+{% block account_2 %}
+    <div class="t-cat-details-icon-header">
+        <i class="fad fa-building t-cat-details-icon-header-icon text-white tr-large-3 float-right  pb-4 pt-3 mt-2 mr-4 mt-md-4 mr-md-5"></i>
+    </div>
+{% endblock %}
+
+{% block account_action %}
+    <div class="d-flex t-header-link-action tr-sm-position-absolute">
+        <div class="school_authority-bg-color-bri w-100 px-2 py-1 text-white">
+            <p>{{ user.schoolAuthority.name }}</p>
+        </div>
+        <div class="tr-bg-yellow-1 px-2 py-1 tr-border-radius-right mr-4">
+
+            {% set cat_details = [] %}
+            {% for cat in categories %}
+
+                {% if  cat.userHasQuestionnairesFilledOut %}
+                    {% set numberOfQuestionnairesFilledOut = cat.questionnairesFilledOut | length %}
+                {% else %}
+                    {% set numberOfQuestionnairesFilledOut = 0 %}
+                {% endif %}
+                {# set the firstr element of array which is the only questionnire in the category #}
+                {% set questionnaire = questionairs[cat.id]| first %}
+                <!-- This is the line of code that does the magic -->
+                {% set cat_details = cat_details|merge({(loop.index0) : {'questionnaire':questionnaire,'id': cat.id,'name': cat.name, 'icon': cat.icon, 'numberOfQuestionnairesFilledOut':numberOfQuestionnairesFilledOut,'userHasQuestionnairesFilledOut': cat.userHasQuestionnairesFilledOut, 'noQuestionnairesFilledOutByUser': cat.noQuestionnairesFilledOutByUser,"subcats":questionairs[cat.id],"questionnairesInCategory":questionairs[cat.id] | length} }) %}
+            {% endfor %}
+
+            {% if numberQuestionnairesDone | default(0) %}
+
+                <b-link v-b-modal.modal-catchoose>
+                    <span class="tr-color-black-100 tr-text-decoration">
+                      {% if numberQuestionnairesDone | length > 0 and nrQuestionaires > numberQuestionnairesDone %}
+                          {% trans  from 'dashboard' %}continue{% endtrans %}
+                      {% else %}
+                          {% trans  from 'dashboard' %}repeat{% endtrans %}
+                      {% endif %}
+                    </span>
+                </b-link>
+                <dashboard-modal :data="{{ cat_details | json_encode }}"
+                                 :id="'modal-catchoose'"
+                                 :texts="['Weitermachen','Starten','noch nicht gestartet','Wiederholen']"
+                                 :intro="'Bearbeiten Sie die Fragebögen der folgenden Handlungsfelder für Ihre Momentaufnahme zur ganzheitlichen Schultransformation. Die Fragebögen können Sie jederzeit bearbeiten und wiederholen. \n'"
+                                 :title="'Handlungsfeld auswählen'"
+                                 modal-component-name="SchoolAuthorityCategoryChoose"></dashboard-modal>
+
+            {% else %}
+
+                <b-link href="{{ path('dashboard_school_authority_next_questionnaire') }}"
+                        class="tr-color-black-100">
+                    {% trans  from 'dashboard' %}quickStart{% endtrans %}
+                </b-link>
+                <dashboard-modal :data="{{ cat_details | json_encode }}"
+                                 :id="'modal-catchoose'"
+                                 :texts="['starten','öffnen','']"
+                                 :intro="'Lorem Ipsum'"
+                                 :title="'asd3'"
+                                 modal-component-name="TeacherQuestionairs"></dashboard-modal>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+ {% block account_bottom %}
+     <div class="justify-content-between mt-2 d-md-flex d-block">
+         <p class="d-inline-block p-0 m-0 pb-grid pb-md-0 ">
+             <b-link v-b-modal.modal-profile-school-authority>{% trans  from 'dashboard' %}inviteSchool{% endtrans %}</b-link>
+         </p>
+         <p class="d-inline-block p-0 m-0 ">{% trans  from 'dashboard' %}yourSchoolAuthorityCode{% endtrans %}
+             <b-link v-b-modal.modal-profile-school-authority><b>{{ user.schoolAuthority.code }}</b></b-link>
+         </p>
+     </div>
+     <dashboard-modal :data="{{ app.user | json_encode }}"
+                      modal-component-name="SchoolAuthorityCode"
+                      id="modal-profile-school-authority"
+     ></dashboard-modal>
+ {% endblock %}

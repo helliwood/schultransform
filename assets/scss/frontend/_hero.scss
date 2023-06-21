@@ -1,0 +1,32 @@
+#carouselHero {
+
+  h2 {
+    margin-bottom: $grid-gutter-halfwidth;
+  }
+
+  .carousel-indicators {
+    left: 0;
+    right: auto;
+    padding: 0;
+    margin: 0;
+    bottom: 0;
+
+    li {
+      background: gray;
+      border-radius: 20px;
+      width: 10px;
+      height: 10px;
+      line-height: 0;
+      padding: 0;
+      border: 1px solid black;
+    }
+  }
+
+
+  .offset-item-back {
+    @include media-breakpoint-down($breakpoint-mobil-style) {
+      padding-right: $grid-gutter-doublewidth !important;
+      border-left-width: 1px;
+    }
+  }
+}

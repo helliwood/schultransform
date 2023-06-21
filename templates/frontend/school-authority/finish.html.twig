@@ -1,0 +1,27 @@
+{% block dc_image %}/build_frontend/images_frontend/socialimage.jpg{% endblock %}
+{% extends 'frontend/public.html.twig' %}
+
+{% block body %}
+    <a href="/home"
+       class="color-switch col-12 col-md-8 main-bg-color mb-grid animate main-title d-flex align-items-center  pl-grid ">
+        <h2>Registrierung abschließen<span class="icon-box d-flex"><i data-fa-transform="rotate-90"
+                                                                      class="fad  fa-arrow-up"></i></span></h2>
+    </a>
+
+    Vielen Dank für die Registrierung Ihres Schulträgers auf schultransform.org.<br/><br/>
+
+    Ihr Schulträgercode lautet: <strong>{{ code }}</strong><br/><br/>
+
+
+    Wir haben Ihnen parallel eine E-Mail gesendet, um die Registrierung vollständig abzuschließen. Diese E-Mail enthält:<br/><br/>
+    <ol>
+        <li>einen Link zur Bestätigung Ihrer E-Mail-Adresse, damit Ihr Schulträger im System von Schultransform verfügbar
+            ist.
+        </li>
+        <li>ein Faxformular zur Verifizierung Ihres Schulträgers.</li>
+    </ol>
+    Beides ist wichtig, um die Angebote auf schultransform.org vollständig nutzen zu können.
+    <br/>
+    <br/>
+    <strong>Ihr Projektbüro Schultransform</strong>
+{% endblock %}

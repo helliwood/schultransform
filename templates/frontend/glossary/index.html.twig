@@ -1,0 +1,108 @@
+{% extends 'frontend/public.html.twig' %}
+{% block title %}Glossar{% endblock %}
+
+{% block body %}
+    <h3 class="my-2 text-primary pl-1">Glossar</h3>
+    {% if letters %}
+        <div class="d-flex flex-wrap w-100 justify-content-md-between">
+            {% for letter in letters %}
+                {% if letter.numberOfWords > 0 %}
+                    {% set rawvalue = '' %}
+                    {% if letterToShow.rawValue | default('') %}
+                        {% set rawvalue = letterToShow.rawValue %}
+                    {% endif %}
+                    <b-link
+                            href="{{ path('glossar_home',{'letter':letter.value} ) }}"
+                            class="h-25 text-decoration-none m-1 text-primary {% if letterToShow and letterToShow.valid and (letterToShow.value == letter.value or rawvalue == letter.value) %}border-primary border-bottom{% endif %}"
+                    >
+                        {{ letter.display }}
+                    </b-link>
+                {% else %}
+                    <p class="m-1 text-light">{{ letter.display }}</p>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if wordNotFound %}
+        <div class="d-flex align-items-center flex-column m-4">
+            <i class="fad fa-telescope display-4 text-primary"></i>
+            <p class="p-2">Eine Entschuldigung das Wort: <b class="text-primary">{{ wordNotFound }}</b> wurde nicht
+                gefunden.</p>
+        </div>
+    {% endif %}
+    {% if not listOfWords and not word and not wordNotFound %}
+        <div class="d-flex align-items-center flex-column m-4">
+            {% if letterToShow %}
+                {% if letterToShow.valid %}
+                    <i class="fad fa-telescope display-4 text-primary"></i>
+                    <p class="p-2">Eine Entschuldigung, keine Worte wurden unter dem Buchstaben: <b
+                                class="text-primary">{{ letterToShow.value }}</b> gefunden.</p>
+                {% else %}
+                    <i class="fad fa-info-square display-4 text-primary"></i>
+                    <p class="p-2">Eine Suche kann nur mit den Buchstaben des Alphabets durchgeführt werden.</p>
+                {% endif %}
+
+            {% endif %}
+        </div>
+    {% endif %}
+    {% if listOfWords %}
+        <div class="d-flex flex-column justify-content-between p-2">
+            <h5 class="text-primary my-1">Wörter im Glossar mit dem Buchstaben: {{ letterToShow.value }}.</h5>
+            <p class="text-light mb-3">Anzahl: {{ listOfWords|length }} </p>
+            {% for key, word in listOfWords %}
+                <div class="d-flex flex-column flex-sm-row justify-content-start p-1 mb-2 border">
+                    {% if word.image %}
+                        <div class="g-image-wrapper">
+                            <a href="/Glossar/{{ letters[word.letterGroup].value }}/{{ word.slug }}">
+                                <img src="/MediaBasePublic/show/{{ word.image }}/200x200">
+                            </a>
+                        </div>
+                    {% endif %}
+                    <div class="m-3">
+                        <h5 class="mb-1 text-primary">{{ word.word }}</h5>
+                        {% if word.shortDescription %}
+                            <p class="text-light small">{{ word.shortDescription }}</p>
+                        {% endif %}
+                        <a class="border p-1 my-1 text-decoration-none text-light small"
+                           href="/Glossar/{{ letters[word.letterGroup].value }}/{{ word.slug }}">
+                            Mehr erfahren
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="my-3 d-flex justify-content-around">
+                {% if previous >= 0 %}
+                    <a href="{{ path('glossar_home', {letter: letterToShow.value, offset: previous }) }}"><i
+                                class="fad fa-chevron-left"></i></a>
+                {% endif %}
+                {% if next < listOfWords|length %}
+                    <a href="{{ path('glossar_home', {letter: letterToShow.value, offset: next }) }}"><i
+                                class="fad fa-chevron-right"></i></a>
+                {% endif %}
+            </div>
+        </div>
+
+    {% else %}
+        {% if word %}
+            <article class="d-flex flex-column flex-sm-row mx-auto p-3">
+                {% if word.image %}
+                    <div class="g-image-wrapper mx-auto w-sm-50">
+                        <img class="d-none d-md-block" src="/MediaBasePublic/show/{{ word.image }}/400x400">
+                        <img class="d-md-none mb-3 mw-100" src="/MediaBasePublic/show/{{ word.image }}">
+                    </div>
+                {% endif %}
+
+                <div class="g-word-wrapper px-sm-3 w-sm-50">
+                    {% if word.theme %}
+                        <h5 class="text-light"><i>{{ word.theme }}</i></h5>
+                    {% endif %}
+                    <h4 class="my-1 text-primary">{{ word.word }}</h4>
+                    <p class="text-black">{{ word.definition }}</p>
+                </div>
+            </article>
+        {% endif %}
+
+
+    {% endif %}
+{% endblock %}

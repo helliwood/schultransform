@@ -1,0 +1,10 @@
+<script>
+    {% if cookie | default(null) %}
+    let cookie = '{{ cookie.name }}';
+    top.postMessage({op: 'closeFrame', newcookie: cookie}, "*");
+    {% else %}
+    top.postMessage({op: 'closeFrame'}, "*");
+    {% endif %}
+
+
+</script>

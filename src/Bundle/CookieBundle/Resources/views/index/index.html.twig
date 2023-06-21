@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            <div class="panel">
+                <h2>Cookie-Banner Dashboard</h2>
+                <cookie-dashboard app-url="{{  appUrl | default('/Backend/Cookie/') }}"></cookie-dashboard>
+            </div>
+        </div>
+    </div>
+{% endblock %}

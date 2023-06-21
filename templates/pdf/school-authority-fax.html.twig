@@ -1,0 +1,181 @@
+{% extends 'pdf/layout.html.twig' %}
+
+{% block body %}
+
+    <style>
+        .subtitle {
+            font-size: 18px;
+            font-family: "regular2";
+            font-weight: normal;
+            color: #006292;
+        }
+
+        h1 {
+            font-size: 1.6rem;
+        }
+
+        h3 {
+            text-decoration: underline;
+        }
+
+        .subtitle b {
+            color: #000;
+        }
+
+        .question {
+            page-break-inside: avoid;
+            padding-bottom: 30px;
+            clear: both;
+        }
+
+        .question .questionTitle {
+            font-family: "semibold";
+            font-weight: normal;
+            text-align: left;
+        }
+
+        .question .questionText {
+            margin-bottom: 5px;
+        }
+
+        .opinion_scale {
+            width: 100%;
+            display: inline-flex;
+            clear-after: both;
+        }
+
+        .opinion_scale div {
+            float: left;
+            width: 12.5%;
+            text-align: center;
+            padding-top: 5px;
+            margin-bottom: 5px;
+            height: 20px;
+            border: 1px solid #000;
+
+        }
+
+        .opinion_scale_values {
+            padding-bottom: 5px;
+        }
+
+        .opinion_scale .selected {
+            background-color: #006292;
+            color: #fff;
+            opacity: 1;
+        }
+
+        .opinion_scale_left {
+            clear: both;
+            display: inline;
+        }
+
+        .opinion_scale_center {
+            position: absolute;
+            left: 44%
+        }
+
+        .opinion_scale_right {
+            position: absolute;
+            right: -13px;
+        }
+
+        .fa-check-circle {
+            width: 12px;
+            height: 12px;
+        }
+
+        .multiple_choice div, .table div {
+            display: inline-block;
+        }
+
+        .multiple_choice img {
+
+        }
+
+        .text_answer {
+            font-family: "semibold";
+            font-weight: normal;
+        }
+
+        .box {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 10px;
+        }
+
+        .box:before {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            display: block;
+            border: 1px solid #000;
+            width: 20px;
+            height: 20px;
+        }
+
+        .signature {
+            position: relative;
+            display: block;
+            border: 1px solid #000;
+            border-radius: 5px;
+            width: 350px;
+            height: 130px;
+            margin-top: 30px;
+        }
+
+        .signature .label {
+            position: absolute;
+            top: 105px;
+            left: 10px;
+        }
+
+        .code {
+            display: block;
+            border: 1px solid #000;
+            border-radius: 5px;
+            width: 200px;
+            position: absolute;
+            top: 20px;
+            right: 0px;
+            font-size: 1.2rem;
+            padding: 10px;
+        }
+
+        .code .label {
+            font-size: 0.6rem;
+        }
+    </style>
+    <h1>Verifizierung Ihres Schulträgers<br/>Fax: +49 30 2938 1689</h1>
+    <div>Um die anonym erfassten Daten des Schulentwicklungsteams Ihrem Schulträger zuordnen zu
+        können, benötigen wir die Rücksendung dieses Faxes. Bitte beachten Sie, dass
+        Anonymität damit in keiner Weise aufgelöst wird.
+    </div>
+    <div style="position: relative;">
+        <div class="code">
+            <div class="label">Schulträgercode:</div>
+            {{ user.schoolAuthority.code }}
+        </div>
+        <h3>Allgemeine Daten des Schulträgers</h3>
+        <div style="max-width: 60%;">
+            {{ user.schoolAuthority.name }}<br>
+            {{ user.schoolAuthority.address.street }}<br>
+            {{ user.schoolAuthority.address.postalCode }} {{ user.schoolAuthority.address.city }}
+            {% if user.schoolAuthority.address.country %}({{ user.schoolAuthority.address.country }}){% endif %}<br>
+        </div>
+        <h3>Ansprechpartner:in</h3>
+        {{ user.salutation }} {{ user.firstName }} {{ user.lastName }}<br>
+        E-Mail: {{ user.email }}<br>
+        <h3>Bestätigung <span style="font-size: 12px">(bitte ankreuzen)</span></h3>
+        <div class="box">Hiermit bestätige ich die Richtigkeit der oben genannten Daten.</div>
+        <div class="box">Hiermit bestätige ich, dass die Verbundpartner von Schultransform mit uns im Rahmen
+            des Projekts Kontakt aufnehmen dürfen.
+        </div>
+        <div class="box">Hiermit bestätige ich, dass ich befugt bin, den oben genannten Schulträger beim Projekt
+            Schultransform zu registrieren.
+        </div>
+        <div class="signature">
+            <div class="label">Unterschrift & Stempel</div>
+        </div>
+    </div>
+{% endblock %}

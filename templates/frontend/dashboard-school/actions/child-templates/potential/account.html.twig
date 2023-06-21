@@ -1,0 +1,34 @@
+{% extends 'frontend/dashboard-general/account.html.twig' %}
+
+
+{% block account_top %}
+
+{% endblock %}
+
+{% block account_2 %}
+    <div class="t-cat-details-icon-header">
+        <i class="fad fa-arrow-up tr-display-2 tr-rotate-45 float-right text-white py-2 px-2"></i>
+        <i class="fad fa-school t-cat-details-icon-header-icon text-white tr-large-3 float-right  pb-4 pt-3 mt-2  mt-md-4"></i>
+    </div>
+{% endblock %}
+
+ {% block account_action %}
+     <div class="d-flex t-header-link-action tr-sm-position-absolute">
+         <div class="tr-bg-school-color-1 w-100 px-2 py-1 text-white">
+             <p>{{ user.school.name }}</p>
+         </div>
+     </div>
+ {% endblock %}
+
+ {% block account_bottom %}
+     <div class="justify-content-between mt-2 d-md-flex d-block">
+         <p class="d-inline-block p-0 m-0 pb-grid pb-md-0 ">
+             {{ "teachersActiveByCategory"|trans({'%teachersActiveByCategory%': teachersActiveByCategory}, "dashboard")| raw }}
+             <a href="{{ path('print_teacher_invitation') }}">{% trans  from 'dashboard' %}inviteTeacher{% endtrans %}</a>
+         </p>
+         <p class="d-inline-block p-0 m-0 ">{% trans  from 'dashboard' %}yourSchoolcode{% endtrans %}
+             <b-link v-b-modal.modal-profil>
+                 <b class="tr-text-decoration">{{ user.school.code }}</b>
+             </b-link>
+     </div>
+ {% endblock %}

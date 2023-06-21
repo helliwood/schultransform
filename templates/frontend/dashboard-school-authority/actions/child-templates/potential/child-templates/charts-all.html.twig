@@ -1,0 +1,17 @@
+{% for index,result in results %}
+    <div class="t-questionnaire-charts-wrapper pb-3">
+        <result-chart-gauge :chart-height="280" chart-value="{{ result.mean }}"
+                            the-url=""
+                            tick-color="#666"
+                            chart-color="{{ result.color }}">
+        </result-chart-gauge>
+        <div class="text-center">{{ result.name }}<br>
+            <span class="tr-small-2">
+                        <span>Stand: {{ result.lastActivity | date("d.m.Y") }}</span>
+                         |
+                        <b>{{ result.nrTeachers }}</b> Lehrkräfte
+                    </span>
+            {#                            <span class="small-text">{{ avrg.detail|raw }}</span>/ #}
+        </div>
+    </div>
+{% endfor %}

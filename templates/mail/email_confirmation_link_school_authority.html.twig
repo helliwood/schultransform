@@ -1,0 +1,64 @@
+{% block body %}
+    Hallo {{ data.user.firstName }} {{ data.user.lastName }},<br/>
+    <br/>
+    vielen Dank für die Registrierung Ihrer Schule auf schultransform.org.<br/>
+    <br/>
+    {% if data.viewOnly | default(null) %}
+        <div class="border p-1 mb-3">
+            <p class="m-auto text-primary">Hier kommt die Nachricht an den Benutzer...</p>
+        </div>
+    {% else %}
+        {% if data.form.message_to_user | default(null) %}
+            <p>
+                {{ data.form.message_to_user }}
+            </p>
+        {% endif %}
+    {% endif %}
+    Um die <b>Registrierung vollständig abzuschließen:</b>
+    <ol>
+        <li>Bestätigen Sie bitte Ihre E-Mail-Adresse mit diesem Link, um Ihre Schulträger im System von Schultransform
+            verfügbar zu machen:
+            {% if data.viewOnly | default(null) %}
+                <span class="text-primary" title="Hier kommt der Link">jetzt bestätigen.</span>
+            {% else %}
+                <a target="_blank" href="{{ data.link }}">jetzt bestätigen</a>.
+            {% endif %}
+        </li>
+        <li>Falls noch nicht geschehen: Bitte senden Sie uns das angehängte Fax zur Verifizierung Ihres Schulträgers
+            ausgefüllt und unterzeichnet zurück.
+        </li>
+    </ol>
+    Beides ist wichtig, um die Angebote auf schultransform.org vollständig nutzen zu können.<br/> <br/>
+
+    <b>Zur Info:</b>
+    <br/>
+    Ihr Schulträgercode lautet: {{ data.user.schoolAuthority.code }}<br/><br/>
+    Mit diesem Schulcode können sich die einzelnen Lehrkräfte ab sofort unter Wahrung der vollständigen Anonymität auf schultransform.org mit Ihrer Schule verknüpfen.
+    <br/>
+    Nutzen Sie die „Lehrereinladung“ in Ihrem Schul-Account, um den Schulcode an die am Transformationsprozess beteiligten Kolleg:innen per E-Mail oder persönlich weiterzugeben.
+    <br/>
+    <br/>
+    Mit den besten Grüßen<br/>
+    <br/><br/>
+    <strong>Projektbüro Schultransform</strong><br/>
+    <br/>
+    <strong>c/o Helliwood media & education im fjs e.V.</strong><br/>
+    Marchlewskistraße 27, 10243 Berlin<br/>
+    Telefon: +49 30 2938 1680<br/>
+    Telefax: +49 30 2938 1689<br/>
+    E-Mail: <a href="mailto:support@schultransform.org">support@schultransform.org</a><br/>
+    Internet: <a href="https://www.schultransform.org">https://www.schultransform.org</a><br/>
+    <br/>
+    <strong>Förderverein für Jugend und Sozialarbeit e.V. (fjs)</strong><br/>
+    Geschäftsführender Vorstand: Thomas Schmidt<br/>
+    Vereinsregisternummer: VR 11338 B, Amtsgericht Berlin-Charlottenburg<br/>
+    <a href="https://fb.tipp.fm/3938_fjs_transparenzdatenbank.htm">Transparenzdatenbank</a><br/><br/>
+
+    <strong>Förderung</strong><br/>
+    Das Forschungs- und Entwicklungsprojekt zur Entwicklung einer Plattform zur digitalen Schultransformation [SchulTransform] wird gefördert durch das Bundesministerium für Bildung und Forschung (BMBF) und wird von Helliwood media & education und dem Bündnis für Bildung gemeinsam umgesetzt.
+    <br/>
+    {% if data.viewOnly | default(null) %}
+        <div class="pb-5"></div>
+    {% endif %}
+
+{% endblock %}

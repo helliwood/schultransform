@@ -1,0 +1,50 @@
+<div style="page-break-before: always;">
+    {% if result.getRecommendations | length > 0 %}
+        <br/><h1>Handlungsempfehlungen</h1>
+
+        {% for recommendation in  result.getRecommendations %}
+            <div>
+                <h3>{{ recommendation.title }}</h3>
+                {{ recommendation.description|markdown }}
+                {{ recommendation.implementation|markdown }}
+                {{ recommendation.tips|markdown }}
+                {{ recommendation.tipsSchoolManagement|markdown }}
+                {{ recommendation.examples|markdown }}
+                {{ recommendation.additionalInformation|markdown }}
+
+
+                {% if recommendation.description %}
+                    <p><strong>Bedeutung für den Transformationsprozess</strong></p>
+                    <p>{{ recommendation.description|markdown }}</p>
+                {% endif %}
+
+                {% if recommendation.implementation %}
+                    <p><strong>Umsetzung</strong></p>
+                    <p>{{ recommendation.implementation|markdown }}</p>
+                {% endif %}
+
+                {% if recommendation.tips %}
+                    <p class="mb-1"><strong>Tipps für Schulentwicklungsteams</strong></p>
+                    <p>{{ recommendation.tips|markdown }}</p>
+                {% endif %}
+
+                {% if recommendation.tipsSchoolManagement %}
+                    <p><strong>Tipps für Schulleitungen</strong></p>
+                    {{ recommendation.tipsSchoolManagement|markdown }}
+                {% endif %}
+
+                {% if recommendation.examples %}
+                    <p><strong>Beispiele</strong></p>
+                    <p>{{ recommendation.examples|markdown }}</p>
+                {% endif %}
+
+                {% if recommendation.additionalInformation %}
+                    <p><strong>Weiterführende Informationen</strong></p>
+                    {{ recommendation.additionalInformation|markdown }}
+                {% endif %}
+                
+                
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>

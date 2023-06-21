@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:template id="15"
+             name="Content | Text Titel-Text"
+             groups="content,basics"
+             xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:rs="http://helliwood.de"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://helliwood.de ./../rs_schema.xsd">
+
+    <rs:color-select id="color" label="Farbe" display="false" />
+
+    <div class="title-text px-grid  py-grid">
+        <rs:attribute name="class" action="append" value=" color-style-$color"/>
+
+        <rs:if condition="$color == 'default'">
+            <rs:attribute name="class" action="append" value=" px-md-0"/>
+        </rs:if>
+
+        <h6 class="h4">
+            <rs:text id="Title" label="Titel"/>
+        </h6>
+        <p>
+            <!--glossary-start--><rs:textarea id="Text" label="Text"/><!--glossary-end-->
+        </p>
+    </div>
+</rs:template>

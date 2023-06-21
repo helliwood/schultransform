@@ -1,0 +1,12 @@
+public_user:
+  login_route: 'user_login'
+  login_success_route: 'user_success'
+  logout_route: 'user_logout'
+  security_logout:
+    path: "user_logout"
+    target: "user_login"
+
+  security_form_login:
+    login_path: "user_login"
+    check_path: "user_login"
+    default_target_path: "user_login"

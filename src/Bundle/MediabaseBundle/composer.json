@@ -1,0 +1,24 @@
+{
+  "name": "trollfjord/mediabase-bundle",
+  "description": "Trollfjord MediaBaseBundle",
+  "license": "proprietary",
+  "keywords": [
+    "trollfjord",
+    "media-base"
+  ],
+  "homepage": "https://helliwood.de",
+  "authors": [
+    {
+      "name": "Tim Wettstein",
+      "email": "wettstein@helliwood.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Trollfjord\\Bundle\\MediaBaseBundle\\": ""
+    }
+  }
+}

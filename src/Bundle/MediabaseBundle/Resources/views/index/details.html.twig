@@ -1,0 +1,61 @@
+{% extends 'iframe.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid media-base">
+        <div class="pt-3">
+            {% if media.mimeType matches '{^image}' %}
+                <div class="row pb-3">
+                    <div class="col">
+                        Bild:
+                        <div class="preview-border">
+                            <a target="_blank" title="{{ media.name }}" href="{{ path('media_base_show', {id:media.id}) }}" class="preview-container" style="background-image: url({{ path('media_base_show', {id:media.id}) }})"></a>
+                        </div>
+                    </div>
+                    {% if media.getChildren()|length > 0 %}
+                        <div class="col">
+                            Alternativbild:
+                            <div class="preview-border">
+                                <a target="_blank" title="{{ media.getChildren()[0].name }}" href="{{ path('media_base_show', {id:media.getChildren()[0].id}) }}" class="preview-container" style="background-image: url({{ path('media_base_show', {id:media.getChildren()[0].id}) }})"></a>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            {% else %}
+                <div class="pb-2">
+                    <a class="btn btn-primary btn-sm" target="_blank" href="{{ path('media_base_show', {id:media.id}) }}"><i class="{{ icons[media.extension] }} pr-1"></i>Dowload {{ media.getDownloadFilename() }}</a>
+                </div>
+            {% endif %}
+            <b-table-simple small caption-top stacked>
+                <b-thead head-variant="dark">
+                    <b-tr>
+                        <b-th>Name</b-th>
+                        <b-th>Type</b-th>
+                        <b-th>Endung</b-th>
+                        <b-th>Dateigröße</b-th>
+                        <b-th>Copyright</b-th>
+                        <b-th>Beschreibung</b-th>
+                    </b-tr>
+                </b-thead>
+                <b-tbody>
+                    <b-tr>
+                        <b-th stacked-heading="Name:">{{ media.name }}</b-th>
+                        <b-td stacked-heading="Type:">{{ media.mimeType }}</b-td>
+                        <b-td stacked-heading="Endung:">{{ media.extension }}</b-td>
+                        <b-td stacked-heading="Dateigröße:">{{ media.getFormatFileSize() }}</b-td>
+                        <b-td stacked-heading="Copyright:">{{ media.copyright }}</b-td>
+                        <b-td stacked-heading="Beschreibung:">{{ media.description }}</b-td>
+                    </b-tr>
+                </b-tbody>
+            </b-table-simple>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        window.onload = function() {
+            parent.postMessage({op: 'contentLoaded'}, "*");
+        }
+    </script>
+{% endblock %}

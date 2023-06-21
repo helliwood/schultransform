@@ -1,0 +1,16 @@
+{% extends 'iframe.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid overflow-hidden mt-4">
+        {{ form(form) }}
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        window.onload = function () {
+            top.postMessage({op: 'contentLoaded', content: 'form'}, "*");
+        }
+    </script>
+{% endblock %}

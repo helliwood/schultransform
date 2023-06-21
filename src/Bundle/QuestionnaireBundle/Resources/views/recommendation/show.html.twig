@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Handlungsempfehlung anzeigen</h1>
+    <div class="row">
+        <div class="col">
+            <div class="panel">
+                <h3>{{ recommendation.title }}</h3>
+                {{ recommendation.description|markdown }}
+                {{ recommendation.implementation|markdown }}
+                {{ recommendation.tips|markdown }}
+                {{ recommendation.tipsSchoolManagement|markdown }}
+                {{ recommendation.examples|markdown }}
+                {{ recommendation.additionalInformation|markdown }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

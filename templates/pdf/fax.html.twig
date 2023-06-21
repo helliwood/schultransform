@@ -1,0 +1,101 @@
+{% extends 'pdf/layout.html.twig' %}
+
+{% block body %}
+
+    <style>
+        .subtitle {
+            font-size: 18px;
+            font-family: "regular2";
+            font-weight: normal;
+            color: #006292;
+        }
+
+        h3 {
+            text-decoration: underline;
+        }
+
+        .subtitle b {
+            color: #000;
+        }
+
+        .question {
+            page-break-inside: avoid;
+            padding-bottom: 30px;
+            clear: both;
+        }
+
+        .question .questionTitle {
+            font-family: "semibold";
+            font-weight: normal;
+            text-align: left;
+        }
+
+        .question .questionText {
+            margin-bottom: 5px;
+        }
+
+        .opinion_scale {
+            width: 100%;
+            display: inline-flex;
+            clear-after: both;
+        }
+
+        .opinion_scale div {
+            float: left;
+            width: 12.5%;
+            text-align: center;
+            padding-top: 5px;
+            margin-bottom: 5px;
+            height: 20px;
+            border: 1px solid #000;
+
+        }
+
+        .opinion_scale_values {
+            padding-bottom: 5px;
+        }
+
+        .opinion_scale .selected {
+            background-color: #006292;
+            color: #fff;
+            opacity: 1;
+        }
+
+        .opinion_scale_left {
+            clear: both;
+            display: inline;
+        }
+
+        .opinion_scale_center {
+            position: absolute;
+            left: 44%
+        }
+
+        .opinion_scale_right {
+            position: absolute;
+            right: -13px;
+        }
+
+        .fa-check-circle {
+            width: 12px;
+            height: 12px;
+        }
+
+        .multiple_choice div, .table div {
+            display: inline-block;
+        }
+
+        .multiple_choice img {
+
+        }
+
+        .text_answer {
+            font-family: "semibold";
+            font-weight: normal;
+        }
+    </style>
+    <span class="subtitle">{{ result.getQuestionnaire.getCategory.getName }} <b>|</b> {{ result.getQuestionnaire.getName }}</span>
+    <br>
+    <br>
+
+{% endblock %}
